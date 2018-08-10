@@ -2,7 +2,6 @@
 {
     using System;
     using System.Runtime.InteropServices;
-    using System.Windows;
     using System.Windows.Interop;
 
     internal class Win32HotKey : IDisposable
@@ -22,33 +21,16 @@
             WM_HOTKEY = 0x0312
         }
 
-        // Guarantee this is called after MainWindow creation
-        private static IntPtr mainWindowHandle;
-
         private static int currentHotKeyId;
 
-        private readonly HwndSource _windowHandleSource;
+        private HwndSource _windowHandleSource;
 
         private readonly int _id;
-
-        static Win32HotKey()
-        {
-            SetMainWindowHandle();
-        }
 
         internal Win32HotKey(uint keycode, HotKeyModifiers modifiers = 0)
         {
             _id = ++currentHotKeyId;
-
-            int result = RegisterHotKey(mainWindowHandle, _id, (uint)modifiers, keycode);
-
-            if (result == 0)
-            {
-                throw new InvalidOperationException("Did not manage to register specified Win32HotKey.");
-            }
-
-            _windowHandleSource = HwndSource.FromHwnd(mainWindowHandle);
-            _windowHandleSource.AddHook(EventCallback);
+            TryRegisterHotKey(keycode, modifiers);
         }
 
         ~Win32HotKey()
@@ -64,27 +46,11 @@
             GC.SuppressFinalize(this);
         }
 
-        internal static void InitialiseWindowHandle()
-        {
-            if (mainWindowHandle == IntPtr.Zero)
-            {
-                SetMainWindowHandle();
-            }
-        }
-
         [DllImport("User32.dll")]
         private static extern int RegisterHotKey(IntPtr windowHandle, int id, uint modifierKeys, uint virtualKeyCode);
 
         [DllImport("User32.dll")]
         private static extern int UnregisterHotKey(IntPtr windowHandle, int id);
-
-        private static void SetMainWindowHandle()
-        {
-            if (Application.Current.MainWindow != null)
-            {
-                mainWindowHandle = new WindowInteropHelper(Application.Current.MainWindow).Handle;
-            }
-        }
 
         private IntPtr EventCallback(IntPtr windowHandle, int message, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
@@ -97,10 +63,36 @@
             return IntPtr.Zero;
         }
 
+        private void TryRegisterHotKey(uint keycode, HotKeyModifiers modifiers)
+        {
+            if (Win32Handler.IsInitialised)
+            {
+                int result = RegisterHotKey(Win32Handler.MainWindowHandle, _id, (uint)modifiers, keycode);
+
+                if (result == 0)
+                {
+                    throw new InvalidOperationException("Did not manage to register specified Win32HotKey.");
+                }
+
+                _windowHandleSource = HwndSource.FromHwnd(Win32Handler.MainWindowHandle);
+                _windowHandleSource.AddHook(EventCallback);
+
+                return;
+            }
+
+            void OnWin32HandlerInitialised(object sender, EventArgs e)
+            {
+                Win32Handler.Initialised -= OnWin32HandlerInitialised;
+                TryRegisterHotKey(keycode, modifiers);
+            }
+
+            Win32Handler.Initialised += OnWin32HandlerInitialised;
+        }
+
         private void Dispose(bool disposing)
         {
             _windowHandleSource.RemoveHook(EventCallback);
-            UnregisterHotKey(mainWindowHandle, _id);
+            UnregisterHotKey(Win32Handler.MainWindowHandle, _id);
 
             if (disposing)
             {
