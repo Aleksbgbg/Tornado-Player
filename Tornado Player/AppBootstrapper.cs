@@ -6,6 +6,9 @@
 
     using Caliburn.Micro;
 
+    using Tornado.Player.Services;
+    using Tornado.Player.Services.Interfaces;
+    using Tornado.Player.Utilities;
     using Tornado.Player.ViewModels;
     using Tornado.Player.ViewModels.Interfaces;
 
@@ -28,6 +31,8 @@
             // Register Services
             _container.Singleton<IWindowManager, WindowManager>();
 
+            _container.Singleton<IMusicPlayerService, MusicPlayerService>();
+
             // Register ViewModels
             _container.Singleton<IShellViewModel, ShellViewModel>();
             _container.Singleton<IMainViewModel, MainViewModel>();
@@ -46,6 +51,7 @@
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
             DisplayRootViewFor<IShellViewModel>();
+            Win32Handler.Initialise(Application.Current.MainWindow);
         }
     }
 }
