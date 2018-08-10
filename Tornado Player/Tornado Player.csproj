@@ -73,6 +73,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Services\Interfaces\IMusicPlayerService.cs" />
+    <Compile Include="Services\MusicPlayerService.cs" />
     <Compile Include="Utilities\Win32HotKey.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -155,7 +157,6 @@
     <Folder Include="Helpers\" />
     <Folder Include="Images\" />
     <Folder Include="Models\" />
-    <Folder Include="Services\Interfaces\" />
     <Folder Include="Utilities\Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
