@@ -7,7 +7,7 @@
     internal class Win32HotKey : IDisposable
     {
         [Flags]
-        internal enum HotKeyModifiers : uint
+        internal enum Modifiers : uint
         {
             AltKey = 0x0001,
             ControlKey = 0x0002,
@@ -27,7 +27,7 @@
 
         private readonly int _id;
 
-        internal Win32HotKey(uint keycode, HotKeyModifiers modifiers = 0)
+        internal Win32HotKey(uint keycode, Modifiers modifiers = 0)
         {
             _id = ++currentHotKeyId;
             TryRegisterHotKey(keycode, modifiers);
@@ -63,7 +63,7 @@
             return IntPtr.Zero;
         }
 
-        private void TryRegisterHotKey(uint keycode, HotKeyModifiers modifiers)
+        private void TryRegisterHotKey(uint keycode, Modifiers modifiers)
         {
             if (Win32Handler.IsInitialised)
             {

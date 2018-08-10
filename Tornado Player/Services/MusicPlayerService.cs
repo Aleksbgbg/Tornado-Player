@@ -11,7 +11,7 @@
         private readonly MediaPlayer _mediaPlayer = new MediaPlayer();
 
         // CTRL + F6 hotkey
-        private readonly Win32HotKey _togglePlaybackHotKey = new Win32HotKey(0x75, Win32HotKey.HotKeyModifiers.ControlKey | Win32HotKey.HotKeyModifiers.NoRepeat);
+        private readonly Win32HotKey _togglePlaybackHotKey = new Win32HotKey(0x75, Win32HotKey.Modifiers.ControlKey | Win32HotKey.Modifiers.NoRepeat);
 
         private bool _playing = true;
 
