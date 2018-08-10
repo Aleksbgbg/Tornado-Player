@@ -15,7 +15,7 @@
 
         private bool _playing = true;
 
-        internal MusicPlayerService()
+        public MusicPlayerService()
         {
             _mediaPlayer.Open(new Uri("E:\\MP3s\\Pete & Bas - Shut Ya Mouth [Music Video] Sindhuworld # Grime Report Tv.mp4"));
             _mediaPlayer.Play();
