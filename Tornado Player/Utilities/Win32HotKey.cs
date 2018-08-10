@@ -38,14 +38,14 @@
 
         internal Win32HotKey(uint keycode, HotKeyModifiers modifiers = 0)
         {
+            _id = ++currentHotKeyId;
+
             int result = RegisterHotKey(mainWindowHandle, _id, (uint)modifiers, keycode);
 
             if (result == 0)
             {
                 throw new InvalidOperationException("Did not manage to register specified Win32HotKey.");
             }
-
-            _id = ++currentHotKeyId;
 
             _windowHandleSource = HwndSource.FromHwnd(mainWindowHandle);
             _windowHandleSource.AddHook(EventCallback);
