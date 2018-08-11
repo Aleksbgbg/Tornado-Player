@@ -73,6 +73,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Models\Track.cs" />
     <Compile Include="Services\Interfaces\IMusicPlayerService.cs" />
     <Compile Include="Services\MusicPlayerService.cs" />
     <Compile Include="Utilities\Win32Handler.cs" />
@@ -157,7 +158,6 @@
     <Folder Include="Factories\Interfaces\" />
     <Folder Include="Helpers\" />
     <Folder Include="Images\" />
-    <Folder Include="Models\" />
     <Folder Include="Utilities\Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
