@@ -74,6 +74,8 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="Models\Track.cs" />
+    <Compile Include="Services\FileSystemService.cs" />
+    <Compile Include="Services\Interfaces\IFileSystemService.cs" />
     <Compile Include="Services\Interfaces\IMusicPlayerService.cs" />
     <Compile Include="Services\MusicPlayerService.cs" />
     <Compile Include="Utilities\Win32Handler.cs" />

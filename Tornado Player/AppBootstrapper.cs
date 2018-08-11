@@ -31,6 +31,7 @@
             // Register Services
             _container.Singleton<IWindowManager, WindowManager>();
 
+            _container.Singleton<IFileSystemService, FileSystemService>();
             _container.Singleton<IMusicPlayerService, MusicPlayerService>();
 
             // Register ViewModels
