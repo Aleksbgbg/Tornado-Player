@@ -78,6 +78,7 @@
     <Compile Include="Services\Interfaces\IFileSystemService.cs" />
     <Compile Include="Services\Interfaces\IMusicPlayerService.cs" />
     <Compile Include="Services\MusicPlayerService.cs" />
+    <Compile Include="Utilities\TornadoPlayer.cs" />
     <Compile Include="Utilities\Win32Handler.cs" />
     <Compile Include="Utilities\Win32HotKey.cs" />
     <Compile Include="Views\MainView.xaml.cs">
