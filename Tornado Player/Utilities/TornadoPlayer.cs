@@ -12,7 +12,6 @@
 
         private bool _isPlaying;
 
-        private Track[] _tracks;
 
         internal TornadoPlayer()
         {
@@ -35,9 +34,9 @@
                     throw new InvalidOperationException("Cannot play a track at index smaller than 0.");
                 }
 
-                if (value > _tracks.Length)
+                if (value > Tracks.Length)
                 {
-                    _trackIndex = value % _tracks.Length;
+                    _trackIndex = value % Tracks.Length;
                 }
                 else
                 {
@@ -46,9 +45,11 @@
             }
         }
 
+        internal Track[] Tracks { get; private set; }
+
         internal void Load(Track[] tracks)
         {
-            _tracks = tracks;
+            Tracks = tracks;
             PlaylistLoaded?.Invoke(this, new PlaylistLoadedEventArgs(tracks));
             Switch(0);
         }
@@ -85,7 +86,7 @@
         private void Switch(int index)
         {
             TrackIndex = index;
-            _mediaPlayer.Open(new Uri(_tracks[TrackIndex].Filepath));
+            _mediaPlayer.Open(new Uri(Tracks[TrackIndex].Filepath));
             Play();
 
             TrackChanged?.Invoke(this, new TrackChangedEventArgs(TrackIndex));
