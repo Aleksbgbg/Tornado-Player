@@ -7,5 +7,7 @@
     internal interface IPlaylistViewModel : IViewModelBase
     {
         IObservableCollection<Track> Tracks { get; }
+
+        int SelectedIndex { get; set; }
     }
 }

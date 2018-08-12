@@ -21,8 +21,26 @@
                 Tracks.Clear();
                 Tracks.AddRange(e.Tracks);
             };
+
+            _musicPlayerService.TrackChanged += (sender, e) => SelectedIndex = e.TrackIndex;
         }
 
         public IObservableCollection<Track> Tracks { get; }
+
+        private int _selectedIndex;
+        public int SelectedIndex
+        {
+            get => _selectedIndex;
+
+            set
+            {
+                if (_selectedIndex == value) return;
+
+                _selectedIndex = value;
+                NotifyOfPropertyChange(() => SelectedIndex);
+
+                _musicPlayerService.SelectTrack(_selectedIndex);
+            }
+        }
     }
 }
