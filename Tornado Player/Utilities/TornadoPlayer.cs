@@ -21,6 +21,8 @@
 
         internal event EventHandler<TrackChangedEventArgs> TrackChanged;
 
+        internal event EventHandler<PlaylistLoadedEventArgs> PlaylistLoaded;
+
         private int _trackIndex;
         private int TrackIndex
         {
@@ -47,6 +49,7 @@
         internal void Load(Track[] tracks)
         {
             _tracks = tracks;
+            PlaylistLoaded?.Invoke(this, new PlaylistLoadedEventArgs(tracks));
             Switch(0);
         }
 
