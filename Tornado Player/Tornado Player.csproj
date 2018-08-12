@@ -83,6 +83,8 @@
     <Compile Include="Utilities\TornadoPlayer.cs" />
     <Compile Include="Utilities\Win32Handler.cs" />
     <Compile Include="Utilities\Win32HotKey.cs" />
+    <Compile Include="ViewModels\Interfaces\IPlaylistViewModel.cs" />
+    <Compile Include="ViewModels\PlaylistViewModel.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
