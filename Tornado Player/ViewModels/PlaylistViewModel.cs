@@ -1,8 +1,10 @@
 ﻿namespace Tornado.Player.ViewModels
 {
+    using System.Linq;
+
     using Caliburn.Micro;
 
-    using Tornado.Player.Models;
+    using Tornado.Player.Factories.Interfaces;
     using Tornado.Player.Services.Interfaces;
     using Tornado.Player.ViewModels.Interfaces;
 
@@ -10,22 +12,22 @@
     {
         private readonly IMusicPlayerService _musicPlayerService;
 
-        public PlaylistViewModel(IMusicPlayerService musicPlayerService)
+        public PlaylistViewModel(ITrackFactory trackFactory, IMusicPlayerService musicPlayerService)
         {
             _musicPlayerService = musicPlayerService;
 
-            Tracks = new BindableCollection<Track>(_musicPlayerService.Tracks);
+            Tracks = new BindableCollection<ITrackViewModel>(_musicPlayerService.Tracks.Select(trackFactory.MakeTrackViewModel));
 
             _musicPlayerService.PlaylistLoaded += (sender, e) =>
             {
                 Tracks.Clear();
-                Tracks.AddRange(e.Tracks);
+                Tracks.AddRange(e.Tracks.Select(trackFactory.MakeTrackViewModel));
             };
 
             _musicPlayerService.TrackChanged += (sender, e) => SelectedIndex = e.TrackIndex;
         }
 
-        public IObservableCollection<Track> Tracks { get; }
+        public IObservableCollection<ITrackViewModel> Tracks { get; }
 
         private int _selectedIndex;
         public int SelectedIndex

@@ -2,11 +2,9 @@
 {
     using Caliburn.Micro;
 
-    using Tornado.Player.Models;
-
     internal interface IPlaylistViewModel : IViewModelBase
     {
-        IObservableCollection<Track> Tracks { get; }
+        IObservableCollection<ITrackViewModel> Tracks { get; }
 
         int SelectedIndex { get; set; }
     }
