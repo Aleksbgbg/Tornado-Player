@@ -12,5 +12,7 @@
         event EventHandler<PlaylistLoadedEventArgs> PlaylistLoaded;
 
         Track[] Tracks { get; }
+
+        void SelectTrack(int index);
     }
 }

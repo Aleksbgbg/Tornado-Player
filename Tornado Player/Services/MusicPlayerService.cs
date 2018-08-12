@@ -35,5 +35,10 @@
         }
 
         public Track[] Tracks => _tornadoPlayer.Tracks;
+
+        public void SelectTrack(int index)
+        {
+            _tornadoPlayer.Switch(index);
+        }
     }
 }
