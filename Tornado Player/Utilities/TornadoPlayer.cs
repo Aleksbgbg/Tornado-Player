@@ -12,7 +12,6 @@
 
         private bool _isPlaying;
 
-
         internal TornadoPlayer()
         {
             _mediaPlayer.MediaEnded += (sender, e) => Next();
@@ -22,7 +21,7 @@
 
         internal event EventHandler<PlaylistLoadedEventArgs> PlaylistLoaded;
 
-        private int _trackIndex;
+        private int _trackIndex = -1;
         private int TrackIndex
         {
             get => _trackIndex;
