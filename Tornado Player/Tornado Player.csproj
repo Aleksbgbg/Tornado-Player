@@ -73,6 +73,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="EventArgs\PlaylistLoadedEventArgs.cs" />
     <Compile Include="EventArgs\TrackChangedEventArgs.cs" />
     <Compile Include="Models\Track.cs" />
     <Compile Include="Services\FileSystemService.cs" />
