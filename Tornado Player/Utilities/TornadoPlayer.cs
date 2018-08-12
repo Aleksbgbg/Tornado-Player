@@ -83,9 +83,12 @@
             }
         }
 
-        private void Switch(int index)
+        internal void Switch(int index)
         {
+            if (TrackIndex == index) return;
+
             TrackIndex = index;
+
             _mediaPlayer.Open(new Uri(Tracks[TrackIndex].Filepath));
             Play();
 
