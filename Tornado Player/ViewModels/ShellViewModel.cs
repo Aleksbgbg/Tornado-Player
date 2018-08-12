@@ -9,7 +9,7 @@
 
         public ShellViewModel(IMainViewModel mainViewModel, IMusicPlayerService musicPlayerService)
         {
-            DisplayName = "Tornado.Player";
+            DisplayName = "Tornado Player";
 
             MainViewModel = mainViewModel;
 
