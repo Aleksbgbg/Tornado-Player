@@ -30,10 +30,9 @@
             {
                 if (value < 0)
                 {
-                    throw new InvalidOperationException("Cannot play a track at index smaller than 0.");
+                    _trackIndex = Tracks.Length - ((-value) % Tracks.Length);
                 }
-
-                if (value > Tracks.Length)
+                else if (value > Tracks.Length)
                 {
                     _trackIndex = value % Tracks.Length;
                 }
