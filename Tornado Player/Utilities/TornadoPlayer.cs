@@ -3,6 +3,7 @@
     using System;
     using System.Windows.Media;
 
+    using Tornado.Player.EventArgs;
     using Tornado.Player.Models;
 
     internal class TornadoPlayer
@@ -17,6 +18,8 @@
         {
             _mediaPlayer.MediaEnded += (sender, e) => Next();
         }
+
+        internal event EventHandler<TrackChangedEventArgs> TrackChanged;
 
         private int _trackIndex;
         private int TrackIndex
@@ -81,6 +84,8 @@
             TrackIndex = index;
             _mediaPlayer.Open(new Uri(_tracks[TrackIndex].Filepath));
             Play();
+
+            TrackChanged?.Invoke(this, new TrackChangedEventArgs(TrackIndex));
         }
     }
 }
