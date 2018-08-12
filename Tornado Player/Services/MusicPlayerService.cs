@@ -3,6 +3,7 @@
     using System;
 
     using Tornado.Player.EventArgs;
+    using Tornado.Player.Models;
     using Tornado.Player.Services.Interfaces;
     using Tornado.Player.Utilities;
 
@@ -32,5 +33,7 @@
 
             remove => _tornadoPlayer.PlaylistLoaded -= value;
         }
+
+        public Track[] Tracks => _tornadoPlayer.Tracks;
     }
 }
