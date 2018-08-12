@@ -6,6 +6,8 @@
 
     using Caliburn.Micro;
 
+    using Tornado.Player.Factories;
+    using Tornado.Player.Factories.Interfaces;
     using Tornado.Player.Services;
     using Tornado.Player.Services.Interfaces;
     using Tornado.Player.Utilities;
@@ -28,6 +30,9 @@
 
         protected override void Configure()
         {
+            // Register Factories
+            _container.Singleton<ITrackFactory, TrackFactory>();
+
             // Register Services
             _container.Singleton<IWindowManager, WindowManager>();
 

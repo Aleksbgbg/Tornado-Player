@@ -79,6 +79,8 @@
     </Page>
     <Compile Include="EventArgs\PlaylistLoadedEventArgs.cs" />
     <Compile Include="EventArgs\TrackChangedEventArgs.cs" />
+    <Compile Include="Factories\Interfaces\ITrackFactory.cs" />
+    <Compile Include="Factories\TrackFactory.cs" />
     <Compile Include="Models\Track.cs" />
     <Compile Include="Services\FileSystemService.cs" />
     <Compile Include="Services\Interfaces\IFileSystemService.cs" />
@@ -170,7 +172,6 @@
   <ItemGroup>
     <Folder Include="Converters\" />
     <Folder Include="Extensions\" />
-    <Folder Include="Factories\Interfaces\" />
     <Folder Include="Helpers\" />
     <Folder Include="Images\" />
     <Folder Include="Utilities\Interfaces\" />
