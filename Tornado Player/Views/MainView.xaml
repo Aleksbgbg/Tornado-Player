@@ -7,5 +7,10 @@
 			 xmlns:ViewModels="clr-namespace:Tornado.Player.ViewModels"
 			 mc:Ignorable="d"
 			 d:DataContext="{d:DesignInstance ViewModels:MainViewModel}">
-    <ContentControl Caliburn:View.Model="{Binding PlaylistViewModel}"/>
+    <DockPanel>
+        <ContentControl DockPanel.Dock="Bottom"
+                        Caliburn:View.Model="{Binding PlaybarViewModel, Mode=OneTime}"/>
+
+        <ContentControl Caliburn:View.Model="{Binding PlaylistViewModel, Mode=OneTime}"/>
+    </DockPanel>
 </UserControl>
