@@ -74,6 +74,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converters\MarkedScrollBarPositionConverter.cs" />
+    <Compile Include="Utilities\VirtualKey.cs" />
     <Compile Include="Views\TrackView.xaml.cs">
       <DependentUpon>TrackView.xaml</DependentUpon>
     </Compile>
