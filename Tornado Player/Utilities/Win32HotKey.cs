@@ -27,10 +27,10 @@
 
         private readonly int _id;
 
-        internal Win32HotKey(uint keycode, Modifiers modifiers = 0)
+        internal Win32HotKey(VirtualKey key, Modifiers modifiers = 0)
         {
             _id = ++currentHotKeyId;
-            TryRegisterHotKey(keycode, modifiers);
+            TryRegisterHotKey(key, modifiers);
         }
 
         ~Win32HotKey()
@@ -63,11 +63,11 @@
             return IntPtr.Zero;
         }
 
-        private void TryRegisterHotKey(uint keycode, Modifiers modifiers)
+        private void TryRegisterHotKey(VirtualKey key, Modifiers modifiers)
         {
             if (Win32Handler.IsInitialised)
             {
-                int result = RegisterHotKey(Win32Handler.MainWindowHandle, _id, (uint)modifiers, keycode);
+                int result = RegisterHotKey(Win32Handler.MainWindowHandle, _id, (uint)modifiers, (uint)key);
 
                 if (result == 0)
                 {
@@ -83,7 +83,7 @@
             void OnWin32HandlerInitialised(object sender, EventArgs e)
             {
                 Win32Handler.Initialised -= OnWin32HandlerInitialised;
-                TryRegisterHotKey(keycode, modifiers);
+                TryRegisterHotKey(key, modifiers);
             }
 
             Win32Handler.Initialised += OnWin32HandlerInitialised;
