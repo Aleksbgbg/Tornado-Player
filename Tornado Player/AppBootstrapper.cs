@@ -44,6 +44,7 @@
             _container.Singleton<IMainViewModel, MainViewModel>();
 
             _container.Singleton<IPlaylistViewModel, PlaylistViewModel>();
+            _container.Singleton<IPlaybarViewModel, PlaybarViewModel>();
 
             _container.PerRequest<ITrackViewModel, TrackViewModel>();
         }

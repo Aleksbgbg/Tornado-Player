@@ -78,12 +78,22 @@
     <Compile Include="Converters\TimeSpanToSecondsConverter.cs" />
     <Compile Include="EventArgs\ProgressUpdatedEventArgs.cs" />
     <Compile Include="Utilities\VirtualKey.cs" />
+    <Compile Include="ViewModels\Interfaces\IPlaybarViewModel.cs" />
+    <Compile Include="ViewModels\PlaybarViewModel.cs" />
+    <Compile Include="Views\PlaybarView.xaml.cs">
+      <DependentUpon>PlaybarView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Views\TrackView.xaml.cs">
       <DependentUpon>TrackView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PlaybarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Views\PlaylistView.xaml">
       <SubType>Designer</SubType>

@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="Tornado.Player.Views.PlaybarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Converters="clr-namespace:Tornado.Player.Converters"
+             xmlns:ViewModels="clr-namespace:Tornado.Player.ViewModels"
+             mc:Ignorable="d"
+			 d:DataContext="{d:DesignInstance ViewModels:PlaybarViewModel}">
+    <DockPanel>
+        <TextBlock Text="{Binding CurrentProgress, Mode=OneWay, StringFormat={}{0:mm':'ss}}"/>
+
+        <TextBlock DockPanel.Dock="Right" Text="{Binding Duration, Mode=OneWay, StringFormat={}{0:mm':'ss}}"/>
+
+        <Slider Value="{Binding CurrentProgress, Converter={x:Static Converters:TimeSpanToSecondsConverter.Default}}"
+                Maximum="{Binding Duration, Mode=OneWay, Converter={x:Static Converters:TimeSpanToSecondsConverter.Default}}"/>
+    </DockPanel>
+</UserControl>
