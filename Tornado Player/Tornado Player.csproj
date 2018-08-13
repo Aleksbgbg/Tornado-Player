@@ -75,6 +75,7 @@
     </Compile>
     <Compile Include="Constants.cs" />
     <Compile Include="Converters\MarkedScrollBarPositionConverter.cs" />
+    <Compile Include="EventArgs\ProgressUpdatedEventArgs.cs" />
     <Compile Include="Utilities\VirtualKey.cs" />
     <Compile Include="Views\TrackView.xaml.cs">
       <DependentUpon>TrackView.xaml</DependentUpon>
