@@ -4,6 +4,8 @@
     using System.Timers;
     using System.Windows.Media;
 
+    using Caliburn.Micro;
+
     using Tornado.Player.EventArgs;
     using Tornado.Player.Models;
 
@@ -20,7 +22,7 @@
             _mediaPlayer.MediaOpened += (sender, e) => TrackChanged?.Invoke(this, new TrackChangedEventArgs(TrackIndex, _mediaPlayer.NaturalDuration.TimeSpan));
             _mediaPlayer.MediaEnded += (sender, e) => Next();
 
-            _progressUpdateTimer.Elapsed += (sender, e) => ProgressUpdated?.Invoke(this, new ProgressUpdatedEventArgs(_mediaPlayer.Position));
+            _progressUpdateTimer.Elapsed += (sender, e) => Execute.BeginOnUIThread(() => ProgressUpdated?.Invoke(this, new ProgressUpdatedEventArgs(_mediaPlayer.Position)));
 
             _progressUpdateTimer.Start();
         }
