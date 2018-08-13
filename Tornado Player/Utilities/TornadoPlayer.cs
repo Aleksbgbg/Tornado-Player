@@ -1,6 +1,7 @@
 ﻿namespace Tornado.Player.Utilities
 {
     using System;
+    using System.Timers;
     using System.Windows.Media;
 
     using Tornado.Player.EventArgs;
@@ -10,13 +11,21 @@
     {
         private readonly MediaPlayer _mediaPlayer = new MediaPlayer();
 
+        private readonly Timer _progressUpdateTimer = new Timer(0.1);
+
         private bool _isPlaying;
 
         internal TornadoPlayer()
         {
             _mediaPlayer.MediaOpened += (sender, e) => TrackChanged?.Invoke(this, new TrackChangedEventArgs(TrackIndex, _mediaPlayer.NaturalDuration.TimeSpan));
             _mediaPlayer.MediaEnded += (sender, e) => Next();
+
+            _progressUpdateTimer.Elapsed += (sender, e) => ProgressUpdated?.Invoke(this, new ProgressUpdatedEventArgs(_mediaPlayer.Position));
+
+            _progressUpdateTimer.Start();
         }
+
+        internal event EventHandler<ProgressUpdatedEventArgs> ProgressUpdated;
 
         internal event EventHandler<TrackChangedEventArgs> TrackChanged;
 
