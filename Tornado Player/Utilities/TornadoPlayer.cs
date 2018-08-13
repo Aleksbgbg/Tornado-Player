@@ -14,6 +14,7 @@
 
         internal TornadoPlayer()
         {
+            _mediaPlayer.MediaOpened += (sender, e) => TrackChanged?.Invoke(this, new TrackChangedEventArgs(TrackIndex, _mediaPlayer.NaturalDuration.TimeSpan));
             _mediaPlayer.MediaEnded += (sender, e) => Next();
         }
 
@@ -94,8 +95,6 @@
 
             _mediaPlayer.Open(new Uri(Tracks[TrackIndex].Filepath));
             Play();
-
-            TrackChanged?.Invoke(this, new TrackChangedEventArgs(TrackIndex));
         }
     }
 }
