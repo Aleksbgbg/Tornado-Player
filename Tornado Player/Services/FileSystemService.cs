@@ -10,7 +10,7 @@
     {
         public Track[] LoadTracks(string directory)
         {
-            return Directory.GetFiles(directory).Select(file => new Track(file)).ToArray();
+            return Directory.GetFiles(directory).Where(file => Constants.SupportedMediaFormats.Contains(Path.GetExtension(file))).Select(file => new Track(file)).ToArray();
         }
     }
 }
