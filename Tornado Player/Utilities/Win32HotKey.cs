@@ -30,7 +30,19 @@
         internal Win32HotKey(VirtualKey key, Modifiers modifiers = 0)
         {
             _id = ++currentHotKeyId;
-            TryRegisterHotKey(key, modifiers);
+
+            Win32Handler.WithWin32HandlerInstance(instance =>
+            {
+                int result = RegisterHotKey(instance.MainWindowHandle, _id, (uint)modifiers, (uint)key);
+
+                if (result == 0)
+                {
+                    throw new InvalidOperationException("Did not manage to register specified Win32HotKey.");
+                }
+
+                _windowHandleSource = HwndSource.FromHwnd(instance.MainWindowHandle);
+                _windowHandleSource.AddHook(EventCallback);
+            });
         }
 
         ~Win32HotKey()
@@ -63,36 +75,10 @@
             return IntPtr.Zero;
         }
 
-        private void TryRegisterHotKey(VirtualKey key, Modifiers modifiers)
-        {
-            if (Win32Handler.IsInitialised)
-            {
-                int result = RegisterHotKey(Win32Handler.MainWindowHandle, _id, (uint)modifiers, (uint)key);
-
-                if (result == 0)
-                {
-                    throw new InvalidOperationException("Did not manage to register specified Win32HotKey.");
-                }
-
-                _windowHandleSource = HwndSource.FromHwnd(Win32Handler.MainWindowHandle);
-                _windowHandleSource.AddHook(EventCallback);
-
-                return;
-            }
-
-            void OnWin32HandlerInitialised(object sender, EventArgs e)
-            {
-                Win32Handler.Initialised -= OnWin32HandlerInitialised;
-                TryRegisterHotKey(key, modifiers);
-            }
-
-            Win32Handler.Initialised += OnWin32HandlerInitialised;
-        }
-
         private void Dispose(bool disposing)
         {
             _windowHandleSource.RemoveHook(EventCallback);
-            UnregisterHotKey(Win32Handler.MainWindowHandle, _id);
+            UnregisterHotKey(Win32Handler.Instance.MainWindowHandle, _id);
 
             if (disposing)
             {
