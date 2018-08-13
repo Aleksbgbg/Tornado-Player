@@ -52,6 +52,11 @@
             Switch(0);
         }
 
+        internal void Previous()
+        {
+            Switch(TrackIndex - 1);
+        }
+
         internal void Next()
         {
             Switch(TrackIndex + 1);
