@@ -4,20 +4,26 @@
     using System.Windows;
     using System.Windows.Interop;
 
-    internal static class Win32Handler
+    internal class Win32Handler
     {
+        private Win32Handler(Window mainWindow)
+        {
+            MainWindowHandle = new WindowInteropHelper(mainWindow).Handle;
+        }
+
         internal static event EventHandler Initialised;
 
-        internal static bool IsInitialised { get; private set; }
+        internal static Win32Handler Instance { get; private set; }
+
+        internal static bool IsInitialised => Instance != null;
 
         // Guarantee this is set after MainWindow creation
-        internal static IntPtr MainWindowHandle { get; private set; }
+        internal IntPtr MainWindowHandle { get; }
 
         internal static void Initialise(Window mainWindow)
         {
-            MainWindowHandle = new WindowInteropHelper(mainWindow).Handle;
+            Instance = new Win32Handler(mainWindow);
 
-            IsInitialised = true;
             Initialised?.Invoke(null, EventArgs.Empty);
         }
     }
