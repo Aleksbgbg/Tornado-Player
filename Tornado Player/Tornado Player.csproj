@@ -73,6 +73,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Constants.cs" />
     <Compile Include="Converters\MarkedScrollBarPositionConverter.cs" />
     <Compile Include="Utilities\VirtualKey.cs" />
     <Compile Include="Views\TrackView.xaml.cs">
