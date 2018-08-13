@@ -4,6 +4,8 @@
     using System.Windows;
     using System.Windows.Interop;
 
+    internal delegate void Win32HandlerInstanceConsumer(Win32Handler instance);
+
     internal class Win32Handler
     {
         private Win32Handler(Window mainWindow)
@@ -25,6 +27,23 @@
             Instance = new Win32Handler(mainWindow);
 
             Initialised?.Invoke(null, EventArgs.Empty);
+        }
+
+        internal static void WithWin32HandlerInstance(Win32HandlerInstanceConsumer consumer)
+        {
+            if (IsInitialised)
+            {
+                consumer(Instance);
+                return;
+            }
+
+            void OnInitialised(object sender, EventArgs e)
+            {
+                Initialised -= OnInitialised;
+                consumer(Instance);
+            }
+
+            Initialised += OnInitialised;
         }
     }
 }
