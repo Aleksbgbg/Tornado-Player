@@ -24,6 +24,13 @@
             _skipForwardHotKey.Actuated += (sender, e) => _tornadoPlayer.Next();
         }
 
+        public event EventHandler<ProgressUpdatedEventArgs> ProgressUpdated
+        {
+            add => _tornadoPlayer.ProgressUpdated += value;
+
+            remove => _tornadoPlayer.ProgressUpdated -= value;
+        }
+
         public event EventHandler<TrackChangedEventArgs> TrackChanged
         {
             add => _tornadoPlayer.TrackChanged += value;

@@ -7,6 +7,8 @@
 
     internal interface IMusicPlayerService
     {
+        event EventHandler<ProgressUpdatedEventArgs> ProgressUpdated;
+
         event EventHandler<TrackChangedEventArgs> TrackChanged;
 
         event EventHandler<PlaylistLoadedEventArgs> PlaylistLoaded;
