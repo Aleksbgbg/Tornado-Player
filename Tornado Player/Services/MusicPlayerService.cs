@@ -11,12 +11,17 @@
     {
         private readonly TornadoPlayer _tornadoPlayer = new TornadoPlayer();
 
+        private readonly Win32HotKey _skipBackwardHotKey = new Win32HotKey(VirtualKey.F5, Win32HotKey.Modifiers.ControlKey | Win32HotKey.Modifiers.NoRepeat);
         private readonly Win32HotKey _togglePlaybackHotKey = new Win32HotKey(VirtualKey.F6, Win32HotKey.Modifiers.ControlKey | Win32HotKey.Modifiers.NoRepeat);
+        private readonly Win32HotKey _skipForwardHotKey = new Win32HotKey(VirtualKey.F7, Win32HotKey.Modifiers.ControlKey | Win32HotKey.Modifiers.NoRepeat);
 
         public MusicPlayerService(IFileSystemService fileSystemService)
         {
             _tornadoPlayer.Load(fileSystemService.LoadTracks("E:\\MP3s"));
+
+            _skipBackwardHotKey.Actuated += (sender, e) => _tornadoPlayer.Previous();
             _togglePlaybackHotKey.Actuated += (sender, e) => _tornadoPlayer.TogglePlay();
+            _skipForwardHotKey.Actuated += (sender, e) => _tornadoPlayer.Next();
         }
 
         public event EventHandler<TrackChangedEventArgs> TrackChanged
