@@ -47,6 +47,13 @@
 
         public Track[] Tracks => _tornadoPlayer.Tracks;
 
+        public TimeSpan Progress
+        {
+            get => _tornadoPlayer.Progress;
+
+            set => _tornadoPlayer.Progress = value;
+        }
+
         public void SelectTrack(int index)
         {
             _tornadoPlayer.Switch(index);

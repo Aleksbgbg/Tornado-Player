@@ -15,6 +15,8 @@
 
         Track[] Tracks { get; }
 
+        TimeSpan Progress { get; set; }
+
         void SelectTrack(int index);
     }
 }
