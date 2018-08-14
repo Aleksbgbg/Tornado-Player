@@ -1,4 +1,4 @@
-﻿namespace Tornado.Player.Utilities
+﻿namespace Tornado.Player.Helpers
 {
     using System;
     using System.Windows;

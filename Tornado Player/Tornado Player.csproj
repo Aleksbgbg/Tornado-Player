@@ -77,7 +77,7 @@
     <Compile Include="Converters\MarkedScrollBarPositionConverter.cs" />
     <Compile Include="Converters\TimeSpanToSecondsConverter.cs" />
     <Compile Include="EventArgs\ProgressUpdatedEventArgs.cs" />
-    <Compile Include="Utilities\RoutedEventTrigger.cs" />
+    <Compile Include="Helpers\RoutedEventTrigger.cs" />
     <Compile Include="Utilities\VirtualKey.cs" />
     <Compile Include="ViewModels\Interfaces\IPlaybarViewModel.cs" />
     <Compile Include="ViewModels\PlaybarViewModel.cs" />
@@ -202,7 +202,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extensions\" />
-    <Folder Include="Helpers\" />
     <Folder Include="Utilities\Interfaces\" />
   </ItemGroup>
   <ItemGroup>

@@ -5,9 +5,9 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:Caliburn="http://www.caliburnproject.org"
              xmlns:Converters="clr-namespace:Tornado.Player.Converters"
+             xmlns:Helpers="clr-namespace:Tornado.Player.Helpers"
              xmlns:Interactivity="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:ViewModels="clr-namespace:Tornado.Player.ViewModels"
-             xmlns:Utilities="clr-namespace:Tornado.Player.Utilities"
              mc:Ignorable="d"
 			 d:DataContext="{d:DesignInstance ViewModels:PlaybarViewModel}">
     <DockPanel>
@@ -19,13 +19,13 @@
                 Maximum="{Binding Duration, Mode=OneWay, Converter={x:Static Converters:TimeSpanToSecondsConverter.Default}}"
                 IsMoveToPointEnabled="True">
             <Interactivity:Interaction.Triggers>
-                <Utilities:RoutedEventTrigger RoutedEvent="Thumb.DragStarted">
+                <Helpers:RoutedEventTrigger RoutedEvent="Thumb.DragStarted">
                     <Caliburn:ActionMessage MethodName="DragStarted"/>
-                </Utilities:RoutedEventTrigger>
+                </Helpers:RoutedEventTrigger>
 
-                <Utilities:RoutedEventTrigger RoutedEvent="Thumb.DragCompleted">
+                <Helpers:RoutedEventTrigger RoutedEvent="Thumb.DragCompleted">
                     <Caliburn:ActionMessage MethodName="DragCompleted"/>
-                </Utilities:RoutedEventTrigger>
+                </Helpers:RoutedEventTrigger>
             </Interactivity:Interaction.Triggers>
         </Slider>
     </DockPanel>
