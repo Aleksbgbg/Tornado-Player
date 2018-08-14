@@ -9,11 +9,19 @@
     {
         private readonly IMusicPlayerService _musicPlayerService;
 
+        private bool _acceptingPlayerUpdates = true;
+
         public PlaybarViewModel(IMusicPlayerService musicPlayerService)
         {
             _musicPlayerService = musicPlayerService;
 
-            _musicPlayerService.ProgressUpdated += (sender, e) => CurrentProgress = e.NewProgress;
+            _musicPlayerService.ProgressUpdated += (sender, e) =>
+            {
+                if (_acceptingPlayerUpdates)
+                {
+                    CurrentProgress = e.NewProgress;
+                }
+            };
             _musicPlayerService.TrackChanged += (sender, e) => Duration = e.Duration;
         }
 
@@ -43,6 +51,17 @@
                 _duration = value;
                 NotifyOfPropertyChange(() => Duration);
             }
+        }
+
+        public void DragStarted()
+        {
+            _acceptingPlayerUpdates = false;
+        }
+
+        public void DragCompleted()
+        {
+            _acceptingPlayerUpdates = true;
+            _musicPlayerService.Progress = CurrentProgress;
         }
     }
 }

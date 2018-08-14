@@ -3,8 +3,11 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Caliburn="http://www.caliburnproject.org"
              xmlns:Converters="clr-namespace:Tornado.Player.Converters"
+             xmlns:Interactivity="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:ViewModels="clr-namespace:Tornado.Player.ViewModels"
+             xmlns:Utilities="clr-namespace:Tornado.Player.Utilities"
              mc:Ignorable="d"
 			 d:DataContext="{d:DesignInstance ViewModels:PlaybarViewModel}">
     <DockPanel>
@@ -12,7 +15,18 @@
 
         <TextBlock DockPanel.Dock="Right" Text="{Binding Duration, Mode=OneWay, StringFormat={}{0:mm':'ss}}"/>
 
-        <Slider Value="{Binding CurrentProgress, Converter={x:Static Converters:TimeSpanToSecondsConverter.Default}}"
-                Maximum="{Binding Duration, Mode=OneWay, Converter={x:Static Converters:TimeSpanToSecondsConverter.Default}}"/>
+        <Slider Value="{Binding CurrentProgress, Converter={x:Static Converters:TimeSpanToSecondsConverter.Default}, Delay=10}"
+                Maximum="{Binding Duration, Mode=OneWay, Converter={x:Static Converters:TimeSpanToSecondsConverter.Default}}"
+                IsMoveToPointEnabled="True">
+            <Interactivity:Interaction.Triggers>
+                <Utilities:RoutedEventTrigger RoutedEvent="Thumb.DragStarted">
+                    <Caliburn:ActionMessage MethodName="DragStarted"/>
+                </Utilities:RoutedEventTrigger>
+
+                <Utilities:RoutedEventTrigger RoutedEvent="Thumb.DragCompleted">
+                    <Caliburn:ActionMessage MethodName="DragCompleted"/>
+                </Utilities:RoutedEventTrigger>
+            </Interactivity:Interaction.Triggers>
+        </Slider>
     </DockPanel>
 </UserControl>
