@@ -11,9 +11,10 @@
              mc:Ignorable="d"
 			 d:DataContext="{d:DesignInstance ViewModels:PlaybarViewModel}">
     <DockPanel>
-        <TextBlock Text="{Binding CurrentProgress, Mode=OneWay, StringFormat={}{0:mm':'ss}}"/>
+        <TextBlock Text="{Binding CurrentProgress, Mode=OneWay, Converter={x:Static Converters:TimeSpanDurationFormatConverter.Default}}"/>
 
-        <TextBlock DockPanel.Dock="Right" Text="{Binding Duration, Mode=OneWay, StringFormat={}{0:mm':'ss}}"/>
+        <TextBlock DockPanel.Dock="Right"
+                   Text="{Binding Duration, Mode=OneWay, Converter={x:Static Converters:TimeSpanDurationFormatConverter.Default}}"/>
 
         <Slider Value="{Binding CurrentProgress, Converter={x:Static Converters:TimeSpanToSecondsConverter.Default}, Delay=10}"
                 Maximum="{Binding Duration, Mode=OneWay, Converter={x:Static Converters:TimeSpanToSecondsConverter.Default}}"
