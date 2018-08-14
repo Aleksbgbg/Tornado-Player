@@ -33,6 +33,13 @@
 
         internal event EventHandler<PlaylistLoadedEventArgs> PlaylistLoaded;
 
+        internal TimeSpan Progress
+        {
+            get => _mediaPlayer.Position;
+
+            set => _mediaPlayer.Position = value;
+        }
+
         private int _trackIndex = -1;
         private int TrackIndex
         {
