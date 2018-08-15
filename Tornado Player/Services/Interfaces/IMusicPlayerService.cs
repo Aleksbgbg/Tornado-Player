@@ -17,6 +17,12 @@
 
         TimeSpan Progress { get; set; }
 
+        void Play();
+
+        void Pause();
+
+        void TogglePlayback();
+
         void SelectTrack(int index);
     }
 }

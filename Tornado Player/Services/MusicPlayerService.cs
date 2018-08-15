@@ -54,6 +54,21 @@
             set => _tornadoPlayer.Progress = value;
         }
 
+        public void Play()
+        {
+            _tornadoPlayer.Play();
+        }
+
+        public void Pause()
+        {
+            _tornadoPlayer.Pause();
+        }
+
+        public void TogglePlayback()
+        {
+            _tornadoPlayer.TogglePlay();
+        }
+
         public void SelectTrack(int index)
         {
             _tornadoPlayer.Switch(index);
