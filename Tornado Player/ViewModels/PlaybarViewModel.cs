@@ -9,7 +9,7 @@
     {
         private readonly IMusicPlayerService _musicPlayerService;
 
-        private bool _acceptingPlayerUpdates = true;
+        private bool _syncPlayer = true;
 
         public PlaybarViewModel(IMusicPlayerService musicPlayerService)
         {
@@ -17,9 +17,11 @@
 
             _musicPlayerService.ProgressUpdated += (sender, e) =>
             {
-                if (_acceptingPlayerUpdates)
+                if (_syncPlayer)
                 {
+                    _syncPlayer = false;
                     CurrentProgress = e.NewProgress;
+                    _syncPlayer = true;
                 }
             };
             _musicPlayerService.TrackChanged += (sender, e) => Duration = e.Duration;
@@ -36,6 +38,11 @@
 
                 _currentProgress = value;
                 NotifyOfPropertyChange(() => CurrentProgress);
+
+                if (_syncPlayer)
+                {
+                    _musicPlayerService.Progress = value;
+                }
             }
         }
 
@@ -55,12 +62,12 @@
 
         public void DragStarted()
         {
-            _acceptingPlayerUpdates = false;
+            _syncPlayer = false;
         }
 
         public void DragCompleted()
         {
-            _acceptingPlayerUpdates = true;
+            _syncPlayer = true;
             _musicPlayerService.Progress = CurrentProgress;
         }
     }
