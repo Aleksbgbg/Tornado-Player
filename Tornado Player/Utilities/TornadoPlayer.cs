@@ -1,10 +1,8 @@
 ﻿namespace Tornado.Player.Utilities
 {
     using System;
-    using System.Timers;
     using System.Windows.Media;
-
-    using Caliburn.Micro;
+    using System.Windows.Threading;
 
     using Tornado.Player.EventArgs;
     using Tornado.Player.Models;
@@ -13,7 +11,7 @@
     {
         private readonly MediaPlayer _mediaPlayer = new MediaPlayer();
 
-        private readonly Timer _progressUpdateTimer = new Timer(0.1);
+        private readonly DispatcherTimer _progressUpdateTimer;
 
         private bool _isPlaying;
 
@@ -22,8 +20,10 @@
             _mediaPlayer.MediaOpened += (sender, e) => TrackChanged?.Invoke(this, new TrackChangedEventArgs(TrackIndex, _mediaPlayer.NaturalDuration.TimeSpan));
             _mediaPlayer.MediaEnded += (sender, e) => Next();
 
-            _progressUpdateTimer.Elapsed += (sender, e) => Execute.BeginOnUIThread(() => ProgressUpdated?.Invoke(this, new ProgressUpdatedEventArgs(_mediaPlayer.Position)));
-
+            _progressUpdateTimer = new DispatcherTimer(TimeSpan.FromSeconds(0.1),
+                                                       DispatcherPriority.Render,
+                                                       (sender, e) => ProgressUpdated?.Invoke(this, new ProgressUpdatedEventArgs(Progress)),
+                                                       Dispatcher.CurrentDispatcher);
             _progressUpdateTimer.Start();
         }
 
