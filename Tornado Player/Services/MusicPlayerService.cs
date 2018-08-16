@@ -45,6 +45,20 @@
             remove => _tornadoPlayer.PlaylistLoaded -= value;
         }
 
+        public event EventHandler Paused
+        {
+            add => _tornadoPlayer.Paused += value;
+
+            remove => _tornadoPlayer.Paused -= value;
+        }
+
+        public event EventHandler Played
+        {
+            add => _tornadoPlayer.Played += value;
+
+            remove => _tornadoPlayer.Played -= value;
+        }
+
         public Track[] Tracks => _tornadoPlayer.Tracks;
 
         public TimeSpan Progress

@@ -13,6 +13,10 @@
 
         event EventHandler<PlaylistLoadedEventArgs> PlaylistLoaded;
 
+        event EventHandler Paused;
+
+        event EventHandler Played;
+
         Track[] Tracks { get; }
 
         TimeSpan Progress { get; set; }
