@@ -16,7 +16,7 @@
                 <Popup AllowsTransparency="True" IsOpen="{Binding IsChecked, ElementName=VolumeButton}"
                        Placement="Left" PlacementTarget="{Binding ElementName=VolumeButton}"
                        StaysOpen="False" Width="75">
-                    <Slider/>
+                    <Slider Style="{StaticResource Slider.Smooth}"/>
                 </Popup>
 
                 <ToggleButton x:Name="VolumeButton">
@@ -72,164 +72,9 @@
                    Text="{Binding Duration, Mode=OneWay, Converter={x:Static Converters:TimeSpanDurationFormatConverter.Default}}"/>
 
             <Slider Value="{Binding CurrentProgress, Converter={x:Static Converters:TimeSpanToSecondsConverter.Default}, Delay=10}"
-                Maximum="{Binding Duration, Mode=OneWay, Converter={x:Static Converters:TimeSpanToSecondsConverter.Default}}"
-                IsMoveToPointEnabled="True" Margin="5, 0">
-                <Slider.Template>
-                    <ControlTemplate TargetType="Slider">
-                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <TickBar x:Name="TopTick" Fill="{TemplateBinding Foreground}" Height="4" Margin="0,0,0,2" Placement="Top" Grid.Row="0" Visibility="Collapsed"/>
-                                <TickBar x:Name="BottomTick" Fill="{TemplateBinding Foreground}" Height="4" Margin="0,2,0,0" Placement="Bottom" Grid.Row="2" Visibility="Collapsed"/>
-                                <Border x:Name="TrackBackground" Background="#FFE7EAEA" Height="4" Margin="5,0" Grid.Row="1" VerticalAlignment="Center">
-                                    <Canvas Margin="-6,-1">
-                                        <Rectangle x:Name="PART_SelectionRange" Fill="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Height="4" Visibility="Hidden"/>
-                                    </Canvas>
-                                </Border>
-                                <Track x:Name="PART_Track" Grid.Row="1">
-                                    <Track.DecreaseRepeatButton>
-                                        <RepeatButton Command="Slider.DecreaseLarge">
-                                            <RepeatButton.Style>
-                                                <Style TargetType="{x:Type RepeatButton}">
-                                                    <Setter Property="OverridesDefaultStyle" Value="True"/>
-                                                    <Setter Property="Background" Value="Transparent"/>
-                                                    <Setter Property="Focusable" Value="False"/>
-                                                    <Setter Property="IsTabStop" Value="False"/>
-                                                    <Setter Property="Template">
-                                                        <Setter.Value>
-                                                            <ControlTemplate TargetType="{x:Type RepeatButton}">
-                                                                <Border Height="3" Background="#48C9B0"
-                                                                    SnapsToDevicePixels="True"/>
-                                                            </ControlTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style>
-                                            </RepeatButton.Style>
-                                        </RepeatButton>
-                                    </Track.DecreaseRepeatButton>
-                                    <Track.IncreaseRepeatButton>
-                                        <RepeatButton Command="Slider.IncreaseLarge">
-                                            <RepeatButton.Style>
-                                                <Style TargetType="{x:Type RepeatButton}">
-                                                    <Setter Property="OverridesDefaultStyle" Value="True"/>
-                                                    <Setter Property="Background" Value="Transparent"/>
-                                                    <Setter Property="Focusable" Value="False"/>
-                                                    <Setter Property="IsTabStop" Value="False"/>
-                                                    <Setter Property="Template">
-                                                        <Setter.Value>
-                                                            <ControlTemplate TargetType="{x:Type RepeatButton}">
-                                                                <Rectangle Fill="{TemplateBinding Background}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}"/>
-                                                            </ControlTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style>
-                                            </RepeatButton.Style>
-                                        </RepeatButton>
-                                    </Track.IncreaseRepeatButton>
-                                    <Track.Thumb>
-                                        <Thumb x:Name="Thumb" Focusable="False" Height="18" OverridesDefaultStyle="True" VerticalAlignment="Center" Width="11">
-                                            <Thumb.Template>
-                                                <ControlTemplate TargetType="{x:Type Thumb}">
-                                                    <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center">
-                                                        <Ellipse x:Name="grip" Fill="#48C9B0" Height="10" Width="10"
-                                                             Stretch="Fill" SnapsToDevicePixels="True"
-                                                             Stroke="#FFACACAC" StrokeThickness="1"
-                                                             UseLayoutRounding="True" VerticalAlignment="Center"/>
-                                                    </Grid>
-                                                    <ControlTemplate.Triggers>
-                                                        <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter Property="Fill" TargetName="grip" Value="#1ABC9C"/>
-                                                            <Setter Property="Stroke" TargetName="grip" Value="#FF7EB4EA"/>
-                                                        </Trigger>
-                                                        <Trigger Property="IsDragging" Value="True">
-                                                            <Setter Property="Fill" TargetName="grip" Value="#17A589"/>
-                                                            <Setter Property="Stroke" TargetName="grip" Value="#FF569DE5"/>
-                                                        </Trigger>
-                                                        <!--<Trigger Property="IsEnabled" Value="False">
-                                                        <Setter Property="Fill" TargetName="grip" Value="#FFF0F0F0"/>
-                                                        <Setter Property="Stroke" TargetName="grip" Value="#FFD9D9D9"/>
-                                                    </Trigger>-->
-                                                    </ControlTemplate.Triggers>
-                                                </ControlTemplate>
-                                            </Thumb.Template>
-                                        </Thumb>
-                                    </Track.Thumb>
-                                </Track>
-                            </Grid>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="TickPlacement" Value="TopLeft">
-                                <Setter Property="Visibility" TargetName="TopTick" Value="Visible"/>
-                                <Setter Property="Template" TargetName="Thumb">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type Thumb}">
-                                            <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center">
-                                                <Path x:Name="grip" Data="M0,6C0,6 5.5,0 5.5,0 5.5,0 11,6 11,6 11,6 11,18 11,18 11,18 0,18 0,18 0,18 0,6 0,6z" Fill="#FFF0F0F0" Stretch="Fill" SnapsToDevicePixels="True" Stroke="#FFACACAC" StrokeThickness="1" UseLayoutRounding="True" VerticalAlignment="Center"/>
-                                            </Grid>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Fill" TargetName="grip" Value="#FFDCECFC"/>
-                                                    <Setter Property="Stroke" TargetName="grip" Value="#FF7EB4EA"/>
-                                                </Trigger>
-                                                <Trigger Property="IsDragging" Value="True">
-                                                    <Setter Property="Fill" TargetName="grip" Value="#FFDAECFC"/>
-                                                    <Setter Property="Stroke" TargetName="grip" Value="#FF569DE5"/>
-                                                </Trigger>
-                                                <Trigger Property="IsEnabled" Value="False">
-                                                    <Setter Property="Fill" TargetName="grip" Value="#FFF0F0F0"/>
-                                                    <Setter Property="Stroke" TargetName="grip" Value="#FFD9D9D9"/>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Setter Property="Margin" TargetName="TrackBackground" Value="5,2,5,0"/>
-                            </Trigger>
-                            <Trigger Property="TickPlacement" Value="BottomRight">
-                                <Setter Property="Visibility" TargetName="BottomTick" Value="Visible"/>
-                                <Setter Property="Template" TargetName="Thumb">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type Thumb}">
-                                            <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center">
-                                                <Path x:Name="grip" Data="M0,12C0,12 5.5,18 5.5,18 5.5,18 11,12 11,12 11,12 11,0 11,0 11,0 0,0 0,0 0,0 0,12 0,12z" Fill="#FFF0F0F0" Stretch="Fill" SnapsToDevicePixels="True" Stroke="#FFACACAC" StrokeThickness="1" UseLayoutRounding="True" VerticalAlignment="Center"/>
-                                            </Grid>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Fill" TargetName="grip" Value="#FFDCECFC"/>
-                                                    <Setter Property="Stroke" TargetName="grip" Value="#FF7EB4EA"/>
-                                                </Trigger>
-                                                <Trigger Property="IsDragging" Value="True">
-                                                    <Setter Property="Fill" TargetName="grip" Value="#FFDAECFC"/>
-                                                    <Setter Property="Stroke" TargetName="grip" Value="#FF569DE5"/>
-                                                </Trigger>
-                                                <Trigger Property="IsEnabled" Value="False">
-                                                    <Setter Property="Fill" TargetName="grip" Value="#FFF0F0F0"/>
-                                                    <Setter Property="Stroke" TargetName="grip" Value="#FFD9D9D9"/>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Setter Property="Margin" TargetName="TrackBackground" Value="5,0,5,2"/>
-                            </Trigger>
-                            <Trigger Property="TickPlacement" Value="Both">
-                                <Setter Property="Visibility" TargetName="TopTick" Value="Visible"/>
-                                <Setter Property="Visibility" TargetName="BottomTick" Value="Visible"/>
-                            </Trigger>
-                            <Trigger Property="IsSelectionRangeEnabled" Value="True">
-                                <Setter Property="Visibility" TargetName="PART_SelectionRange" Value="Visible"/>
-                            </Trigger>
-                            <Trigger Property="IsKeyboardFocused" Value="True">
-                                <Setter Property="Foreground" TargetName="Thumb" Value="Blue"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Slider.Template>
-
+                    Maximum="{Binding Duration, Mode=OneWay, Converter={x:Static Converters:TimeSpanToSecondsConverter.Default}}"
+                    IsMoveToPointEnabled="True" Margin="5, 0"
+                    Style="{StaticResource Slider.Smooth}">
                 <Interactivity:Interaction.Triggers>
                     <Helpers:RoutedEventTrigger RoutedEvent="Thumb.DragStarted">
                         <Caliburn:ActionMessage MethodName="DragStarted"/>
