@@ -13,9 +13,13 @@
     <StackPanel>
         <DockPanel Height="50">
             <StackPanel Height="30" DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Bottom">
-                <Button>
+                <ToggleButton>
+                    <Image Source="{StaticResource Loop}"/>
+                </ToggleButton>
+
+                <ToggleButton>
                     <Image Source="{StaticResource Shuffle}"/>
-                </Button>
+                </ToggleButton>
             </StackPanel>
 
             <StackPanel Height="50" Orientation="Horizontal">
