@@ -215,7 +215,7 @@
     <Resource Include="Images\Back.png" />
     <Resource Include="Images\Pause.png" />
     <Resource Include="Images\Play.png" />
-    <Resource Include="Images\Repeat.png" />
+    <Resource Include="Images\Loop.png" />
     <Resource Include="Images\Shuffle.png" />
   </ItemGroup>
   <ItemGroup>
