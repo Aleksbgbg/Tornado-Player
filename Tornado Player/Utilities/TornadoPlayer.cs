@@ -33,6 +33,10 @@
 
         internal event EventHandler<PlaylistLoadedEventArgs> PlaylistLoaded;
 
+        internal event EventHandler Paused;
+
+        internal event EventHandler Played;
+
         internal TimeSpan Progress
         {
             get => _mediaPlayer.Position;
@@ -85,12 +89,14 @@
         {
             _mediaPlayer.Play();
             _isPlaying = true;
+            Played?.Invoke(this, EventArgs.Empty);
         }
 
         internal void Pause()
         {
             _mediaPlayer.Pause();
             _isPlaying = false;
+            Paused?.Invoke(this, EventArgs.Empty);
         }
 
         internal void TogglePlay()
