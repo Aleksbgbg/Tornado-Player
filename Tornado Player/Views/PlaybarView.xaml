@@ -13,6 +13,16 @@
     <StackPanel>
         <DockPanel Height="50">
             <StackPanel Height="30" DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Bottom">
+                <Popup AllowsTransparency="True" IsOpen="{Binding IsChecked, ElementName=VolumeButton}"
+                       Placement="Left" PlacementTarget="{Binding ElementName=VolumeButton}"
+                       StaysOpen="False" Width="75">
+                    <Slider/>
+                </Popup>
+
+                <ToggleButton x:Name="VolumeButton">
+                    <Image Source="{StaticResource MaxVolume}"/>
+                </ToggleButton>
+
                 <ToggleButton>
                     <Image Source="{StaticResource Loop}"/>
                 </ToggleButton>
