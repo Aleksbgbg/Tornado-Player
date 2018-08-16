@@ -25,6 +25,9 @@
                 }
             };
             _musicPlayerService.TrackChanged += (sender, e) => Duration = e.Duration;
+
+            _musicPlayerService.Paused += (sender, e) => Playing = false;
+            _musicPlayerService.Played += (sender, e) => Playing = true;
         }
 
         private TimeSpan _currentProgress;
@@ -60,6 +63,20 @@
             }
         }
 
+        private bool _playing = true;
+        public bool Playing
+        {
+            get => _playing;
+
+            private set
+            {
+                if (_playing == value) return;
+
+                _playing = value;
+                NotifyOfPropertyChange(() => Playing);
+            }
+        }
+
         public void DragStarted()
         {
             _syncPlayer = false;
@@ -69,6 +86,21 @@
         {
             _syncPlayer = true;
             _musicPlayerService.Progress = CurrentProgress;
+        }
+
+        public void Previous()
+        {
+            _musicPlayerService.Previous();
+        }
+
+        public void Next()
+        {
+            _musicPlayerService.Next();
+        }
+
+        public void TogglePlayback()
+        {
+            _musicPlayerService.TogglePlayback();
         }
     }
 }

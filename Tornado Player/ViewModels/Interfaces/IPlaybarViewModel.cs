@@ -7,5 +7,7 @@
         TimeSpan CurrentProgress { get; set; }
 
         TimeSpan Duration { get; }
+
+        bool Playing { get; }
     }
 }
