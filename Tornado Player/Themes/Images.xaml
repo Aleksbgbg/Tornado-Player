@@ -1,4 +1,10 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<BitmapImage x:Key="Back" UriSource="/Images/Back.png"/>
+	<BitmapImage x:Key="Favourite" UriSource="/Images/Favourite.png"/>
+	<BitmapImage x:Key="Pause" UriSource="/Images/Pause.png"/>
+	<BitmapImage x:Key="Play" UriSource="/Images/Play.png"/>
+	<BitmapImage x:Key="Repeat" UriSource="/Images/Repeat.png"/>
+	<BitmapImage x:Key="Shuffle" UriSource="/Images/Shuffle.png"/>
 	<BitmapImage x:Key="Tornado" UriSource="/Images/Tornado.ico"/>
 </ResourceDictionary>
