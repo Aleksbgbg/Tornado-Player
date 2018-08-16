@@ -221,6 +221,12 @@
   <ItemGroup>
     <Resource Include="Images\Favourite.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Max Volume.png" />
+    <Resource Include="Images\Low Volume.png" />
+    <Resource Include="Images\Mute.png" />
+    <Resource Include="Images\High Volume.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
