@@ -21,6 +21,10 @@
 
         TimeSpan Progress { get; set; }
 
+        void Previous();
+
+        void Next();
+
         void Play();
 
         void Pause();

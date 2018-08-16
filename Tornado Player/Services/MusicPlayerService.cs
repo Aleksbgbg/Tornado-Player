@@ -68,6 +68,16 @@
             set => _tornadoPlayer.Progress = value;
         }
 
+        public void Previous()
+        {
+            _tornadoPlayer.Previous();
+        }
+
+        public void Next()
+        {
+            _tornadoPlayer.Next();
+        }
+
         public void Play()
         {
             _tornadoPlayer.Play();
