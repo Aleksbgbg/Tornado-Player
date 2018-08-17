@@ -61,12 +61,7 @@
 
         public Track[] Tracks => _tornadoPlayer.Tracks;
 
-        public bool Loop
-        {
-            get => _tornadoPlayer.Loop;
-
-            set => _tornadoPlayer.Loop = value;
-        }
+        public bool IsPlaying => _tornadoPlayer.IsPlaying;
 
         public TimeSpan Progress
         {
@@ -75,11 +70,20 @@
             set => _tornadoPlayer.Progress = value;
         }
 
+        public TimeSpan Duration => _tornadoPlayer.Duration;
+
         public double Volume
         {
             get => _tornadoPlayer.Volume;
 
             set => _tornadoPlayer.Volume = value;
+        }
+
+        public bool Loop
+        {
+            get => _tornadoPlayer.Loop;
+
+            set => _tornadoPlayer.Loop = value;
         }
 
         public void Previous()
