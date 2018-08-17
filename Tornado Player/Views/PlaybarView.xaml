@@ -25,7 +25,7 @@
                     <Image Source="{Binding Volume, Converter={x:Static Converters:VolumeToImageConverter.Default}}"/>
                 </ToggleButton>
 
-                <ToggleButton>
+                <ToggleButton IsChecked="{Binding Loop}">
                     <Image Source="{StaticResource Loop}"/>
                 </ToggleButton>
 

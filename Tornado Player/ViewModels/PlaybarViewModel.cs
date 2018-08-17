@@ -74,6 +74,19 @@
             }
         }
 
+        public bool Loop
+        {
+            get => _musicPlayerService.Loop;
+
+            set
+            {
+                if (Loop == value) return;
+
+                _musicPlayerService.Loop = value;
+                NotifyOfPropertyChange(() => Loop);
+            }
+        }
+
         private bool _playing = true;
         public bool Playing
         {
