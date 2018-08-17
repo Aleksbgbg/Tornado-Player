@@ -21,21 +21,21 @@
                             AutoToolTipPlacement="TopLeft" Style="{StaticResource Slider.Smooth}"/>
                 </Popup>
 
-                <ToggleButton x:Name="VolumeButton">
+                <ToggleButton x:Name="VolumeButton" ToolTip="Volume">
                     <Image Source="{Binding Volume, Converter={x:Static Converters:VolumeToImageConverter.Default}}"/>
                 </ToggleButton>
 
-                <ToggleButton IsChecked="{Binding Loop}">
+                <ToggleButton IsChecked="{Binding Loop}" ToolTip="Loop">
                     <Image Source="{StaticResource Loop}"/>
                 </ToggleButton>
 
-                <ToggleButton IsChecked="{Binding Shuffle}">
+                <ToggleButton IsChecked="{Binding Shuffle}" ToolTip="Shuffle">
                     <Image Source="{StaticResource Shuffle}"/>
                 </ToggleButton>
             </StackPanel>
 
             <StackPanel Height="50" Orientation="Horizontal">
-                <Button Caliburn:Message.Attach="Previous">
+                <Button Caliburn:Message.Attach="Previous" ToolTip="Previous (Ctrl+F5)">
                     <Image Source="{StaticResource Back}"/>
                 </Button>
 
@@ -46,10 +46,12 @@
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Playing}" Value="True">
                                         <Setter Property="Source" Value="{StaticResource Pause}"/>
+                                        <Setter Property="ToolTip" Value="Pause (Ctrl+F6)"/>
                                     </DataTrigger>
 
                                     <DataTrigger Binding="{Binding Playing}" Value="False">
                                         <Setter Property="Source" Value="{StaticResource Play}"/>
+                                        <Setter Property="ToolTip" Value="Play (Ctrl+F6)"/>
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -57,7 +59,7 @@
                     </Image>
                 </Button>
 
-                <Button Caliburn:Message.Attach="Next">
+                <Button Caliburn:Message.Attach="Next" ToolTip="Next (Ctrl+F7)">
                     <Image Source="{StaticResource Back}" RenderTransformOrigin="0.5, 0.5">
                         <Image.RenderTransform>
                             <RotateTransform Angle="180"/>
