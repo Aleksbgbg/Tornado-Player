@@ -79,7 +79,7 @@
                 {
                     _trackIndex = Tracks.Length - ((-value) % Tracks.Length);
                 }
-                else if (value > Tracks.Length)
+                else if (value >= Tracks.Length)
                 {
                     _trackIndex = value % Tracks.Length;
                 }
