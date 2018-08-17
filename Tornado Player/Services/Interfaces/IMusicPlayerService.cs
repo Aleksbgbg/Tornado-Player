@@ -19,6 +19,8 @@
 
         Track[] Tracks { get; }
 
+        bool Loop { get; set; }
+
         TimeSpan Progress { get; set; }
 
         double Volume { get; set; }
