@@ -18,7 +18,18 @@
         internal TornadoPlayer()
         {
             _mediaPlayer.MediaOpened += (sender, e) => TrackChanged?.Invoke(this, new TrackChangedEventArgs(TrackIndex, _mediaPlayer.NaturalDuration.TimeSpan));
-            _mediaPlayer.MediaEnded += (sender, e) => Next();
+            _mediaPlayer.MediaEnded += (sender, e) =>
+            {
+                if (Loop)
+                {
+                    _mediaPlayer.Stop();
+                    _mediaPlayer.Play();
+                }
+                else
+                {
+                    Next();
+                }
+            };
 
             _progressUpdateTimer = new DispatcherTimer(TimeSpan.FromSeconds(0.1),
                                                        DispatcherPriority.Render,
@@ -50,6 +61,8 @@
 
             set => _mediaPlayer.Volume = value;
         }
+
+        internal bool Loop { get; set; }
 
         private int _trackIndex = -1;
         private int TrackIndex
