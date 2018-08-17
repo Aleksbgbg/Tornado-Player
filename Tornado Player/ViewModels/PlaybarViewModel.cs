@@ -24,10 +24,10 @@
                     _syncPlayer = true;
                 }
             };
-            _musicPlayerService.TrackChanged += (sender, e) => Duration = e.Duration;
+            _musicPlayerService.TrackChanged += (sender, e) => NotifyOfPropertyChange(() => Duration);
 
-            _musicPlayerService.Paused += (sender, e) => Playing = false;
-            _musicPlayerService.Played += (sender, e) => Playing = true;
+            _musicPlayerService.Paused += (sender, e) => NotifyOfPropertyChange(() => Playing);
+            _musicPlayerService.Played += (sender, e) => NotifyOfPropertyChange(() => Playing);
         }
 
         private TimeSpan _currentProgress;
@@ -49,19 +49,7 @@
             }
         }
 
-        private TimeSpan _duration;
-        public TimeSpan Duration
-        {
-            get => _duration;
-
-            private set
-            {
-                if (_duration == value) return;
-
-                _duration = value;
-                NotifyOfPropertyChange(() => Duration);
-            }
-        }
+        public TimeSpan Duration => _musicPlayerService.Duration;
 
         public double Volume
         {
@@ -87,19 +75,7 @@
             }
         }
 
-        private bool _playing = true;
-        public bool Playing
-        {
-            get => _playing;
-
-            private set
-            {
-                if (_playing == value) return;
-
-                _playing = value;
-                NotifyOfPropertyChange(() => Playing);
-            }
-        }
+        public bool Playing => _musicPlayerService.IsPlaying;
 
         public void DragStarted()
         {
