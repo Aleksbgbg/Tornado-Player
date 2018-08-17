@@ -95,7 +95,7 @@
         internal void Load(Track[] tracks)
         {
             Tracks = tracks;
-            PlaylistLoaded?.Invoke(this, new PlaylistLoadedEventArgs(tracks));
+            OnPlaylistLoaded();
             Switch(0);
         }
 
@@ -143,6 +143,33 @@
 
             _mediaPlayer.Open(new Uri(Tracks[TrackIndex].Filepath));
             Play();
+        }
+
+        internal void Shuffle()
+        {
+            Random random = new Random();
+
+            for (int index = 0; index < Tracks.Length; index++)
+            {
+                int swapIndex = index + random.Next(Tracks.Length - index);
+
+                Track track = Tracks[swapIndex];
+                Tracks[swapIndex] = Tracks[index];
+                Tracks[index] = track;
+            }
+
+            OnPlaylistLoaded();
+        }
+
+        internal void Sort()
+        {
+            Array.Sort(Tracks);
+            OnPlaylistLoaded();
+        }
+
+        private void OnPlaylistLoaded()
+        {
+            PlaylistLoaded?.Invoke(this, new PlaylistLoadedEventArgs(Tracks));
         }
     }
 }
