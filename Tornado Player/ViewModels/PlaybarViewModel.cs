@@ -77,6 +77,29 @@
 
         public bool Playing => _musicPlayerService.IsPlaying;
 
+        private bool _shuffle;
+        public bool Shuffle
+        {
+            get => _shuffle;
+
+            set
+            {
+                if (_shuffle == value) return;
+
+                _shuffle = value;
+                NotifyOfPropertyChange(() => Shuffle);
+
+                if (_shuffle)
+                {
+                    _musicPlayerService.Shuffle();
+                }
+                else
+                {
+                    _musicPlayerService.Sort();
+                }
+            }
+        }
+
         public void DragStarted()
         {
             _syncPlayer = false;

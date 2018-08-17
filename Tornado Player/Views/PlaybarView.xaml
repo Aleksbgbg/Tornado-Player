@@ -29,7 +29,7 @@
                     <Image Source="{StaticResource Loop}"/>
                 </ToggleButton>
 
-                <ToggleButton>
+                <ToggleButton IsChecked="{Binding Shuffle}">
                     <Image Source="{StaticResource Shuffle}"/>
                 </ToggleButton>
             </StackPanel>
