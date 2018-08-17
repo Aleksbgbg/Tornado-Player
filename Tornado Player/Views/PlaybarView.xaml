@@ -22,7 +22,7 @@
                 </Popup>
 
                 <ToggleButton x:Name="VolumeButton">
-                    <Image Source="{StaticResource MaxVolume}"/>
+                    <Image Source="{Binding Volume, Converter={x:Static Converters:VolumeToImageConverter.Default}}"/>
                 </ToggleButton>
 
                 <ToggleButton>
