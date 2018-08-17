@@ -40,5 +40,9 @@
         void TogglePlayback();
 
         void SelectTrack(int index);
+
+        void Shuffle();
+
+        void Sort();
     }
 }

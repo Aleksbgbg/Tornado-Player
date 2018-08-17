@@ -115,5 +115,15 @@
         {
             _tornadoPlayer.Switch(index);
         }
+
+        public void Shuffle()
+        {
+            _tornadoPlayer.Shuffle();
+        }
+
+        public void Sort()
+        {
+            _tornadoPlayer.Sort();
+        }
     }
 }
