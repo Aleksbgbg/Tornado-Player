@@ -63,6 +63,17 @@
             }
         }
 
+        public double Volume
+        {
+            get => _musicPlayerService.Volume;
+
+            set
+            {
+                _musicPlayerService.Volume = value;
+                NotifyOfPropertyChange(() => Volume);
+            }
+        }
+
         private bool _playing = true;
         public bool Playing
         {

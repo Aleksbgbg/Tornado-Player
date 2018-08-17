@@ -14,9 +14,11 @@
         <DockPanel Height="50">
             <StackPanel Height="30" DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Bottom">
                 <Popup AllowsTransparency="True" IsOpen="{Binding IsChecked, ElementName=VolumeButton}"
-                       Placement="Left" PlacementTarget="{Binding ElementName=VolumeButton}"
+                       Placement="Left" PlacementTarget="{Binding ElementName=VolumeButton, Mode=OneTime}"
                        StaysOpen="False" Width="75">
-                    <Slider Style="{StaticResource Slider.Smooth}"/>
+                    <Slider Value="{Binding Volume, Delay=1, Converter={x:Static Converters:FractionToPercentageConverter.Default}}"
+                            Maximum="100" IsMoveToPointEnabled="True"
+                            AutoToolTipPlacement="TopLeft" Style="{StaticResource Slider.Smooth}"/>
                 </Popup>
 
                 <ToggleButton x:Name="VolumeButton">
