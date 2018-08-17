@@ -21,6 +21,8 @@
 
         TimeSpan Progress { get; set; }
 
+        double Volume { get; set; }
+
         void Previous();
 
         void Next();
