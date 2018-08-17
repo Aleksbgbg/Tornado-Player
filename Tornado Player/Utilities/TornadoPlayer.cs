@@ -48,12 +48,16 @@
 
         internal event EventHandler Played;
 
+        internal bool IsPlaying { get; private set; }
+
         internal TimeSpan Progress
         {
             get => _mediaPlayer.Position;
 
             set => _mediaPlayer.Position = value;
         }
+
+        internal TimeSpan Duration => _mediaPlayer.NaturalDuration.HasTimeSpan ? _mediaPlayer.NaturalDuration.TimeSpan : new TimeSpan();
 
         internal double Volume
         {
@@ -108,20 +112,20 @@
         internal void Play()
         {
             _mediaPlayer.Play();
-            _isPlaying = true;
+            IsPlaying = true;
             Played?.Invoke(this, EventArgs.Empty);
         }
 
         internal void Pause()
         {
             _mediaPlayer.Pause();
-            _isPlaying = false;
+            IsPlaying = false;
             Paused?.Invoke(this, EventArgs.Empty);
         }
 
         internal void TogglePlay()
         {
-            if (_isPlaying)
+            if (IsPlaying)
             {
                 Pause();
             }
