@@ -44,6 +44,13 @@
             set => _mediaPlayer.Position = value;
         }
 
+        internal double Volume
+        {
+            get => _mediaPlayer.Volume;
+
+            set => _mediaPlayer.Volume = value;
+        }
+
         private int _trackIndex = -1;
         private int TrackIndex
         {
