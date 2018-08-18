@@ -9,15 +9,17 @@
     {
         event EventHandler<ProgressUpdatedEventArgs> ProgressUpdated;
 
-        event EventHandler<TrackChangedEventArgs> TrackChanged;
-
-        event EventHandler<PlaylistLoadedEventArgs> PlaylistLoaded;
-
         event EventHandler Paused;
 
         event EventHandler Played;
 
+        event EventHandler<TrackChangedEventArgs> TrackChanged;
+
+        event EventHandler<PlaylistLoadedEventArgs> PlaylistLoaded;
+
         Track[] Tracks { get; }
+
+        int TrackIndex { get; }
 
         bool IsPlaying { get; }
 

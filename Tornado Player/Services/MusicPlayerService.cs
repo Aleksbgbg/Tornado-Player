@@ -17,11 +17,25 @@
 
         public MusicPlayerService(IFileSystemService fileSystemService)
         {
-            _tornadoPlayer.Load(fileSystemService.LoadTracks("E:\\MP3s"));
+            _skipBackwardHotKey.Actuated += (sender, e) => Previous();
+            _togglePlaybackHotKey.Actuated += (sender, e) => TogglePlayback();
+            _skipForwardHotKey.Actuated += (sender, e) => Next();
 
-            _skipBackwardHotKey.Actuated += (sender, e) => _tornadoPlayer.Previous();
-            _togglePlaybackHotKey.Actuated += (sender, e) => _tornadoPlayer.TogglePlay();
-            _skipForwardHotKey.Actuated += (sender, e) => _tornadoPlayer.Next();
+            _tornadoPlayer.MediaOpened += (sender, e) => TrackChanged?.Invoke(this, new TrackChangedEventArgs(TrackIndex, Duration));
+            _tornadoPlayer.MediaEnded += (sender, e) =>
+            {
+                if (Loop)
+                {
+                    _tornadoPlayer.Stop();
+                    _tornadoPlayer.Play();
+                }
+                else
+                {
+                    Next();
+                }
+            };
+
+            Tracks = fileSystemService.LoadTracks("E:\\MP3s");
         }
 
         public event EventHandler<ProgressUpdatedEventArgs> ProgressUpdated
@@ -29,20 +43,6 @@
             add => _tornadoPlayer.ProgressUpdated += value;
 
             remove => _tornadoPlayer.ProgressUpdated -= value;
-        }
-
-        public event EventHandler<TrackChangedEventArgs> TrackChanged
-        {
-            add => _tornadoPlayer.TrackChanged += value;
-
-            remove => _tornadoPlayer.TrackChanged -= value;
-        }
-
-        public event EventHandler<PlaylistLoadedEventArgs> PlaylistLoaded
-        {
-            add => _tornadoPlayer.PlaylistLoaded += value;
-
-            remove => _tornadoPlayer.PlaylistLoaded -= value;
         }
 
         public event EventHandler Paused
@@ -59,7 +59,43 @@
             remove => _tornadoPlayer.Played -= value;
         }
 
-        public Track[] Tracks => _tornadoPlayer.Tracks;
+        public event EventHandler<TrackChangedEventArgs> TrackChanged;
+
+        public event EventHandler<PlaylistLoadedEventArgs> PlaylistLoaded;
+
+        private Track[] _tracks;
+        public Track[] Tracks
+        {
+            get => _tracks;
+
+            private set
+            {
+                _tracks = value;
+                OnPlaylistLoaded();
+            }
+        }
+
+        private int _trackIndex = -1;
+        public int TrackIndex
+        {
+            get => _trackIndex;
+
+            private set
+            {
+                if (value < 0)
+                {
+                    _trackIndex = Tracks.Length - ((-value) % Tracks.Length);
+                }
+                else if (value >= Tracks.Length)
+                {
+                    _trackIndex = value % Tracks.Length;
+                }
+                else
+                {
+                    _trackIndex = value;
+                }
+            }
+        }
 
         public bool IsPlaying => _tornadoPlayer.IsPlaying;
 
@@ -88,12 +124,12 @@
 
         public void Previous()
         {
-            _tornadoPlayer.Previous();
+            SelectTrack(TrackIndex - 1);
         }
 
         public void Next()
         {
-            _tornadoPlayer.Next();
+            SelectTrack(TrackIndex + 1);
         }
 
         public void Play()
@@ -113,17 +149,38 @@
 
         public void SelectTrack(int index)
         {
-            _tornadoPlayer.Switch(index);
+            if (TrackIndex == index) return;
+
+            TrackIndex = index;
+
+            _tornadoPlayer.Open(Tracks[TrackIndex]);
         }
 
         public void Shuffle()
         {
-            _tornadoPlayer.Shuffle();
+            Random random = new Random();
+
+            for (int index = 0; index < Tracks.Length; index++)
+            {
+                int swapIndex = index + random.Next(Tracks.Length - index);
+
+                Track track = Tracks[swapIndex];
+                Tracks[swapIndex] = Tracks[index];
+                Tracks[index] = track;
+            }
+
+            OnPlaylistLoaded();
         }
 
         public void Sort()
         {
-            _tornadoPlayer.Sort();
+            Array.Sort(Tracks);
+            OnPlaylistLoaded();
+        }
+
+        private void OnPlaylistLoaded()
+        {
+            PlaylistLoaded?.Invoke(this, new PlaylistLoadedEventArgs(Tracks));
         }
     }
 }
