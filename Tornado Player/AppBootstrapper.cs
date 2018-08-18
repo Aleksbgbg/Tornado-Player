@@ -66,5 +66,10 @@
             DisplayRootViewFor<IShellViewModel>();
             Win32Handler.Initialise(Application.Current.MainWindow);
         }
+
+        protected override void OnExit(object sender, System.EventArgs e)
+        {
+            IoC.Get<IMusicPlayerService>().SaveState();
+        }
     }
 }
