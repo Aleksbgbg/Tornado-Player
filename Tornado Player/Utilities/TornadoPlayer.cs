@@ -13,8 +13,6 @@
 
         private readonly DispatcherTimer _progressUpdateTimer;
 
-        private bool _isPlaying;
-
         internal TornadoPlayer()
         {
             _mediaPlayer.MediaOpened += (sender, e) => TrackChanged?.Invoke(this, new TrackChangedEventArgs(TrackIndex, _mediaPlayer.NaturalDuration.TimeSpan));
