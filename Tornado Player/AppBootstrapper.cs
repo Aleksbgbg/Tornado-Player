@@ -37,6 +37,7 @@
             _container.Singleton<IWindowManager, WindowManager>();
 
             _container.Singleton<IAppDataService, AppDataService>();
+            _container.Singleton<IDataService, DataService>();
             _container.Singleton<IFileSystemService, FileSystemService>();
             _container.Singleton<IMusicPlayerService, MusicPlayerService>();
 
