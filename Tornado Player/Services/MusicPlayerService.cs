@@ -123,6 +123,28 @@
             set => _tornadoPlayer.Loop = value;
         }
 
+        private bool _isShuffled;
+        public bool IsShuffled
+        {
+            get => _isShuffled;
+
+            set
+            {
+                if (_isShuffled == value) return;
+
+                _isShuffled = value;
+
+                if (_isShuffled)
+                {
+                    Shuffle();
+                }
+                else
+                {
+                    Sort();
+                }
+            }
+        }
+
         public void Previous()
         {
             SelectTrack(TrackIndex - 1);
@@ -172,11 +194,13 @@
                     tracks[index] = track;
                 }
             });
+            IsShuffled = true;
         }
 
         public void Sort()
         {
             RearrangePlaylist(Array.Sort);
+            IsShuffled = false;
         }
 
         private void RearrangePlaylist(Action<Track[]> rearrangeMethod)

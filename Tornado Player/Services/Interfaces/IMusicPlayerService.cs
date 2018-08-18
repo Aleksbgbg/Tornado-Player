@@ -31,6 +31,8 @@
 
         bool Loop { get; set; }
 
+        bool IsShuffled { get; set; }
+
         void Previous();
 
         void Next();
