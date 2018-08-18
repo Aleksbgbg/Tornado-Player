@@ -121,6 +121,13 @@
             Switch(TrackIndex + 1);
         }
 
+        internal void Stop()
+        {
+            _mediaPlayer.Stop();
+            IsPlaying = false;
+            Paused?.Invoke(this, EventArgs.Empty);
+        }
+
         internal void Play()
         {
             _mediaPlayer.Play();
