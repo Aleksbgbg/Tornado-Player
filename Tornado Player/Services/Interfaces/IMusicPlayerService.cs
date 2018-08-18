@@ -48,5 +48,7 @@
         void Shuffle();
 
         void Sort();
+
+        void SaveState();
     }
 }

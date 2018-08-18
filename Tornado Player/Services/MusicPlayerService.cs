@@ -9,14 +9,18 @@
 
     internal class MusicPlayerService : IMusicPlayerService
     {
+        private readonly IDataService _dataService;
+
         private readonly TornadoPlayer _tornadoPlayer = new TornadoPlayer();
 
         private readonly Win32HotKey _skipBackwardHotKey = new Win32HotKey(VirtualKey.F5, Win32HotKey.Modifiers.ControlKey | Win32HotKey.Modifiers.NoRepeat);
         private readonly Win32HotKey _togglePlaybackHotKey = new Win32HotKey(VirtualKey.F6, Win32HotKey.Modifiers.ControlKey | Win32HotKey.Modifiers.NoRepeat);
         private readonly Win32HotKey _skipForwardHotKey = new Win32HotKey(VirtualKey.F7, Win32HotKey.Modifiers.ControlKey | Win32HotKey.Modifiers.NoRepeat);
 
-        public MusicPlayerService(IFileSystemService fileSystemService)
+        public MusicPlayerService(IDataService dataService, IFileSystemService fileSystemService)
         {
+            _dataService = dataService;
+
             _skipBackwardHotKey.Actuated += (sender, e) => Previous();
             _togglePlaybackHotKey.Actuated += (sender, e) => TogglePlayback();
             _skipForwardHotKey.Actuated += (sender, e) => Next();
@@ -201,6 +205,12 @@
         {
             RearrangePlaylist(Array.Sort);
             IsShuffled = false;
+        }
+
+        public void SaveState()
+        {
+            _dataService.Save("Tracks", Tracks);
+            _dataService.Save("Player State", new PlayerState(TrackIndex, Progress, Volume, Loop, IsShuffled));
         }
 
         private void RearrangePlaylist(Action<Track[]> rearrangeMethod)
