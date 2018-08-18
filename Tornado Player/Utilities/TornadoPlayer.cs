@@ -36,6 +36,20 @@
             _progressUpdateTimer.Start();
         }
 
+        internal event EventHandler MediaOpened
+        {
+            add => _mediaPlayer.MediaOpened += value;
+
+            remove => _mediaPlayer.MediaOpened -= value;
+        }
+
+        internal event EventHandler MediaEnded
+        {
+            add => _mediaPlayer.MediaEnded += value;
+
+            remove => _mediaPlayer.MediaEnded -= value;
+        }
+
         internal event EventHandler<ProgressUpdatedEventArgs> ProgressUpdated;
 
         internal event EventHandler<TrackChangedEventArgs> TrackChanged;
