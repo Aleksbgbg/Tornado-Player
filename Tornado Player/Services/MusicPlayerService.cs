@@ -36,6 +36,7 @@
             };
 
             Tracks = fileSystemService.LoadTracks("E:\\MP3s");
+            SelectTrack(0);
         }
 
         public event EventHandler<ProgressUpdatedEventArgs> ProgressUpdated
