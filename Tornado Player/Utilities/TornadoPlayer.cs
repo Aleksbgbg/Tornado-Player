@@ -126,6 +126,7 @@
             _mediaPlayer.Stop();
             IsPlaying = false;
             Paused?.Invoke(this, EventArgs.Empty);
+            _progressUpdateTimer.Stop();
         }
 
         internal void Play()
@@ -133,6 +134,7 @@
             _mediaPlayer.Play();
             IsPlaying = true;
             Played?.Invoke(this, EventArgs.Empty);
+            _progressUpdateTimer.Start();
         }
 
         internal void Pause()
@@ -140,6 +142,7 @@
             _mediaPlayer.Pause();
             IsPlaying = false;
             Paused?.Invoke(this, EventArgs.Empty);
+            _progressUpdateTimer.Stop();
         }
 
         internal void TogglePlay()
