@@ -33,7 +33,12 @@
         {
             get => _musicPlayerService.TrackIndex;
 
-            set => _musicPlayerService.SelectTrack(value);
+            set
+            {
+                if (value == -1) return;
+
+                _musicPlayerService.SelectTrack(value);
+            }
         }
     }
 }
