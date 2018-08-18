@@ -24,12 +24,12 @@
                 Tracks.AddRange(e.Tracks.Select(trackFactory.MakeTrackViewModel));
             };
 
-            _musicPlayerService.TrackChanged += (sender, e) => NotifyOfPropertyChange(() => SelectedTrack);
+            _musicPlayerService.TrackChanged += (sender, e) => NotifyOfPropertyChange(() => SelectedTrackIndex);
         }
 
         public IObservableCollection<ITrackViewModel> Tracks { get; }
 
-        public int SelectedTrack
+        public int SelectedTrackIndex
         {
             get => _musicPlayerService.TrackIndex;
 
