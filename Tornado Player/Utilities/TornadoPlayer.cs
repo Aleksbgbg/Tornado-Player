@@ -163,8 +163,7 @@
 
             TrackIndex = index;
 
-            _mediaPlayer.Open(new Uri(Tracks[TrackIndex].Filepath));
-            Play();
+            Open(Tracks[TrackIndex]);
         }
 
         internal void Shuffle()
@@ -187,6 +186,12 @@
         {
             Array.Sort(Tracks);
             OnPlaylistLoaded();
+        }
+
+        internal void Open(Track track)
+        {
+            _mediaPlayer.Open(new Uri(track.Filepath));
+            Play();
         }
 
         private void OnPlaylistLoaded()
