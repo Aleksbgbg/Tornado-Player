@@ -21,7 +21,7 @@
             _togglePlaybackHotKey.Actuated += (sender, e) => TogglePlayback();
             _skipForwardHotKey.Actuated += (sender, e) => Next();
 
-            _tornadoPlayer.MediaOpened += (sender, e) => TrackChanged?.Invoke(this, new TrackChangedEventArgs(TrackIndex, Duration));
+            _tornadoPlayer.MediaOpened += (sender, e) => OnTrackChanged();
             _tornadoPlayer.MediaEnded += (sender, e) =>
             {
                 if (Loop)
@@ -159,24 +159,41 @@
 
         public void Shuffle()
         {
-            Random random = new Random();
-
-            for (int index = 0; index < Tracks.Length; index++)
+            RearrangePlaylist(tracks =>
             {
-                int swapIndex = index + random.Next(Tracks.Length - index);
+                Random random = new Random();
 
-                Track track = Tracks[swapIndex];
-                Tracks[swapIndex] = Tracks[index];
-                Tracks[index] = track;
-            }
+                for (int index = 0; index < tracks.Length; index++)
+                {
+                    int swapIndex = index + random.Next(tracks.Length - index);
 
-            OnPlaylistLoaded();
+                    Track track = tracks[swapIndex];
+                    tracks[swapIndex] = tracks[index];
+                    tracks[index] = track;
+                }
+            });
         }
 
         public void Sort()
         {
-            Array.Sort(Tracks);
+            RearrangePlaylist(Array.Sort);
+        }
+
+        private void RearrangePlaylist(Action<Track[]> rearrangeMethod)
+        {
+            Track selectedTrack = Tracks[TrackIndex];
+
+            rearrangeMethod(Tracks);
+
+            TrackIndex = Array.IndexOf(Tracks, selectedTrack);
+
             OnPlaylistLoaded();
+            OnTrackChanged();
+        }
+
+        private void OnTrackChanged()
+        {
+            TrackChanged?.Invoke(this, new TrackChangedEventArgs(TrackIndex, Duration));
         }
 
         private void OnPlaylistLoaded()
