@@ -25,6 +25,7 @@
                 }
             };
             _musicPlayerService.TrackChanged += (sender, e) => NotifyOfPropertyChange(() => Duration);
+            _musicPlayerService.PlaylistLoaded += (sender, e) => NotifyOfPropertyChange(() => Shuffle);
 
             _musicPlayerService.Paused += (sender, e) => NotifyOfPropertyChange(() => Playing);
             _musicPlayerService.Played += (sender, e) => NotifyOfPropertyChange(() => Playing);
@@ -77,26 +78,14 @@
 
         public bool Playing => _musicPlayerService.IsPlaying;
 
-        private bool _shuffle;
         public bool Shuffle
         {
-            get => _shuffle;
+            get => _musicPlayerService.IsShuffled;
 
             set
             {
-                if (_shuffle == value) return;
-
-                _shuffle = value;
+                _musicPlayerService.IsShuffled = value;
                 NotifyOfPropertyChange(() => Shuffle);
-
-                if (_shuffle)
-                {
-                    _musicPlayerService.Shuffle();
-                }
-                else
-                {
-                    _musicPlayerService.Sort();
-                }
             }
         }
 
