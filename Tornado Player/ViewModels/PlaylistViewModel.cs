@@ -24,25 +24,16 @@
                 Tracks.AddRange(e.Tracks.Select(trackFactory.MakeTrackViewModel));
             };
 
-            _musicPlayerService.TrackChanged += (sender, e) => SelectedIndex = e.TrackIndex;
+            _musicPlayerService.TrackChanged += (sender, e) => NotifyOfPropertyChange(() => SelectedTrack);
         }
 
         public IObservableCollection<ITrackViewModel> Tracks { get; }
 
-        private int _selectedIndex;
-        public int SelectedIndex
+        public int SelectedTrack
         {
-            get => _selectedIndex;
+            get => _musicPlayerService.TrackIndex;
 
-            set
-            {
-                if (_selectedIndex == value) return;
-
-                _selectedIndex = value;
-                NotifyOfPropertyChange(() => SelectedIndex);
-
-                _musicPlayerService.SelectTrack(_selectedIndex);
-            }
+            set => _musicPlayerService.SelectTrack(value);
         }
     }
 }
