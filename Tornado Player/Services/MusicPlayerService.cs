@@ -2,6 +2,8 @@
 {
     using System;
 
+    using Newtonsoft.Json;
+
     using Tornado.Player.EventArgs;
     using Tornado.Player.Models;
     using Tornado.Player.Services.Interfaces;
@@ -39,8 +41,29 @@
                 }
             };
 
-            Tracks = fileSystemService.LoadTracks("E:\\MP3s");
-            SelectTrack(0);
+            {
+                Track[] tracks = dataService.Load<Track[]>("Tracks", "[]");
+
+                Tracks = tracks.Length == 0 ? fileSystemService.LoadTracks("E:\\MP3s") : tracks;
+            }
+
+            PlayerState playerState = dataService.Load<PlayerState>("Player State", () => JsonConvert.SerializeObject(new PlayerState(0, new TimeSpan(), 0.5, false, false)));
+
+            {
+                void LoadProgress(object sender, EventArgs e)
+                {
+                    _tornadoPlayer.MediaOpened -= LoadProgress;
+                    Progress = playerState.Progress;
+                }
+
+                _tornadoPlayer.MediaOpened += LoadProgress;
+            }
+
+            SelectTrack(playerState.TrackIndex);
+
+            Volume = playerState.Volume;
+            Loop = playerState.Loop;
+            _isShuffled = playerState.Shuffle;
         }
 
         public event EventHandler<ProgressUpdatedEventArgs> ProgressUpdated
