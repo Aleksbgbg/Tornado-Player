@@ -16,14 +16,14 @@
             _appDataService = appDataService;
         }
 
-        public T Load<T>(string dataName, string emptyData = "")
+        public T Load<T>(string dataName, T emptyData = default)
         {
-            return Load<T>(dataName, () => emptyData);
+            return Load(dataName, () => emptyData);
         }
 
-        public T Load<T>(string dataName, Func<string> emptyData)
+        public T Load<T>(string dataName, Func<T> emptyData)
         {
-            return JsonConvert.DeserializeObject<T>(File.ReadAllText(_appDataService.GetFile($"Data/{dataName}.json", emptyData)));
+            return JsonConvert.DeserializeObject<T>(File.ReadAllText(_appDataService.GetFile($"Data/{dataName}.json", () => JsonConvert.SerializeObject(emptyData()))));
         }
 
         public void Save<T>(string dataName, T data)

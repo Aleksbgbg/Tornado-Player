@@ -2,8 +2,6 @@
 {
     using System;
 
-    using Newtonsoft.Json;
-
     using Tornado.Player.EventArgs;
     using Tornado.Player.Models;
     using Tornado.Player.Services.Interfaces;
@@ -42,12 +40,12 @@
             };
 
             {
-                Track[] tracks = dataService.Load<Track[]>("Tracks", "[]");
+                Track[] tracks = dataService.Load("Tracks", () => new Track[0]);
 
                 Tracks = tracks.Length == 0 ? fileSystemService.LoadTracks("E:\\MP3s") : tracks;
             }
 
-            PlayerState playerState = dataService.Load<PlayerState>("Player State", () => JsonConvert.SerializeObject(new PlayerState(0, new TimeSpan(), 0.5, false, false)));
+            PlayerState playerState = dataService.Load("Player State", () => new PlayerState(0, new TimeSpan(), 0.5, false, false));
 
             {
                 void LoadProgress(object sender, EventArgs e)
