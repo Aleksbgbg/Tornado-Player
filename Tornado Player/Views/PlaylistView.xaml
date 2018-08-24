@@ -6,7 +6,8 @@
              xmlns:Converters="clr-namespace:Tornado.Player.Converters"
              xmlns:ViewModels="clr-namespace:Tornado.Player.ViewModels"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance ViewModels:PlaylistViewModel}">
+             d:DataContext="{d:DesignInstance ViewModels:PlaylistViewModel}"
+             Loaded="OnLoaded">
     <ListBox x:Name="Tracks" SelectedIndex="{Binding SelectedTrackIndex}">
         <ListBox.Template>
             <ControlTemplate TargetType="ListBox">
