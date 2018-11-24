@@ -123,6 +123,8 @@
             }
         }
 
+        public Track SelectedTrack => Tracks[TrackIndex];
+
         public bool IsPlaying => _tornadoPlayer.IsPlaying;
 
         public TimeSpan Progress
@@ -204,6 +206,11 @@
             _tornadoPlayer.Open(Tracks[TrackIndex]);
         }
 
+        public void SelectTrack(Track track)
+        {
+            SelectTrack(Array.IndexOf(Tracks, track));
+        }
+
         public void Shuffle()
         {
             RearrangePlaylist(tracks =>
@@ -248,7 +255,7 @@
 
         private void OnTrackChanged()
         {
-            TrackChanged?.Invoke(this, new TrackChangedEventArgs(TrackIndex, Duration));
+            TrackChanged?.Invoke(this, new TrackChangedEventArgs(TrackIndex, Tracks[TrackIndex], Duration));
         }
 
         private void OnPlaylistLoaded()

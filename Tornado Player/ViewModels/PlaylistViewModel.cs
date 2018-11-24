@@ -34,15 +34,15 @@
 
         public IObservableCollection<ITrackViewModel> Tracks { get; }
 
-        public int SelectedTrackIndex
-        {
-            get => _musicPlayerService.TrackIndex;
+        public int SelectedTrackIndex => _musicPlayerService.TrackIndex;
 
+        public ITrackViewModel SelectedTrack
+        {
             set
             {
-                if (value == -1) return;
+                if (value == null) return;
 
-                _musicPlayerService.SelectTrack(value);
+                _musicPlayerService.SelectTrack(Tracks.IndexOf(value));
             }
         }
 

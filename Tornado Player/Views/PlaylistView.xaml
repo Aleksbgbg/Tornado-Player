@@ -10,7 +10,9 @@
              d:DataContext="{d:DesignInstance ViewModels:PlaylistViewModel}"
              Loaded="OnLoaded">
     <Grid>
-        <ListBox x:Name="Tracks" SelectedIndex="{Binding SelectedTrackIndex}">
+        <ListBox x:Name="Tracks"
+                 SelectedIndex="{Binding SelectedTrackIndex, Mode=OneWay}"
+                 SelectedItem="{Binding SelectedTrack, Mode=OneWayToSource}">
             <ListBox.Template>
                 <ControlTemplate TargetType="ListBox">
                     <Border x:Name="Bd"
@@ -105,8 +107,8 @@
             </ListBox.Template>
         </ListBox>
 
-        <Border BorderBrush="DeepSkyBlue" BorderThickness="1"
-                HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="250"
+        <Border BorderBrush="DeepSkyBlue" BorderThickness="1" Background="White"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Width="250"
                 Visibility="{Binding IsSearching, Mode=OneWay,
             Converter={x:Static Converters:BoolToVisibilityConverter.Default}}">
             <StackPanel Margin="5">

@@ -21,6 +21,8 @@
 
         int TrackIndex { get; }
 
+        Track SelectedTrack { get; }
+
         bool IsPlaying { get; }
 
         TimeSpan Progress { get; set; }
@@ -44,6 +46,8 @@
         void TogglePlayback();
 
         void SelectTrack(int index);
+
+        void SelectTrack(Track track);
 
         void Shuffle();
 

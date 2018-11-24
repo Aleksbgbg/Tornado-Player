@@ -6,6 +6,6 @@
     {
         IObservableCollection<ITrackViewModel> Tracks { get; }
 
-        int SelectedTrackIndex { get; set; }
+        int SelectedTrackIndex { get; }
     }
 }
