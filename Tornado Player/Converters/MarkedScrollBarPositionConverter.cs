@@ -13,14 +13,15 @@
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             ScrollBar scrollBar = (ScrollBar)values[0];
-            double lineHeight = (double)values[1];
-            int selectedIndex = (int)values[2];
-            int totalItems = (int)values[3];
+            double scrollBarHeight = (double)values[1];
+            double lineHeight = (double)values[2];
+            int selectedIndex = (int)values[3];
+            int totalItems = (int)values[4];
 
             double topButtonOffset = ((RepeatButton)scrollBar.Template.FindName("PART_LineUpButton", scrollBar)).ActualHeight;
             double bottomButtonOffset = ((RepeatButton)scrollBar.Template.FindName("PART_LineDownButton", scrollBar)).ActualHeight;
 
-            double totalScrollSpace = scrollBar.ActualHeight - (topButtonOffset + bottomButtonOffset);
+            double totalScrollSpace = scrollBarHeight - (topButtonOffset + bottomButtonOffset);
 
             double linePositionIncrement = totalScrollSpace / totalItems;
 

@@ -65,9 +65,13 @@
                                                         <MultiBinding
                                                             Converter="{x:Static Converters:MarkedScrollBarPositionConverter.Default}">
                                                             <MultiBinding.Bindings>
-                                                                <Binding ElementName="PART_VerticalScrollBar"/>
+                                                                <Binding ElementName="PART_VerticalScrollBar"
+                                                                         Mode="OneTime"/>
+                                                                <Binding Path="ActualHeight"
+                                                                         ElementName="PART_VerticalScrollBar"/>
                                                                 <Binding Path="Height"
-                                                                         RelativeSource="{RelativeSource Self}"/>
+                                                                         RelativeSource="{RelativeSource Self}"
+                                                                         Mode="OneTime"/>
                                                                 <Binding Path="SelectedIndex"
                                                                          RelativeSource="{RelativeSource FindAncestor, AncestorType=ListBox}"/>
                                                                 <Binding Path="Items.Count"
