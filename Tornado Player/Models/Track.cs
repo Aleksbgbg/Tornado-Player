@@ -23,5 +23,10 @@
         {
             return string.Compare(Name, other.Name, StringComparison.Ordinal);
         }
+
+        public bool MatchesSearch(string search)
+        {
+            return Name.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0;
+        }
     }
 }

@@ -8,5 +8,11 @@
 		mc:Ignorable="d"
 		d:DataContext="{d:DesignInstance ViewModels:ShellViewModel}"
         Icon="{StaticResource Tornado}">
-		<ContentControl Caliburn:View.Model="{Binding MainViewModel}"/>
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Control"
+                    Key="F"
+                    Command="{Binding SearchCommand, Mode=OneTime}"/>
+    </Window.InputBindings>
+
+    <ContentControl Caliburn:View.Model="{Binding MainViewModel}"/>
 </Window>

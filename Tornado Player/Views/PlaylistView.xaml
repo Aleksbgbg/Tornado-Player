@@ -5,101 +5,118 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:Converters="clr-namespace:Tornado.Player.Converters"
              xmlns:ViewModels="clr-namespace:Tornado.Player.ViewModels"
+             xmlns:Caliburn="http://www.caliburnproject.org"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance ViewModels:PlaylistViewModel}"
              Loaded="OnLoaded">
-    <ListBox x:Name="Tracks" SelectedIndex="{Binding SelectedTrackIndex}">
-        <ListBox.Template>
-            <ControlTemplate TargetType="ListBox">
-                <Border x:Name="Bd"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        Background="{TemplateBinding Background}"
-                        Padding="1"
-                        SnapsToDevicePixels="True">
-                    <ScrollViewer Focusable="False" Padding="{TemplateBinding Padding}">
-                        <ScrollViewer.Template>
-                            <ControlTemplate TargetType="ScrollViewer">
-                                <Grid x:Name="Grid" Background="{TemplateBinding Background}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
+    <Grid>
+        <ListBox x:Name="Tracks" SelectedIndex="{Binding SelectedTrackIndex}">
+            <ListBox.Template>
+                <ControlTemplate TargetType="ListBox">
+                    <Border x:Name="Bd"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            Padding="1"
+                            SnapsToDevicePixels="True">
+                        <ScrollViewer Focusable="False" Padding="{TemplateBinding Padding}">
+                            <ScrollViewer.Template>
+                                <ControlTemplate TargetType="ScrollViewer">
+                                    <Grid x:Name="Grid" Background="{TemplateBinding Background}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
 
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
 
-                                    <Rectangle x:Name="Corner" Grid.Column="1"
-                                               Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
-                                               Grid.Row="1"/>
+                                        <Rectangle x:Name="Corner" Grid.Column="1"
+                                                   Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                                                   Grid.Row="1"/>
 
-                                    <ScrollContentPresenter Grid.Column="0"
-                                                            Grid.Row="0"
-                                                            x:Name="PART_ScrollContentPresenter"
-                                                            CanContentScroll="{TemplateBinding CanContentScroll}"
-                                                            CanHorizontallyScroll="False"
-                                                            CanVerticallyScroll="False"
-                                                            ContentTemplate="{TemplateBinding ContentTemplate}"
-                                                            Content="{TemplateBinding Content}" 
-                                                            Margin="{TemplateBinding Padding}"/>
+                                        <ScrollContentPresenter Grid.Column="0"
+                                                                Grid.Row="0"
+                                                                x:Name="PART_ScrollContentPresenter"
+                                                                CanContentScroll="{TemplateBinding CanContentScroll}"
+                                                                CanHorizontallyScroll="False"
+                                                                CanVerticallyScroll="False"
+                                                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                                Content="{TemplateBinding Content}"
+                                                                Margin="{TemplateBinding Padding}"/>
 
-                                    <Grid Grid.Column="1" Grid.Row="0">
-                                        <ScrollBar x:Name="PART_VerticalScrollBar"
-                                                   AutomationProperties.AutomationId="VerticalScrollBar"
-                                                   Cursor="Arrow"
-                                                   Minimum="0"
-                                                   Maximum="{TemplateBinding ScrollableHeight}"
-                                                   Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                                   ViewportSize="{TemplateBinding ViewportHeight}"/>
+                                        <Grid Grid.Column="1" Grid.Row="0">
+                                            <ScrollBar x:Name="PART_VerticalScrollBar"
+                                                       AutomationProperties.AutomationId="VerticalScrollBar"
+                                                       Cursor="Arrow"
+                                                       Minimum="0"
+                                                       Maximum="{TemplateBinding ScrollableHeight}"
+                                                       Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                       ViewportSize="{TemplateBinding ViewportHeight}"/>
 
-                                        <Canvas>
-                                            <Rectangle Fill="Blue" Height="2" IsHitTestVisible="False"
-                                                       Width="{Binding ActualWidth, ElementName=PART_VerticalScrollBar}">
-                                                <Canvas.Top>
-                                                    <MultiBinding
-                                                        Converter="{x:Static Converters:MarkedScrollBarPositionConverter.Default}">
-                                                        <MultiBinding.Bindings>
-                                                            <Binding ElementName="PART_VerticalScrollBar"/>
-                                                            <Binding Path="Height"
-                                                                     RelativeSource="{RelativeSource Self}"/>
-                                                            <Binding Path="SelectedIndex"
-                                                                     RelativeSource="{RelativeSource FindAncestor, AncestorType=ListBox}"/>
-                                                            <Binding Path="Items.Count"
-                                                                     RelativeSource="{RelativeSource FindAncestor, AncestorType=ListBox}"/>
-                                                        </MultiBinding.Bindings>
-                                                    </MultiBinding>
-                                                </Canvas.Top>
-                                            </Rectangle>
-                                        </Canvas>
+                                            <Canvas>
+                                                <Rectangle Fill="Blue" Height="2" IsHitTestVisible="False"
+                                                           Width="{Binding ActualWidth, ElementName=PART_VerticalScrollBar}">
+                                                    <Canvas.Top>
+                                                        <MultiBinding
+                                                            Converter="{x:Static Converters:MarkedScrollBarPositionConverter.Default}">
+                                                            <MultiBinding.Bindings>
+                                                                <Binding ElementName="PART_VerticalScrollBar"/>
+                                                                <Binding Path="Height"
+                                                                         RelativeSource="{RelativeSource Self}"/>
+                                                                <Binding Path="SelectedIndex"
+                                                                         RelativeSource="{RelativeSource FindAncestor, AncestorType=ListBox}"/>
+                                                                <Binding Path="Items.Count"
+                                                                         RelativeSource="{RelativeSource FindAncestor, AncestorType=ListBox}"/>
+                                                            </MultiBinding.Bindings>
+                                                        </MultiBinding>
+                                                    </Canvas.Top>
+                                                </Rectangle>
+                                            </Canvas>
+                                        </Grid>
+
+                                        <!-- Horizontal ScrollBar removed; assumed vertical only -->
                                     </Grid>
+                                </ControlTemplate>
+                            </ScrollViewer.Template>
 
-                                    <!-- Horizontal ScrollBar removed; assumed vertical only -->
-                                </Grid>
-                            </ControlTemplate>
-                        </ScrollViewer.Template>
+                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </ScrollViewer>
+                    </Border>
 
-                        <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                    </ScrollViewer>
-                </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" TargetName="Bd" Value="White"/>
+                            <Setter Property="BorderBrush" TargetName="Bd" Value="#FFD9D9D9"/>
+                        </Trigger>
 
-                <ControlTemplate.Triggers>
-                    <Trigger Property="IsEnabled" Value="False">
-                        <Setter Property="Background" TargetName="Bd" Value="White"/>
-                        <Setter Property="BorderBrush" TargetName="Bd" Value="#FFD9D9D9"/>
-                    </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsGrouping" Value="True"/>
+                                <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="False"/>
+                            </MultiTrigger.Conditions>
 
-                    <MultiTrigger>
-                        <MultiTrigger.Conditions>
-                            <Condition Property="IsGrouping" Value="True"/>
-                            <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="False"/>
-                        </MultiTrigger.Conditions>
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </ListBox.Template>
+        </ListBox>
 
-                        <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
-                    </MultiTrigger>
-                </ControlTemplate.Triggers>
-            </ControlTemplate>
-        </ListBox.Template>
-    </ListBox>
+        <Border BorderBrush="DeepSkyBlue" BorderThickness="1"
+                HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="250"
+                Visibility="{Binding IsSearching, Mode=OneWay,
+            Converter={x:Static Converters:BoolToVisibilityConverter.Default}}">
+            <StackPanel Margin="5">
+                <TextBlock Text="Search Tracks by Name" FontWeight="DemiBold"
+                           HorizontalAlignment="Center"/>
+                <TextBox x:Name="SearchText"/>
+                <Button Content="Search" HorizontalAlignment="Right"
+                        Width="75" Margin="0, 5"
+                        Caliburn:Message.Attach="Search(searchText)"/>
+            </StackPanel>
+        </Border>
+    </Grid>
 </UserControl>

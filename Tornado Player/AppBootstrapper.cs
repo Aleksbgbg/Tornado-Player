@@ -34,6 +34,7 @@
             _container.Singleton<ITrackFactory, TrackFactory>();
 
             // Register Services
+            _container.Singleton<IEventAggregator, EventAggregator>();
             _container.Singleton<IWindowManager, WindowManager>();
 
             _container.Singleton<IAppDataService, AppDataService>();
@@ -69,7 +70,7 @@
 
         protected override void OnExit(object sender, System.EventArgs e)
         {
-            IoC.Get<IMusicPlayerService>().SaveState();
+            _container.GetInstance<IMusicPlayerService>().SaveState();
         }
     }
 }
