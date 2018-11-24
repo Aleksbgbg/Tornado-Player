@@ -240,6 +240,9 @@
     <Resource Include="Images\Mute.png" />
     <Resource Include="Images\High Volume.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\YouTube.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

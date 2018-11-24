@@ -11,4 +11,5 @@
 	<BitmapImage x:Key="Play" UriSource="/Images/Play.png"/>
 	<BitmapImage x:Key="Shuffle" UriSource="/Images/Shuffle.png"/>
 	<BitmapImage x:Key="Tornado" UriSource="/Images/Tornado.ico"/>
+	<BitmapImage x:Key="Youtube" UriSource="/Images/YouTube.png"/>
 </ResourceDictionary>
