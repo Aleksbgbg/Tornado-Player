@@ -19,9 +19,8 @@
             {
                 if (_syncPlayer)
                 {
-                    _syncPlayer = false;
-                    CurrentProgress = e.NewProgress;
-                    _syncPlayer = true;
+                    _currentProgress = e.NewProgress;
+                    NotifyOfPropertyChange(() => CurrentProgress);
                 }
             };
             _musicPlayerService.TrackChanged += (sender, e) => NotifyOfPropertyChange(() => Duration);
