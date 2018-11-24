@@ -92,6 +92,8 @@
     <Compile Include="Services\Interfaces\IAppDataService.cs" />
     <Compile Include="Services\Interfaces\IDataService.cs" />
     <Compile Include="Models\PlayerState.cs" />
+    <Compile Include="Services\Interfaces\IWebService.cs" />
+    <Compile Include="Services\WebService.cs" />
     <Compile Include="Utilities\VirtualKey.cs" />
     <Compile Include="ViewModels\Interfaces\IPlaybarViewModel.cs" />
     <Compile Include="ViewModels\PlaybarViewModel.cs" />

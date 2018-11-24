@@ -41,6 +41,7 @@
             _container.Singleton<IDataService, DataService>();
             _container.Singleton<IFileSystemService, FileSystemService>();
             _container.Singleton<IMusicPlayerService, MusicPlayerService>();
+            _container.Singleton<IWebService, WebService>();
 
             // Register ViewModels
             _container.Singleton<IShellViewModel, ShellViewModel>();
