@@ -60,8 +60,6 @@
             set => _mediaPlayer.Volume = value;
         }
 
-        internal bool Loop { get; set; }
-
         internal void Stop()
         {
             _mediaPlayer.Stop();
