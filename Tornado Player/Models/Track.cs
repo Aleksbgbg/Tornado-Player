@@ -8,10 +8,14 @@
     internal class Track : IComparable<Track>
     {
         [JsonConstructor]
-        internal Track(string filepath)
+        internal Track(ulong id, string filepath)
         {
+            Id = id;
             Filepath = filepath;
         }
+
+        [JsonProperty("Id")]
+        public ulong Id { get; }
 
         [JsonProperty("Filepath")]
         public string Filepath { get; }
