@@ -2,6 +2,9 @@
 {
     internal enum Shortcut
     {
-        Search
+        Search,
+        TogglePlayback,
+        SkipBackward,
+        SkipForward
     }
 }

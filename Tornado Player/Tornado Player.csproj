@@ -86,6 +86,7 @@
     <Compile Include="Converters\TimeSpanDurationFormatConverter.cs" />
     <Compile Include="Converters\TimeSpanToSecondsConverter.cs" />
     <Compile Include="Converters\VolumeToImageConverter.cs" />
+    <Compile Include="EventArgs\HotKeyActuatedEventArgs.cs" />
     <Compile Include="EventArgs\ProgressUpdatedEventArgs.cs" />
     <Compile Include="Helpers\ImageContentHelper.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />
@@ -95,9 +96,11 @@
     <Compile Include="Models\Snowflake.cs" />
     <Compile Include="Services\AppDataService.cs" />
     <Compile Include="Services\DataService.cs" />
+    <Compile Include="Services\HotKeyService.cs" />
     <Compile Include="Services\Interfaces\IAppDataService.cs" />
     <Compile Include="Services\Interfaces\IDataService.cs" />
     <Compile Include="Models\PlayerState.cs" />
+    <Compile Include="Services\Interfaces\IHotkeyService.cs" />
     <Compile Include="Services\Interfaces\ISnowflakeService.cs" />
     <Compile Include="Services\Interfaces\IWebService.cs" />
     <Compile Include="Services\SnowflakeService.cs" />

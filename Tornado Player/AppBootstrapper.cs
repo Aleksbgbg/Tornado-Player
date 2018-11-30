@@ -40,6 +40,7 @@
             _container.Singleton<IAppDataService, AppDataService>();
             _container.Singleton<IDataService, DataService>();
             _container.Singleton<IFileSystemService, FileSystemService>();
+            _container.Singleton<IHotKeyService, HotKeyService>();
             _container.Singleton<IMusicPlayerService, MusicPlayerService>();
             _container.Singleton<ISnowflakeService, SnowflakeService>();
             _container.Singleton<IWebService, WebService>();
