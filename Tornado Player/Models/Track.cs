@@ -5,17 +5,13 @@
 
     using Newtonsoft.Json;
 
-    internal class Track : IComparable<Track>
+    internal class Track : Snowflake, IComparable<Track>
     {
         [JsonConstructor]
-        internal Track(ulong id, string filepath)
+        internal Track(ulong id, string filepath) : base(id)
         {
-            Id = id;
             Filepath = filepath;
         }
-
-        [JsonProperty("Id")]
-        public ulong Id { get; }
 
         [JsonProperty("Filepath")]
         public string Filepath { get; }

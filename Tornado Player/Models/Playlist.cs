@@ -4,18 +4,14 @@
 
     using Newtonsoft.Json;
 
-    internal class Playlist
+    internal class Playlist : Snowflake
     {
         [JsonConstructor]
-        internal Playlist(ulong id, string name, IEnumerable<Track> tracks)
+        internal Playlist(ulong id, string name, IEnumerable<Track> tracks) : base(id)
         {
-            Id = id;
             Name = name;
             Tracks = new List<Track>(tracks);
         }
-
-        [JsonProperty("Id")]
-        public ulong Id { get; }
 
         [JsonProperty("Name")]
         public string Name { get; }
