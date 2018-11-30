@@ -90,6 +90,7 @@
     <Compile Include="Helpers\ImageContentHelper.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />
     <Compile Include="Helpers\RoutedEventTrigger.cs" />
+    <Compile Include="Models\Playlist.cs" />
     <Compile Include="Models\Shortcut.cs" />
     <Compile Include="Services\AppDataService.cs" />
     <Compile Include="Services\DataService.cs" />
