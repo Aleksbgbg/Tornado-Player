@@ -1,5 +1,6 @@
 ﻿namespace Tornado.Player.ViewModels
 {
+    using System.ComponentModel;
     using System.Linq;
     using System.Windows.Data;
 
@@ -14,13 +15,13 @@
     {
         private readonly IMusicPlayerService _musicPlayerService;
 
-        private readonly CollectionView _tracksView;
+        private readonly ICollectionView _tracksView;
 
         public PlaylistViewModel(ITrackFactory trackFactory, IEventAggregator eventAggregator, IMusicPlayerService musicPlayerService)
         {
             _musicPlayerService = musicPlayerService;
             Tracks = new BindableCollection<ITrackViewModel>(_musicPlayerService.Tracks.Select(trackFactory.MakeTrackViewModel));
-            _tracksView = (CollectionView)CollectionViewSource.GetDefaultView(Tracks);
+            _tracksView = CollectionViewSource.GetDefaultView(Tracks);
 
             eventAggregator.Subscribe(this);
 
