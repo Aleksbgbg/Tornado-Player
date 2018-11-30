@@ -5,14 +5,11 @@
 
     internal class TrackChangedEventArgs : EventArgs
     {
-        public TrackChangedEventArgs(int trackIndex, Track track, TimeSpan duration)
+        public TrackChangedEventArgs(Track track, TimeSpan duration)
         {
-            TrackIndex = trackIndex;
             Track = track;
             Duration = duration;
         }
-
-        public int TrackIndex { get; }
 
         public Track Track { get; }
 

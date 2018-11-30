@@ -15,13 +15,7 @@
 
         event EventHandler<TrackChangedEventArgs> TrackChanged;
 
-        event EventHandler<PlaylistLoadedEventArgs> PlaylistLoaded;
-
-        Track[] Tracks { get; }
-
-        int TrackIndex { get; }
-
-        Track SelectedTrack { get; }
+        Track Track { get; }
 
         bool IsPlaying { get; }
 
@@ -33,26 +27,12 @@
 
         bool Loop { get; set; }
 
-        bool IsShuffled { get; set; }
-
-        void Previous();
-
-        void Next();
-
         void Play();
 
         void Pause();
 
         void TogglePlayback();
 
-        void SelectTrack(int index);
-
         void SelectTrack(Track track);
-
-        void Shuffle();
-
-        void Sort();
-
-        void SaveState();
     }
 }
