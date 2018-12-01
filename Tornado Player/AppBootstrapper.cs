@@ -38,6 +38,7 @@
             Container.Singleton<IShellViewModel, ShellViewModel>();
             Container.Singleton<IMainViewModel, MainViewModel>();
 
+            Container.Singleton<IPlaylistCollectionViewModel, PlaylistCollectionViewModel>();
             Container.Singleton<IPlaybarViewModel, PlaybarViewModel>();
 
             Container.PerRequest<ITrackViewModel, TrackViewModel>();
