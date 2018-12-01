@@ -1,10 +1,8 @@
 ﻿namespace Tornado.Player
 {
-    using System;
-    using System.Collections.Generic;
     using System.Windows;
 
-    using Caliburn.Micro;
+    using Caliburn.Micro.Wrapper;
 
     using Tornado.Player.Factories;
     using Tornado.Player.Factories.Interfaces;
@@ -14,66 +12,47 @@
     using Tornado.Player.ViewModels;
     using Tornado.Player.ViewModels.Interfaces;
 
-    internal class AppBootstrapper : BootstrapperBase
+    using CM = Caliburn.Micro; // Required due to extension method conflict
+
+    internal class AppBootstrapper : BootstrapperBase<IShellViewModel>
     {
-        private readonly SimpleContainer _container = new SimpleContainer();
-
-        internal AppBootstrapper()
-        {
-            Initialize();
-        }
-
-        protected override void BuildUp(object instance)
-        {
-            _container.BuildUp(instance);
-        }
-
-        protected override void Configure()
+        protected override void RegisterServices()
         {
             // Register Factories
-            _container.Singleton<ITrackFactory, TrackFactory>();
+            Container.Singleton<ITrackFactory, TrackFactory>();
 
             // Register Services
-            _container.Singleton<IEventAggregator, EventAggregator>();
-            _container.Singleton<IWindowManager, WindowManager>();
+            Container.Singleton<CM.IEventAggregator, CM.EventAggregator>();
 
-            _container.Singleton<IAppDataService, AppDataService>();
-            _container.Singleton<IDataService, DataService>();
-            _container.Singleton<IFileSystemService, FileSystemService>();
-            _container.Singleton<IHotKeyService, HotKeyService>();
-            _container.Singleton<IMusicPlayerService, MusicPlayerService>();
-            _container.Singleton<ISnowflakeService, SnowflakeService>();
-            _container.Singleton<IWebService, WebService>();
-
-            // Register ViewModels
-            _container.Singleton<IShellViewModel, ShellViewModel>();
-            _container.Singleton<IMainViewModel, MainViewModel>();
-
-            _container.Singleton<IPlaylistViewModel, PlaylistViewModel>();
-            _container.Singleton<IPlaybarViewModel, PlaybarViewModel>();
-
-            _container.PerRequest<ITrackViewModel, TrackViewModel>();
+            Container.Singleton<IAppDataService, AppDataService>();
+            Container.Singleton<IDataService, DataService>();
+            Container.Singleton<IFileSystemService, FileSystemService>();
+            Container.Singleton<IHotKeyService, HotKeyService>();
+            Container.Singleton<IMusicPlayerService, MusicPlayerService>();
+            Container.Singleton<ISnowflakeService, SnowflakeService>();
+            Container.Singleton<IWebService, WebService>();
         }
 
-        protected override object GetInstance(Type service, string key)
+        protected override void RegisterViewModels(IViewModelFactory viewModelFactory)
         {
-            return _container.GetInstance(service, key);
+            Container.Singleton<IShellViewModel, ShellViewModel>();
+            Container.Singleton<IMainViewModel, MainViewModel>();
+
+            Container.Singleton<IPlaybarViewModel, PlaybarViewModel>();
+
+            Container.PerRequest<ITrackViewModel, TrackViewModel>();
+
+            viewModelFactory.Register<IPlaylistViewModel, PlaylistViewModel>();
         }
 
-        protected override IEnumerable<object> GetAllInstances(Type serviceType)
+        protected override void OnStartupAfterDisplayRootView(object sender, StartupEventArgs e)
         {
-            return _container.GetAllInstances(serviceType);
-        }
-
-        protected override void OnStartup(object sender, StartupEventArgs e)
-        {
-            DisplayRootViewFor<IShellViewModel>();
             Win32Handler.Initialise(Application.Current.MainWindow);
         }
 
         protected override void OnExit(object sender, System.EventArgs e)
         {
-            _container.GetInstance<IMusicPlayerService>().SaveState();
+            // _container.GetInstance<IMusicPlayerService>().SaveState();
         }
     }
 }
