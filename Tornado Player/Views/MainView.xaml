@@ -11,6 +11,6 @@
         <ContentControl DockPanel.Dock="Bottom"
                         Caliburn:View.Model="{Binding PlaybarViewModel, Mode=OneTime}"/>
 
-        <ContentControl Caliburn:View.Model="{Binding PlaylistViewModel, Mode=OneTime}"/>
+        <ContentControl Caliburn:View.Model="{Binding PlaylistCollectionViewModel, Mode=OneTime}"/>
     </DockPanel>
 </UserControl>

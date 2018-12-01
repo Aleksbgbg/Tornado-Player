@@ -4,13 +4,13 @@
 
     internal class MainViewModel : ViewModelBase, IMainViewModel
     {
-        public MainViewModel(IPlaylistViewModel playlistViewModel, IPlaybarViewModel playbarViewModel)
+        public MainViewModel(IPlaylistCollectionViewModel playlistCollectionViewModel, IPlaybarViewModel playbarViewModel)
         {
-            PlaylistViewModel = playlistViewModel;
+            PlaylistCollectionViewModel = playlistCollectionViewModel;
             PlaybarViewModel = playbarViewModel;
         }
 
-        public IPlaylistViewModel PlaylistViewModel { get; }
+        public IPlaylistCollectionViewModel PlaylistCollectionViewModel { get; }
 
         public IPlaybarViewModel PlaybarViewModel { get; }
     }

@@ -2,6 +2,6 @@
 {
     internal interface IMainViewModel : IViewModelBase
     {
-        IPlaylistViewModel PlaylistViewModel { get; }
+        IPlaylistCollectionViewModel PlaylistCollectionViewModel { get; }
     }
 }
