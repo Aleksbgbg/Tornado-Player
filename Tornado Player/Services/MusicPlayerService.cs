@@ -24,11 +24,11 @@
             };
         }
 
-        public event EventHandler<ProgressUpdatedEventArgs> ProgressUpdated
+        public event EventHandler Played
         {
-            add => _tornadoPlayer.ProgressUpdated += value;
+            add => _tornadoPlayer.Played += value;
 
-            remove => _tornadoPlayer.ProgressUpdated -= value;
+            remove => _tornadoPlayer.Played -= value;
         }
 
         public event EventHandler Paused
@@ -38,11 +38,18 @@
             remove => _tornadoPlayer.Paused -= value;
         }
 
-        public event EventHandler Played
+        public event EventHandler MediaEnded
         {
-            add => _tornadoPlayer.Played += value;
+            add => _tornadoPlayer.MediaEnded += value;
 
-            remove => _tornadoPlayer.Played -= value;
+            remove => _tornadoPlayer.MediaEnded -= value;
+        }
+
+        public event EventHandler<ProgressUpdatedEventArgs> ProgressUpdated
+        {
+            add => _tornadoPlayer.ProgressUpdated += value;
+
+            remove => _tornadoPlayer.ProgressUpdated -= value;
         }
 
         public event EventHandler<TrackChangedEventArgs> TrackChanged;

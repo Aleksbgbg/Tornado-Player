@@ -7,11 +7,13 @@
 
     internal interface IMusicPlayerService
     {
-        event EventHandler<ProgressUpdatedEventArgs> ProgressUpdated;
+        event EventHandler Played;
 
         event EventHandler Paused;
 
-        event EventHandler Played;
+        event EventHandler MediaEnded;
+
+        event EventHandler<ProgressUpdatedEventArgs> ProgressUpdated;
 
         event EventHandler<TrackChangedEventArgs> TrackChanged;
 
