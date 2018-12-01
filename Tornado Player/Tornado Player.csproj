@@ -98,9 +98,11 @@
     <Compile Include="Models\Shortcut.cs" />
     <Compile Include="Models\Snowflake.cs" />
     <Compile Include="Services\AppDataService.cs" />
+    <Compile Include="Services\ContentManagerService.cs" />
     <Compile Include="Services\DataService.cs" />
     <Compile Include="Services\HotKeyService.cs" />
     <Compile Include="Services\Interfaces\IAppDataService.cs" />
+    <Compile Include="Services\Interfaces\IContentManagerService.cs" />
     <Compile Include="Services\Interfaces\IDataService.cs" />
     <Compile Include="Models\PlayerState.cs" />
     <Compile Include="Services\Interfaces\IHotkeyService.cs" />

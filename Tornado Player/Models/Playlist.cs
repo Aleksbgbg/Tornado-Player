@@ -17,6 +17,14 @@
             Tracks = new List<Track>(trackIds.Select(trackId => new Track(trackId)));
         }
 
+        internal Playlist(ulong id, string name, bool isShuffled, int selectedTrackIndex, IEnumerable<Track> tracks) : base(id)
+        {
+            Name = name;
+            _isShuffled = isShuffled;
+            SelectedTrackIndex = selectedTrackIndex;
+            Tracks = new List<Track>(tracks);
+        }
+
         [JsonProperty("Name")]
         public string Name { get; }
 
@@ -53,7 +61,7 @@
         [JsonProperty("TrackIds")]
         private IEnumerable<ulong> TrackIds => Tracks.Select(track => track.Id);
 
-        public void Load(Dictionary<ulong, Track> trackRepository)
+        internal void Load(Dictionary<ulong, Track> trackRepository)
         {
             Track[] newTracks = Tracks.Select(track => trackRepository[track.Id]).ToArray();
 

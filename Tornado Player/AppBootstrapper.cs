@@ -25,6 +25,7 @@
             Container.Singleton<CM.IEventAggregator, CM.EventAggregator>();
 
             Container.Singleton<IAppDataService, AppDataService>();
+            Container.Singleton<IContentManagerService, ContentManagerService>();
             Container.Singleton<IDataService, DataService>();
             Container.Singleton<IFileSystemService, FileSystemService>();
             Container.Singleton<IHotKeyService, HotKeyService>();
@@ -53,7 +54,7 @@
 
         protected override void OnExit(object sender, System.EventArgs e)
         {
-            // _container.GetInstance<IMusicPlayerService>().SaveState();
+            Container.GetInstance<IContentManagerService>().SaveContent();
         }
     }
 }
