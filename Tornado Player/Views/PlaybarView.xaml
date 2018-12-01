@@ -29,7 +29,7 @@
                     <Image Source="{StaticResource Loop}"/>
                 </ToggleButton>
 
-                <ToggleButton IsChecked="{Binding Shuffle}" ToolTip="Shuffle">
+                <ToggleButton IsChecked="{Binding ActivePlaylist.Playlist.IsShuffled}" ToolTip="Shuffle">
                     <Image Source="{StaticResource Shuffle}"/>
                 </ToggleButton>
             </StackPanel>

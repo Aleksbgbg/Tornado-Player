@@ -2,18 +2,22 @@
 {
     using System;
 
+    using Caliburn.Micro;
+
     using Tornado.Player.Services.Interfaces;
     using Tornado.Player.ViewModels.Interfaces;
 
-    internal class PlaybarViewModel : ViewModelBase, IPlaybarViewModel
+    internal class PlaybarViewModel : ViewModelBase, IPlaybarViewModel, IHandle<IPlaylistViewModel>
     {
         private readonly IMusicPlayerService _musicPlayerService;
 
         private bool _syncPlayer = true;
 
-        public PlaybarViewModel(IMusicPlayerService musicPlayerService)
+        public PlaybarViewModel(IEventAggregator eventAggregator, IMusicPlayerService musicPlayerService)
         {
             _musicPlayerService = musicPlayerService;
+
+            eventAggregator.Subscribe(this);
 
             _musicPlayerService.ProgressUpdated += (sender, e) =>
             {
@@ -24,10 +28,36 @@
                 }
             };
             _musicPlayerService.TrackChanged += (sender, e) => NotifyOfPropertyChange(() => Duration);
-            _musicPlayerService.PlaylistLoaded += (sender, e) => NotifyOfPropertyChange(() => Shuffle);
 
             _musicPlayerService.Paused += (sender, e) => NotifyOfPropertyChange(() => Playing);
             _musicPlayerService.Played += (sender, e) => NotifyOfPropertyChange(() => Playing);
+
+            _musicPlayerService.MediaEnded += (sender, e) =>
+            {
+                if (Loop)
+                {
+                    _musicPlayerService.Stop();
+                    _musicPlayerService.Play();
+                }
+                else
+                {
+                    ActivePlaylist.PlayNext();
+                }
+            };
+        }
+
+        private IPlaylistViewModel _activePlaylist;
+        public IPlaylistViewModel ActivePlaylist
+        {
+            get => _activePlaylist;
+
+            set
+            {
+                if (_activePlaylist == value) return;
+
+                _activePlaylist = value;
+                NotifyOfPropertyChange(() => ActivePlaylist);
+            }
         }
 
         private TimeSpan _currentProgress;
@@ -62,30 +92,25 @@
             }
         }
 
+        private bool _loop;
         public bool Loop
         {
-            get => _musicPlayerService.Loop;
+            get => _loop;
 
             set
             {
                 if (Loop == value) return;
 
-                _musicPlayerService.Loop = value;
+                _loop = value;
                 NotifyOfPropertyChange(() => Loop);
             }
         }
 
         public bool Playing => _musicPlayerService.IsPlaying;
 
-        public bool Shuffle
+        public void Handle(IPlaylistViewModel message)
         {
-            get => _musicPlayerService.IsShuffled;
-
-            set
-            {
-                _musicPlayerService.IsShuffled = value;
-                NotifyOfPropertyChange(() => Shuffle);
-            }
+            ActivePlaylist = message;
         }
 
         public void DragStarted()
@@ -101,12 +126,12 @@
 
         public void Previous()
         {
-            _musicPlayerService.Previous();
+            ActivePlaylist.PlayPrevious();
         }
 
         public void Next()
         {
-            _musicPlayerService.Next();
+            ActivePlaylist.PlayNext();
         }
 
         public void TogglePlayback()

@@ -11,7 +11,5 @@
         double Volume { get; set; }
 
         bool Playing { get; }
-
-        bool Shuffle { get; set; }
     }
 }
