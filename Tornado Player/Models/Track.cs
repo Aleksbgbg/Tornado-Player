@@ -7,6 +7,10 @@
 
     internal class Track : Snowflake, IComparable<Track>
     {
+        internal Track(ulong id) : base(id)
+        {
+        }
+
         [JsonConstructor]
         internal Track(ulong id, int sortOrder, string filepath) : base(id)
         {
