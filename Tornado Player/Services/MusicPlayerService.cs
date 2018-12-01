@@ -86,6 +86,11 @@
             _tornadoPlayer.Pause();
         }
 
+        public void Stop()
+        {
+            _tornadoPlayer.Stop();
+        }
+
         public void TogglePlayback()
         {
             _tornadoPlayer.TogglePlay();

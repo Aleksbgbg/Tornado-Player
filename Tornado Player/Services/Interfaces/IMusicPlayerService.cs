@@ -31,6 +31,8 @@
 
         void Pause();
 
+        void Stop();
+
         void TogglePlayback();
 
         void SelectTrack(Track track);
