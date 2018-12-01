@@ -49,7 +49,17 @@
 
         public bool IsPlaying => _tornadoPlayer.IsPlaying;
 
-        public Track Track { get; private set; }
+        private Track _track;
+        public Track Track
+        {
+            get => _track;
+
+            private set
+            {
+                _track = value;
+                _tornadoPlayer.Open(_track);
+            }
+        }
 
         public TimeSpan Progress
         {
