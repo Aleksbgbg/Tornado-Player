@@ -7,10 +7,11 @@
     internal class Playlist : Snowflake
     {
         [JsonConstructor]
-        internal Playlist(ulong id, string name, bool isShuffled, IEnumerable<Track> tracks) : base(id)
+        internal Playlist(ulong id, string name, bool isShuffled, int selectedTrackIndex, IEnumerable<Track> tracks) : base(id)
         {
             Name = name;
             IsShuffled = isShuffled;
+            SelectedTrackIndex = selectedTrackIndex;
             Tracks = new List<Track>(tracks);
         }
 
@@ -19,6 +20,9 @@
 
         [JsonProperty("IsShuffled")]
         public bool IsShuffled { get; set; }
+
+        [JsonProperty("SelectedTrackIndex")]
+        public int SelectedTrackIndex { get; set; }
 
         [JsonProperty("Tracks")]
         public List<Track> Tracks { get; }
