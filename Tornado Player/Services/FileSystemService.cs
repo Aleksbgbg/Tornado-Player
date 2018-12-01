@@ -8,9 +8,19 @@
 
     internal class FileSystemService : IFileSystemService
     {
+        private readonly ISnowflakeService _snowflakeService;
+
+        public FileSystemService(ISnowflakeService snowflakeService)
+        {
+            _snowflakeService = snowflakeService;
+        }
+
         public Track[] LoadTracks(string directory)
         {
-            return Directory.GetFiles(directory).Where(file => Constants.SupportedMediaFormats.Contains(Path.GetExtension(file))).Select(file => new Track(file)).ToArray();
+            return Directory.GetFiles(directory)
+                            .Where(file => Constants.SupportedMediaFormats.Contains(Path.GetExtension(file)))
+                            .Select(file => new Track(_snowflakeService.GenerateSnowflake(), 0, file))
+                            .ToArray();
         }
     }
 }
