@@ -1,8 +1,10 @@
 ﻿namespace Tornado.Player.Models
 {
+    using Caliburn.Micro;
+
     using Newtonsoft.Json;
 
-    internal class Snowflake
+    internal class Snowflake : PropertyChangedBase
     {
         public Snowflake(ulong id)
         {

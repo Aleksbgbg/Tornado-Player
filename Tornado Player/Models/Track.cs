@@ -8,9 +8,25 @@
     internal class Track : Snowflake, IComparable<Track>
     {
         [JsonConstructor]
-        internal Track(ulong id, string filepath) : base(id)
+        internal Track(ulong id, int sortOrder, string filepath) : base(id)
         {
+            _sortOrder = sortOrder;
             Filepath = filepath;
+        }
+
+        private int _sortOrder;
+        [JsonProperty("SortOrder")]
+        public int SortOrder
+        {
+            get => _sortOrder;
+
+            set
+            {
+                if (_sortOrder == value) return;
+
+                _sortOrder = value;
+                NotifyOfPropertyChange(() => SortOrder);
+            }
         }
 
         [JsonProperty("Filepath")]
