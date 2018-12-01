@@ -14,14 +14,6 @@
         public MusicPlayerService()
         {
             _tornadoPlayer.MediaOpened += (sender, e) => OnTrackChanged();
-            _tornadoPlayer.MediaEnded += (sender, e) =>
-            {
-                if (Loop)
-                {
-                    _tornadoPlayer.Stop();
-                    _tornadoPlayer.Play();
-                }
-            };
         }
 
         public event EventHandler Played
@@ -83,8 +75,6 @@
 
             set => _tornadoPlayer.Volume = value;
         }
-
-        public bool Loop { get; set; }
 
         public void Play()
         {

@@ -27,8 +27,6 @@
 
         double Volume { get; set; }
 
-        bool Loop { get; set; }
-
         void Play();
 
         void Pause();
