@@ -1,5 +1,6 @@
 ﻿namespace Tornado.Player.ViewModels
 {
+    using System;
     using System.ComponentModel;
     using System.Linq;
     using System.Windows.Data;
@@ -11,39 +12,55 @@
     using Tornado.Player.Services.Interfaces;
     using Tornado.Player.ViewModels.Interfaces;
 
-    internal class PlaylistViewModel : ViewModelBase, IPlaylistViewModel, IHandle<Shortcut>
+    internal sealed class PlaylistViewModel : ViewModelBase, IPlaylistViewModel, IHandle<Shortcut>
     {
         private readonly IMusicPlayerService _musicPlayerService;
 
         private readonly ICollectionView _tracksView;
 
-        public PlaylistViewModel(ITrackFactory trackFactory, IEventAggregator eventAggregator, IMusicPlayerService musicPlayerService)
+        public PlaylistViewModel(ITrackFactory trackFactory, IEventAggregator eventAggregator, IMusicPlayerService musicPlayerService, Playlist playlist)
         {
             _musicPlayerService = musicPlayerService;
-            Tracks = new BindableCollection<ITrackViewModel>(_musicPlayerService.Tracks.Select(trackFactory.MakeTrackViewModel));
+
+            DisplayName = playlist.Name;
+            Playlist = playlist;
+            Tracks = new BindableCollection<ITrackViewModel>(playlist.Tracks.Select(trackFactory.MakeTrackViewModel));
+
             _tracksView = CollectionViewSource.GetDefaultView(Tracks);
+            _selectedTrack = Tracks[playlist.SelectedTrackIndex];
+
+            _tracksView.SortDescriptions.Add(new SortDescription(string.Join(".", nameof(ITrackViewModel.Track), nameof(ITrackViewModel.Track.SortOrder)), ListSortDirection.Ascending));
 
             eventAggregator.Subscribe(this);
 
-            _musicPlayerService.PlaylistLoaded += (sender, e) =>
+            Playlist.PropertyChanged += (sender, e) =>
             {
-                Tracks.Clear();
-                Tracks.AddRange(e.Tracks.Select(trackFactory.MakeTrackViewModel));
+                if (e.PropertyName == nameof(Playlist.IsShuffled))
+                {
+                    _tracksView.Refresh();
+                }
             };
-            _musicPlayerService.TrackChanged += (sender, e) => NotifyOfPropertyChange(() => SelectedTrackIndex);
         }
+
+        public Playlist Playlist { get; }
 
         public IObservableCollection<ITrackViewModel> Tracks { get; }
 
-        public int SelectedTrackIndex => _musicPlayerService.TrackIndex;
-
+        private ITrackViewModel _selectedTrack;
         public ITrackViewModel SelectedTrack
         {
+            get => _selectedTrack;
+
             set
             {
-                if (value == null) return;
+                if (value == null || _selectedTrack == value) return;
 
-                _musicPlayerService.SelectTrack(Tracks.IndexOf(value));
+                _selectedTrack = value;
+                NotifyOfPropertyChange(() => SelectedTrack);
+
+                _musicPlayerService.SelectTrack(_selectedTrack.Track);
+
+                Playlist.SelectedTrackIndex = Tracks.IndexOf(_selectedTrack);
             }
         }
 
@@ -66,6 +83,16 @@
             }
         }
 
+        public void PlayPrevious()
+        {
+            SelectTrack(Playlist.SelectedTrackIndex - 1);
+        }
+
+        public void PlayNext()
+        {
+            SelectTrack(Playlist.SelectedTrackIndex + 1);
+        }
+
         public void Handle(Shortcut message)
         {
             if (message == Shortcut.Search)
@@ -83,6 +110,25 @@
             }
 
             _tracksView.Filter = item => ((ITrackViewModel)item).Track.MatchesSearch(searchText);
+        }
+
+        protected override void OnActivate()
+        {
+            _musicPlayerService.SelectTrack(SelectedTrack.Track);
+        }
+
+        private void SelectTrack(int index)
+        {
+            if (index < 0)
+            {
+                index = Tracks.Count - ((-index) % Tracks.Count);
+            }
+            else if (index >= Tracks.Count)
+            {
+                index = index % Tracks.Count;
+            }
+
+            SelectedTrack = Tracks[index];
         }
     }
 }

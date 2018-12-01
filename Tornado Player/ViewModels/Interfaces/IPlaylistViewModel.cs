@@ -1,11 +1,9 @@
 ﻿namespace Tornado.Player.ViewModels.Interfaces
 {
-    using Caliburn.Micro;
-
     internal interface IPlaylistViewModel : IViewModelBase
     {
-        IObservableCollection<ITrackViewModel> Tracks { get; }
+        void PlayPrevious();
 
-        int SelectedTrackIndex { get; }
+        void PlayNext();
     }
 }

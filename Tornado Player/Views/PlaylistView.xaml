@@ -11,9 +11,7 @@
              d:DataContext="{d:DesignInstance ViewModels:PlaylistViewModel}"
              Loaded="OnLoaded">
     <Grid>
-        <ListBox x:Name="Tracks"
-                 SelectedIndex="{Binding SelectedTrackIndex, Mode=OneWay}"
-                 SelectedItem="{Binding SelectedTrack, Mode=OneWayToSource}">
+        <ListBox x:Name="Tracks" SelectedItem="{Binding SelectedTrack}">
             <ListBox.Template>
                 <ControlTemplate TargetType="ListBox">
                     <Border x:Name="Bd"
