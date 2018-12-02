@@ -4,6 +4,6 @@
 
     internal interface IMainViewModel : IViewModelBase, IConductor
     {
-        IPlaylistCollectionViewModel PlaylistCollectionViewModel { get; }
+        void EditPlaylists();
     }
 }
