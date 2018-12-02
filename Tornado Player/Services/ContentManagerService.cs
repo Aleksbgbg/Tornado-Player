@@ -94,6 +94,11 @@
             return _playlists;
         }
 
+        public IEnumerable<Track> RetrieveTracks()
+        {
+            return _trackRepository.Values;
+        }
+
         public void SaveContent()
         {
             _dataService.Save(TracksFile, _trackRepository.Values);

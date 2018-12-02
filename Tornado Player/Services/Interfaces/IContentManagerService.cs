@@ -20,6 +20,8 @@
 
         IEnumerable<Playlist> RetrievePlaylists();
 
+        IEnumerable<Track> RetrieveTracks();
+
         void SaveContent();
     }
 }
