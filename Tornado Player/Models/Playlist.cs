@@ -8,13 +8,17 @@
 
     internal class Playlist : Snowflake
     {
+        private static readonly Random Random = new Random();
+
+        private readonly List<Track> _tracks;
+
         [JsonConstructor]
         internal Playlist(ulong id, string name, bool isShuffled, int selectedTrackIndex, IEnumerable<ulong> trackIds) : base(id)
         {
             Name = name;
             _isShuffled = isShuffled;
             SelectedTrackIndex = selectedTrackIndex;
-            Tracks = new List<Track>(trackIds.Select(trackId => new Track(trackId)));
+            _tracks = new List<Track>(trackIds.Select(trackId => new Track(trackId)));
         }
 
         internal Playlist(ulong id, string name, bool isShuffled, int selectedTrackIndex, IEnumerable<Track> tracks) : base(id)
@@ -22,7 +26,7 @@
             Name = name;
             _isShuffled = isShuffled;
             SelectedTrackIndex = selectedTrackIndex;
-            Tracks = new List<Track>(tracks);
+            _tracks = new List<Track>(tracks);
         }
 
         [JsonProperty("Name")]
@@ -56,17 +60,31 @@
         public int SelectedTrackIndex { get; set; }
 
         [JsonIgnore]
-        public List<Track> Tracks { get; }
+        public IReadOnlyList<Track> Tracks => _tracks;
 
         [JsonProperty("TrackIds")]
         private IEnumerable<ulong> TrackIds => Tracks.Select(track => track.Id);
 
         internal void Load(Dictionary<ulong, Track> trackRepository)
         {
-            Track[] newTracks = Tracks.Select(track => trackRepository[track.Id]).ToArray();
+            Track[] newTracks = _tracks.Select(track => trackRepository[track.Id]).ToArray();
 
-            Tracks.Clear();
-            Tracks.AddRange(newTracks);
+            _tracks.Clear();
+            _tracks.AddRange(newTracks);
+        }
+
+        internal void AddTrack(ulong id, Dictionary<ulong, Track> trackRepository)
+        {
+            Track newTrack = trackRepository[id];
+
+            newTrack.SortOrder = IsShuffled ? Random.Next(0, _tracks.Count) : 0;
+
+            _tracks.Add(newTrack);
+        }
+
+        internal void RemoveTrack(Track track)
+        {
+            _tracks.Remove(track);
         }
 
         private void Sort()
@@ -82,11 +100,9 @@
             int[] sortOrders = new int[Tracks.Count];
 
             {
-                Random random = new Random();
-
                 for (int index = 0; index < sortOrders.Length; ++index)
                 {
-                    int shuffleIndex = random.Next(0, index + 1);
+                    int shuffleIndex = Random.Next(0, index + 1);
 
                     if (shuffleIndex != index)
                     {
@@ -101,7 +117,7 @@
 
             for (int index = 0; index < sortOrders.Length; ++index)
             {
-                Tracks[index].SortOrder = sortOrders[index];
+                _tracks[index].SortOrder = sortOrders[index];
             }
         }
     }
