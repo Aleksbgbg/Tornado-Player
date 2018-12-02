@@ -45,7 +45,8 @@
             Track track = new Track(_snowflakeService.GenerateSnowflake(), 0, file);
 
             _trackRepository[track.Id] = track;
-            _playlists[0].Tracks.Add(track); // Main playlist contains all tracks
+
+            AddTrackToPlaylist(_playlists[0], track); // Main playlist contains all tracks
 
             return track;
         }
@@ -76,6 +77,16 @@
             _playlists.Add(playlist);
 
             return playlist;
+        }
+
+        public void AddTrackToPlaylist(Playlist playlist, Track track)
+        {
+            playlist.AddTrack(track.Id, _trackRepository);
+        }
+
+        public void RemoveTrackFromPlaylist(Playlist playlist, Track track)
+        {
+            playlist.RemoveTrack(track);
         }
 
         public IEnumerable<Playlist> RetrievePlaylists()
