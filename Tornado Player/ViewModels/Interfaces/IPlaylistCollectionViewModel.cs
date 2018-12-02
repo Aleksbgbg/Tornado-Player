@@ -4,5 +4,6 @@
 
     internal interface IPlaylistCollectionViewModel : IViewModelBase, IConductor
     {
+        IObservableCollection<IPlaylistViewModel> Playlists { get; }
     }
 }

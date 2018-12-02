@@ -24,6 +24,8 @@
 
         public AppLayout AppLayout { get; }
 
+        public IObservableCollection<IPlaylistViewModel> Playlists => Items;
+
         protected override void OnActivationProcessed(IPlaylistViewModel item, bool success)
         {
             if (success && item != null)
