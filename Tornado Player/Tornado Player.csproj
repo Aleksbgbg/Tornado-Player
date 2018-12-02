@@ -85,6 +85,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\FractionToPercentageConverter.cs" />
+    <Compile Include="Converters\DoubleToGridLengthConverter.cs" />
     <Compile Include="Converters\MarkedScrollBarPositionConverter.cs" />
     <Compile Include="Converters\TimeSpanDurationFormatConverter.cs" />
     <Compile Include="Converters\TimeSpanToSecondsConverter.cs" />
