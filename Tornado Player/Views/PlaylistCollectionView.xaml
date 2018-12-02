@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:ViewModels="clr-namespace:Tornado.Player.ViewModels"
              xmlns:Caliburn="http://www.caliburnproject.org"
+             xmlns:Converters="clr-namespace:Tornado.Player.Converters"
+             xmlns:ViewModels="clr-namespace:Tornado.Player.ViewModels"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance ViewModels:PlaylistCollectionViewModel}">
     <ContentControl>
@@ -16,9 +17,10 @@
                             <Setter.Value>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="{Binding AppLayout.PlaylistsBoxColumnWidth, Mode=TwoWay,
+                                            Converter={x:Static Converters:DoubleToGridLengthConverter.Default}}"/>
                                         <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
 
                                     <ListBox ItemsSource="{Binding Items, Mode=OneTime}"
