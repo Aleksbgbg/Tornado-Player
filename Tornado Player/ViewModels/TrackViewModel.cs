@@ -6,10 +6,13 @@
 
     internal class TrackViewModel : ViewModelBase, ITrackViewModel
     {
+        private readonly IMusicPlayerService _musicPlayerService;
+
         private readonly IWebService _webService;
 
-        public TrackViewModel(IWebService webService)
+        public TrackViewModel(IMusicPlayerService musicPlayerService, IWebService webService)
         {
+            _musicPlayerService = musicPlayerService;
             _webService = webService;
         }
 
@@ -18,6 +21,11 @@
         public void Initialise(Track track)
         {
             Track = track;
+        }
+
+        protected override void OnActivate()
+        {
+            _musicPlayerService.SelectTrack(Track);
         }
 
         public void FindOnYouTube()

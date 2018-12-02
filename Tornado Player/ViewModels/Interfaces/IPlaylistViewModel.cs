@@ -1,9 +1,11 @@
 ﻿namespace Tornado.Player.ViewModels.Interfaces
 {
-    internal interface IPlaylistViewModel : IViewModelBase
-    {
-        void PlayPrevious();
+    using Caliburn.Micro;
 
-        void PlayNext();
+    internal interface IPlaylistViewModel : IViewModelBase, IConductor
+    {
+        void SelectPrevious();
+
+        void SelectNext();
     }
 }

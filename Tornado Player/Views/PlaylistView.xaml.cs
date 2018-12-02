@@ -11,7 +11,7 @@
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            Tracks.ScrollIntoView(Tracks.SelectedItem);
+            Items.ScrollIntoView(Items.SelectedItem);
         }
     }
 }

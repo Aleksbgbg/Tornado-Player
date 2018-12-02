@@ -1,6 +1,5 @@
 ﻿namespace Tornado.Player.ViewModels
 {
-    using System;
     using System.ComponentModel;
     using System.Linq;
     using System.Windows.Data;
@@ -9,25 +8,20 @@
 
     using Tornado.Player.Factories.Interfaces;
     using Tornado.Player.Models;
-    using Tornado.Player.Services.Interfaces;
     using Tornado.Player.ViewModels.Interfaces;
 
-    internal sealed class PlaylistViewModel : ViewModelBase, IPlaylistViewModel, IHandle<Shortcut>
+    internal sealed class PlaylistViewModel : Conductor<ITrackViewModel>.Collection.OneActive, IPlaylistViewModel, IHandle<Shortcut>
     {
-        private readonly IMusicPlayerService _musicPlayerService;
-
         private readonly ICollectionView _tracksView;
 
-        public PlaylistViewModel(ITrackFactory trackFactory, IEventAggregator eventAggregator, IMusicPlayerService musicPlayerService, Playlist playlist)
+        public PlaylistViewModel(ITrackFactory trackFactory, IEventAggregator eventAggregator, Playlist playlist)
         {
-            _musicPlayerService = musicPlayerService;
+            _tracksView = CollectionViewSource.GetDefaultView(Items);
 
             DisplayName = playlist.Name;
             Playlist = playlist;
-            Tracks = new BindableCollection<ITrackViewModel>(playlist.Tracks.Select(trackFactory.MakeTrackViewModel));
-
-            _tracksView = CollectionViewSource.GetDefaultView(Tracks);
-            _selectedTrack = Tracks[playlist.SelectedTrackIndex];
+            Items.AddRange(playlist.Tracks.Select(trackFactory.MakeTrackViewModel));
+            ActivateItem(Items[playlist.SelectedTrackIndex]);
 
             _tracksView.SortDescriptions.Add(new SortDescription(string.Join(".", nameof(ITrackViewModel.Track), nameof(ITrackViewModel.Track.SortOrder)), ListSortDirection.Ascending));
 
@@ -43,26 +37,6 @@
         }
 
         public Playlist Playlist { get; }
-
-        public IObservableCollection<ITrackViewModel> Tracks { get; }
-
-        private ITrackViewModel _selectedTrack;
-        public ITrackViewModel SelectedTrack
-        {
-            get => _selectedTrack;
-
-            set
-            {
-                if (value == null || _selectedTrack == value) return;
-
-                _selectedTrack = value;
-                NotifyOfPropertyChange(() => SelectedTrack);
-
-                _musicPlayerService.SelectTrack(_selectedTrack.Track);
-
-                Playlist.SelectedTrackIndex = Tracks.IndexOf(_selectedTrack);
-            }
-        }
 
         private bool _isSearching;
         public bool IsSearching
@@ -83,12 +57,12 @@
             }
         }
 
-        public void PlayPrevious()
+        public void SelectPrevious()
         {
             SelectTrack(Playlist.SelectedTrackIndex - 1);
         }
 
-        public void PlayNext()
+        public void SelectNext()
         {
             SelectTrack(Playlist.SelectedTrackIndex + 1);
         }
@@ -112,23 +86,26 @@
             _tracksView.Filter = item => ((ITrackViewModel)item).Track.MatchesSearch(searchText);
         }
 
-        protected override void OnActivate()
+        protected override void OnActivationProcessed(ITrackViewModel item, bool success)
         {
-            _musicPlayerService.SelectTrack(SelectedTrack.Track);
+            if (success && item != null)
+            {
+                Playlist.SelectedTrackIndex = Items.IndexOf(item);
+            }
         }
 
         private void SelectTrack(int index)
         {
             if (index < 0)
             {
-                index = Tracks.Count - ((-index) % Tracks.Count);
+                index = Items.Count - ((-index) % Items.Count);
             }
-            else if (index >= Tracks.Count)
+            else if (index >= Items.Count)
             {
-                index = index % Tracks.Count;
+                index = index % Items.Count;
             }
 
-            SelectedTrack = Tracks[index];
+            ActivateItem(Items[index]);
         }
     }
 }

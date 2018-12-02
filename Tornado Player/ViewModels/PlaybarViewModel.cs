@@ -41,7 +41,7 @@
                 }
                 else
                 {
-                    ActivePlaylist.PlayNext();
+                    ActivePlaylist.SelectNext();
                 }
             };
         }
@@ -126,12 +126,12 @@
 
         public void Previous()
         {
-            ActivePlaylist.PlayPrevious();
+            ActivePlaylist.SelectPrevious();
         }
 
         public void Next()
         {
-            ActivePlaylist.PlayNext();
+            ActivePlaylist.SelectNext();
         }
 
         public void TogglePlayback()

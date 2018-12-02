@@ -14,5 +14,5 @@
                     Command="{Binding SearchCommand, Mode=OneTime}"/>
     </Window.InputBindings>
 
-    <ContentControl Caliburn:View.Model="{Binding MainViewModel}"/>
+    <ContentControl Caliburn:View.Model="{Binding ActiveItem, Mode=OneTime}"/>
 </Window>

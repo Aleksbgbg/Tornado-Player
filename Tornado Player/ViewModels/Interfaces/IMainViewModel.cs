@@ -1,6 +1,8 @@
 ﻿namespace Tornado.Player.ViewModels.Interfaces
 {
-    internal interface IMainViewModel : IViewModelBase
+    using Caliburn.Micro;
+
+    internal interface IMainViewModel : IViewModelBase, IConductor
     {
         IPlaylistCollectionViewModel PlaylistCollectionViewModel { get; }
     }

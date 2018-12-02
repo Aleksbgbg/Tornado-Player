@@ -11,7 +11,7 @@
              d:DataContext="{d:DesignInstance ViewModels:PlaylistViewModel}"
              Loaded="OnLoaded">
     <Grid>
-        <ListBox x:Name="Tracks" SelectedItem="{Binding SelectedTrack}">
+        <ListBox x:Name="Items">
             <ListBox.Template>
                 <ControlTemplate TargetType="ListBox">
                     <Border x:Name="Bd"

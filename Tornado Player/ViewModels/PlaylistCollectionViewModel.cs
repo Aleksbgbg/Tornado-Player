@@ -19,20 +19,15 @@
             Items.AddRange(contentManagerService.RetrievePlaylists()
                                                 .Select(playlist => viewModelFactory.MakeViewModel<IPlaylistViewModel>(playlist)));
 
-            ScreenExtensions.TryActivate(this);
+            ActivateItem(Items[0]);
         }
 
         protected override void OnActivationProcessed(IPlaylistViewModel item, bool success)
         {
-            if (success)
+            if (success && item != null)
             {
                 _eventAggregator.BeginPublishOnUIThread(item);
             }
-        }
-
-        protected override void OnViewAttached(object view, object context)
-        {
-            ActivateItem(Items[0]);
         }
     }
 }

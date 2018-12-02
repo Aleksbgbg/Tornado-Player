@@ -6,17 +6,16 @@
     using Tornado.Player.Models;
     using Tornado.Player.ViewModels.Interfaces;
 
-    internal sealed class ShellViewModel : ViewModelBase, IShellViewModel
+    internal sealed class ShellViewModel : Conductor<IMainViewModel>, IShellViewModel
     {
         public ShellViewModel(IEventAggregator eventAggregator, IMainViewModel mainViewModel)
         {
             DisplayName = "Tornado Player";
 
-            MainViewModel = mainViewModel;
             SearchCommand = new RelayCommand(_ => eventAggregator.BeginPublishOnUIThread(Shortcut.Search));
-        }
 
-        public IMainViewModel MainViewModel { get; }
+            ActivateItem(mainViewModel);
+        }
 
         public RelayCommand SearchCommand { get; }
     }
