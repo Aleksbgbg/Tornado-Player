@@ -4,27 +4,51 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:ViewModels="clr-namespace:Tornado.Player.ViewModels"
+             xmlns:Caliburn="http://www.caliburnproject.org"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance ViewModels:PlaylistCollectionViewModel}">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="2*"/>
-        </Grid.ColumnDefinitions>
+    <ContentControl>
+        <ContentControl.Style>
+            <Style TargetType="ContentControl">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding AppLayout.ShowPlaylists}" Value="True">
+                        <Setter Property="Content">
+                            <Setter.Value>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="2*"/>
+                                    </Grid.ColumnDefinitions>
 
-        <ListBox ItemsSource="{Binding Items, Mode=OneTime}"
-                 SelectedItem="{Binding ActiveItem}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding DisplayName, Mode=OneTime}"/>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                                    <ListBox ItemsSource="{Binding Items, Mode=OneTime}"
+                                             SelectedItem="{Binding ActiveItem}">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding DisplayName, Mode=OneTime}"/>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
 
-        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"
-                      ShowsPreview="True" Width="5"/>
+                                    <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"
+                                                  ShowsPreview="True" Width="5"/>
 
-        <ContentControl Grid.Column="2" x:Name="ActiveItem"/>
-    </Grid>
+                                    <ContentControl Grid.Column="2"
+                                                    Caliburn:View.Model="{Binding ActiveItem}"/>
+                                </Grid>
+                            </Setter.Value>
+                        </Setter>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding AppLayout.ShowPlaylists}" Value="False">
+                        <Setter Property="Content">
+                            <Setter.Value>
+                                <ContentControl Grid.Column="2"
+                                                Caliburn:View.Model="{Binding ActiveItem}"/>
+                            </Setter.Value>
+                        </Setter>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </ContentControl.Style>
+    </ContentControl>
 </UserControl>

@@ -5,6 +5,7 @@
     using Caliburn.Micro;
     using Caliburn.Micro.Wrapper;
 
+    using Tornado.Player.Models;
     using Tornado.Player.Services.Interfaces;
     using Tornado.Player.ViewModels.Interfaces;
 
@@ -12,15 +13,18 @@
     {
         private readonly IEventAggregator _eventAggregator;
 
-        public PlaylistCollectionViewModel(IViewModelFactory viewModelFactory, IEventAggregator eventAggregator, IContentManagerService contentManagerService)
+        public PlaylistCollectionViewModel(IViewModelFactory viewModelFactory, IEventAggregator eventAggregator, IContentManagerService contentManagerService, ILayoutService layoutService)
         {
             _eventAggregator = eventAggregator;
+            AppLayout = layoutService.AppLayout;
 
             Items.AddRange(contentManagerService.RetrievePlaylists()
                                                 .Select(playlist => viewModelFactory.MakeViewModel<IPlaylistViewModel>(playlist)));
 
             ActivateItem(Items[0]);
         }
+
+        public AppLayout AppLayout { get; }
 
         protected override void OnActivationProcessed(IPlaylistViewModel item, bool success)
         {
