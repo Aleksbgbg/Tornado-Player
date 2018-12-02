@@ -1,5 +1,6 @@
 ﻿namespace Tornado.Player.ViewModels
 {
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
     using System.Windows.Data;
@@ -56,6 +57,8 @@
                 }
             }
         }
+
+        public IEnumerable<ITrackViewModel> Tracks => Items;
 
         public void SelectPrevious()
         {
