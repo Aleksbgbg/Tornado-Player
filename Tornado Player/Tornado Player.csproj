@@ -115,10 +115,15 @@
     <Compile Include="Services\SnowflakeService.cs" />
     <Compile Include="Services\WebService.cs" />
     <Compile Include="Utilities\VirtualKey.cs" />
+    <Compile Include="ViewModels\EditTrackViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\IEditTrackViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IPlaybarViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IPlaylistCollectionViewModel.cs" />
     <Compile Include="ViewModels\PlaybarViewModel.cs" />
     <Compile Include="ViewModels\PlaylistCollectionViewModel.cs" />
+    <Compile Include="Views\EditTrackView.xaml.cs">
+      <DependentUpon>EditTrackView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PlaybarView.xaml.cs">
       <DependentUpon>PlaybarView.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -129,6 +134,10 @@
     <Compile Include="Views\TrackView.xaml.cs">
       <DependentUpon>TrackView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\EditTrackView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
