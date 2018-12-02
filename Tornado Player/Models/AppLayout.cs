@@ -7,9 +7,10 @@
     internal class AppLayout : PropertyChangedBase
     {
         [JsonConstructor]
-        public AppLayout(bool showPlaylists)
+        public AppLayout(bool showPlaylists, double playlistsBoxColumnWidth)
         {
             _showPlaylists = showPlaylists;
+            _playlistsBoxColumnWidth = playlistsBoxColumnWidth;
         }
 
         private bool _showPlaylists;
@@ -24,6 +25,19 @@
 
                 _showPlaylists = value;
                 NotifyOfPropertyChange(() => ShowPlaylists);
+            }
+        }
+
+        private double _playlistsBoxColumnWidth;
+        [JsonProperty("PlaylistsBoxColumnWidth")]
+        public double PlaylistsBoxColumnWidth
+        {
+            get => _playlistsBoxColumnWidth;
+
+            set
+            {
+                _playlistsBoxColumnWidth = value;
+                NotifyOfPropertyChange(() => PlaylistsBoxColumnWidth);
             }
         }
     }

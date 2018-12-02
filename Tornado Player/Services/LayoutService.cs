@@ -11,7 +11,8 @@
         {
             _dataService = dataService;
 
-            AppLayout = _dataService.Load("Layout", () => new AppLayout(true));
+            AppLayout = _dataService.Load("Layout", () => new AppLayout(showPlaylists: true,
+                                                                        playlistsBoxColumnWidth: 300.0));
         }
 
         public AppLayout AppLayout { get; }
