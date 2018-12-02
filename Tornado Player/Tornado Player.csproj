@@ -119,8 +119,10 @@
     <Compile Include="ViewModels\Interfaces\IEditTrackViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IPlaybarViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IPlaylistCollectionViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\IPlaylistEditorViewModel.cs" />
     <Compile Include="ViewModels\PlaybarViewModel.cs" />
     <Compile Include="ViewModels\PlaylistCollectionViewModel.cs" />
+    <Compile Include="ViewModels\PlaylistEditorViewModel.cs" />
     <Compile Include="Views\EditTrackView.xaml.cs">
       <DependentUpon>EditTrackView.xaml</DependentUpon>
     </Compile>
@@ -130,6 +132,10 @@
     </Compile>
     <Compile Include="Views\PlaylistCollectionView.xaml.cs">
       <DependentUpon>PlaylistCollectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlaylistEditorView.xaml.cs">
+      <DependentUpon>PlaylistEditorView.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\TrackView.xaml.cs">
       <DependentUpon>TrackView.xaml</DependentUpon>
@@ -149,6 +155,10 @@
     <Page Include="Views\PlaylistCollectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlaylistEditorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Views\PlaylistView.xaml">
       <SubType>Designer</SubType>
