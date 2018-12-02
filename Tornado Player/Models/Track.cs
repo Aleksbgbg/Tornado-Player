@@ -5,7 +5,7 @@
 
     using Newtonsoft.Json;
 
-    internal class Track : Snowflake, IComparable<Track>
+    internal class Track : Snowflake, IComparable<Track>, IEquatable<Track>
     {
         internal Track(ulong id) : base(id)
         {
@@ -42,6 +42,41 @@
         public int CompareTo(Track other)
         {
             return string.Compare(Name, other.Name, StringComparison.Ordinal);
+        }
+
+        public bool Equals(Track other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            return Id == other.Id;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj is Track other)
+            {
+                return Equals(other);
+            }
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
         }
 
         public bool MatchesSearch(string search)
