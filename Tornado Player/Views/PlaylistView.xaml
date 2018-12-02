@@ -5,7 +5,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:Caliburn="http://www.caliburnproject.org"
              xmlns:Converters="clr-namespace:Tornado.Player.Converters"
-             xmlns:Helpers="clr-namespace:Tornado.Player.Helpers"
              xmlns:ViewModels="clr-namespace:Tornado.Player.ViewModels"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance ViewModels:PlaylistViewModel}"
@@ -108,19 +107,6 @@
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </ListBox.Template>
-
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="ContextMenu">
-                        <Setter.Value>
-                            <ContextMenu>
-                                <MenuItem Header="Find on YouTube" Helpers:ImageContentHelper.Image="{StaticResource Youtube}"
-                                          Caliburn:Message.Attach="FindOnYouTube"/>
-                            </ContextMenu>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </ListBox.ItemContainerStyle>
         </ListBox>
 
         <Border BorderBrush="DeepSkyBlue" BorderThickness="1" Background="White"
