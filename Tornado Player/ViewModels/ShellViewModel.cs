@@ -22,5 +22,10 @@
         public AppLayout AppLayout { get; }
 
         public RelayCommand SearchCommand { get; }
+
+        public void EditPlaylists()
+        {
+            ActiveItem.EditPlaylists();
+        }
     }
 }

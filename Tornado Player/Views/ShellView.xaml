@@ -22,6 +22,9 @@
 
         <Menu>
             <MenuItem Header="View">
+                <MenuItem Header="Edit Playlists"
+                          Caliburn:Message.Attach="EditPlaylists"/>
+
                 <MenuItem Header="Show Playlists"
                           IsCheckable="True"
                           IsChecked="{Binding AppLayout.ShowPlaylists}"/>
