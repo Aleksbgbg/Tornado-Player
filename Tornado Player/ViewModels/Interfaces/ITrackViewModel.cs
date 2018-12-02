@@ -5,7 +5,5 @@
     internal interface ITrackViewModel : IViewModelBase
     {
         Track Track { get; }
-
-        void Initialise(Track track);
     }
 }

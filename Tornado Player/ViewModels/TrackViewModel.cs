@@ -10,18 +10,15 @@
 
         private readonly IWebService _webService;
 
-        public TrackViewModel(IMusicPlayerService musicPlayerService, IWebService webService)
+        public TrackViewModel(IMusicPlayerService musicPlayerService, IWebService webService, Track track)
         {
             _musicPlayerService = musicPlayerService;
             _webService = webService;
-        }
 
-        public Track Track { get; private set; }
-
-        public void Initialise(Track track)
-        {
             Track = track;
         }
+
+        public Track Track { get; }
 
         protected override void OnActivate()
         {

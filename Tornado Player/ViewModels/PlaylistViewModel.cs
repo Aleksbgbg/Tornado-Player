@@ -5,8 +5,8 @@
     using System.Windows.Data;
 
     using Caliburn.Micro;
+    using Caliburn.Micro.Wrapper;
 
-    using Tornado.Player.Factories.Interfaces;
     using Tornado.Player.Models;
     using Tornado.Player.ViewModels.Interfaces;
 
@@ -14,13 +14,13 @@
     {
         private readonly ICollectionView _tracksView;
 
-        public PlaylistViewModel(ITrackFactory trackFactory, IEventAggregator eventAggregator, Playlist playlist)
+        public PlaylistViewModel(IViewModelFactory viewModelFactory, IEventAggregator eventAggregator, Playlist playlist)
         {
             _tracksView = CollectionViewSource.GetDefaultView(Items);
 
             DisplayName = playlist.Name;
             Playlist = playlist;
-            Items.AddRange(playlist.Tracks.Select(trackFactory.MakeTrackViewModel));
+            Items.AddRange(playlist.Tracks.Select(track => viewModelFactory.MakeViewModel<ITrackViewModel>(track)));
             ActivateItem(Items[playlist.SelectedTrackIndex]);
 
             _tracksView.SortDescriptions.Add(new SortDescription(string.Join(".", nameof(ITrackViewModel.Track), nameof(ITrackViewModel.Track.SortOrder)), ListSortDirection.Ascending));
