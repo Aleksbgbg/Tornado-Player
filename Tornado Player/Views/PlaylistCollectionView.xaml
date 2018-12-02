@@ -9,6 +9,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 
@@ -21,6 +22,9 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <ContentControl Grid.Column="1" x:Name="ActiveItem"/>
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"
+                      ShowsPreview="True" Width="5"/>
+
+        <ContentControl Grid.Column="2" x:Name="ActiveItem"/>
     </Grid>
 </UserControl>
