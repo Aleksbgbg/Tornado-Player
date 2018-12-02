@@ -29,6 +29,7 @@
             Container.Singleton<IDataService, DataService>();
             Container.Singleton<IFileSystemService, FileSystemService>();
             Container.Singleton<IHotKeyService, HotKeyService>();
+            Container.Singleton<ILayoutService, LayoutService>();
             Container.Singleton<IMusicPlayerService, MusicPlayerService>();
             Container.Singleton<ISnowflakeService, SnowflakeService>();
             Container.Singleton<IWebService, WebService>();
@@ -55,6 +56,7 @@
         protected override void OnExit(object sender, System.EventArgs e)
         {
             Container.GetInstance<IContentManagerService>().SaveContent();
+            Container.GetInstance<ILayoutService>().SaveLayout();
         }
     }
 }

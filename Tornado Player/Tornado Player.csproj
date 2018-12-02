@@ -107,8 +107,10 @@
     <Compile Include="Services\Interfaces\IDataService.cs" />
     <Compile Include="Models\PlayerState.cs" />
     <Compile Include="Services\Interfaces\IHotkeyService.cs" />
+    <Compile Include="Services\Interfaces\ILayoutService.cs" />
     <Compile Include="Services\Interfaces\ISnowflakeService.cs" />
     <Compile Include="Services\Interfaces\IWebService.cs" />
+    <Compile Include="Services\LayoutService.cs" />
     <Compile Include="Services\SnowflakeService.cs" />
     <Compile Include="Services\WebService.cs" />
     <Compile Include="Utilities\VirtualKey.cs" />
