@@ -97,6 +97,7 @@
     <Compile Include="Helpers\RoutedEventTrigger.cs" />
     <Compile Include="Models\AppLayout.cs" />
     <Compile Include="Models\Playlist.cs" />
+    <Compile Include="Models\PlaylistTrack.cs" />
     <Compile Include="Models\Shortcut.cs" />
     <Compile Include="Models\Snowflake.cs" />
     <Compile Include="Services\AppDataService.cs" />
