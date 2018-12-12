@@ -19,7 +19,7 @@
         {
             return Directory.GetFiles(directory)
                             .Where(file => Constants.SupportedMediaFormats.Contains(Path.GetExtension(file)))
-                            .Select(file => new Track(_snowflakeService.GenerateSnowflake(), 0, file))
+                            .Select(file => new Track(_snowflakeService.GenerateSnowflake(), file))
                             .ToArray();
         }
     }
