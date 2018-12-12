@@ -16,5 +16,5 @@
         </ContextMenu>
     </UserControl.ContextMenu>
 
-    <TextBlock Text="{Binding Track.Name}"/>
+    <TextBlock Text="{Binding Track.Track.Name}"/>
 </UserControl>

@@ -10,7 +10,7 @@
 
         private readonly IWebService _webService;
 
-        public TrackViewModel(IMusicPlayerService musicPlayerService, IWebService webService, Track track)
+        public TrackViewModel(IMusicPlayerService musicPlayerService, IWebService webService, PlaylistTrack track)
         {
             _musicPlayerService = musicPlayerService;
             _webService = webService;
@@ -18,16 +18,16 @@
             Track = track;
         }
 
-        public Track Track { get; }
+        public PlaylistTrack Track { get; }
 
         protected override void OnActivate()
         {
-            _musicPlayerService.SelectTrack(Track);
+            _musicPlayerService.SelectTrack(Track.Track);
         }
 
         public void FindOnYouTube()
         {
-            _webService.YouTubeTrackQueryInBrowser(Track.Name);
+            _webService.YouTubeTrackQueryInBrowser(Track.Track.Name);
         }
     }
 }

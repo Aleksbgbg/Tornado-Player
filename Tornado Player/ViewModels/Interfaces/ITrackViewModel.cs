@@ -4,6 +4,6 @@
 
     internal interface ITrackViewModel : IViewModelBase
     {
-        Track Track { get; }
+        PlaylistTrack Track { get; }
     }
 }
