@@ -7,7 +7,7 @@
 
     using Newtonsoft.Json;
 
-    internal class PlaylistTrack : PropertyChangedBase, IComparable<PlaylistTrack> // Track with sort order
+    internal class PlaylistTrack : PropertyChangedBase, IComparable, IComparable<PlaylistTrack> // Track with sort order
     {
         internal PlaylistTrack(int sortOrder, Track track)
         {
@@ -46,6 +46,11 @@
 
         public int CompareTo(PlaylistTrack other)
         {
+            if (other is null)
+            {
+                return 1;
+            }
+
             int sortOrderCompare = SortOrder.CompareTo(other.SortOrder);
 
             if (sortOrderCompare == 0)
@@ -54,6 +59,16 @@
             }
 
             return sortOrderCompare;
+        }
+
+        public int CompareTo(object other)
+        {
+            if (other is null)
+            {
+                return 1;
+            }
+
+            return CompareTo((PlaylistTrack)other);
         }
 
         internal void Load(IDictionary<ulong, Track> trackRepository)
