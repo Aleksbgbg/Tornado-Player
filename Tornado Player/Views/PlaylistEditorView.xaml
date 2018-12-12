@@ -7,75 +7,17 @@
              xmlns:ViewModels="clr-namespace:Tornado.Player.ViewModels"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance ViewModels:PlaylistEditorViewModel}">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-
-        <ComboBox ItemsSource="{Binding Playlists, Mode=OneTime}"
-                  SelectedItem="{Binding SelectedPlaylist}">
+    <DockPanel>
+        <ComboBox DockPanel.Dock="Top"
+                  ItemsSource="{Binding Items, Mode=OneTime}"
+                  SelectedItem="{Binding ActiveItem}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Playlist.Name, Mode=OneTime}"/>
+                    <TextBlock Text="{Binding DisplayName, Mode=OneTime}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <UniformGrid Grid.Row="1" Columns="2">
-            <DockPanel>
-                <TextBox DockPanel.Dock="Top"/>
-
-                <Button DockPanel.Dock="Bottom" Content="Add Selected"
-                        Caliburn:Message.Attach="AddSelectedTracks"/>
-
-                <ListBox SelectionMode="Extended"
-                         ItemsSource="{Binding TrackBucket, Mode=OneTime}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <DockPanel>
-                                <Button DockPanel.Dock="Right" Content="+"
-                                        Caliburn:Message.Attach="AddTrack($dataContext)"/>
-                                <ContentControl Caliburn:View.Model="{Binding Mode=OneTime}"/>
-                            </DockPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=OneWayToSource}"/>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-                </ListBox>
-            </DockPanel>
-
-            <DockPanel>
-                <TextBox DockPanel.Dock="Top"/>
-
-                <Button DockPanel.Dock="Bottom" Content="Remove Selected"
-                        Caliburn:Message.Attach="RemoveSelectedTracks"/>
-
-                <ListBox SelectionMode="Extended"
-                         ItemsSource="{Binding PlaylistBucket, Mode=OneTime}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <DockPanel>
-                                <Button DockPanel.Dock="Right" Content="-"
-                                        Caliburn:Message.Attach="RemoveTrack($dataContext)"/>
-                                <ContentControl Caliburn:View.Model="{Binding Mode=OneTime}"/>
-                            </DockPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=OneWayToSource}"/>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-                </ListBox>
-            </DockPanel>
-        </UniformGrid>
-    </Grid>
+        <ContentControl Caliburn:View.Model="{Binding ActiveItem}"/>
+    </DockPanel>
 </UserControl>
