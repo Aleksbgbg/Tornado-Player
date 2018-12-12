@@ -79,14 +79,14 @@
             return playlist;
         }
 
-        public void AddTrackToPlaylist(Playlist playlist, Track track)
+        public PlaylistTrack AddTrackToPlaylist(Playlist playlist, Track track)
         {
-            playlist.AddTrack(track.Id, _trackRepository);
+            return playlist.AddTrack(track.Id, _trackRepository);
         }
 
-        public void RemoveTrackFromPlaylist(Playlist playlist, Track track)
+        public PlaylistTrack RemoveTrackFromPlaylist(Playlist playlist, Track track)
         {
-            playlist.RemoveTrack(track.Id);
+            return playlist.RemoveTrack(track.Id);
         }
 
         public IEnumerable<Playlist> RetrievePlaylists()
