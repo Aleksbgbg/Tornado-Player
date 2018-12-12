@@ -10,23 +10,23 @@
     {
         private static readonly Random Random = new Random();
 
-        private readonly List<Track> _tracks;
+        private readonly List<PlaylistTrack> _tracks;
 
         [JsonConstructor]
-        internal Playlist(ulong id, string name, bool isShuffled, int selectedTrackIndex, IEnumerable<ulong> trackIds) : base(id)
+        internal Playlist(ulong id, string name, bool isShuffled, int selectedTrackIndex, IEnumerable<PlaylistTrack> tracks) : base(id)
         {
             Name = name;
             _isShuffled = isShuffled;
             SelectedTrackIndex = selectedTrackIndex;
-            _tracks = new List<Track>(trackIds.Select(trackId => new Track(trackId)));
+            _tracks = new List<PlaylistTrack>(tracks);
         }
 
-        internal Playlist(ulong id, string name, bool isShuffled, int selectedTrackIndex, IEnumerable<Track> tracks) : base(id)
+        internal Playlist(ulong id, string name, int selectedTrackIndex, IEnumerable<Track> tracks) : base(id)
         {
             Name = name;
-            _isShuffled = isShuffled;
+            _isShuffled = false;
             SelectedTrackIndex = selectedTrackIndex;
-            _tracks = new List<Track>(tracks);
+            _tracks = new List<PlaylistTrack>(tracks.Select(track => new PlaylistTrack(0, track)));
         }
 
         [JsonProperty("Name")]
@@ -59,37 +59,33 @@
         [JsonProperty("SelectedTrackIndex")]
         public int SelectedTrackIndex { get; set; }
 
-        [JsonIgnore]
-        public IReadOnlyList<Track> Tracks => _tracks;
-
-        [JsonProperty("TrackIds")]
-        private IEnumerable<ulong> TrackIds => Tracks.Select(track => track.Id);
+        [JsonProperty("Tracks")]
+        public IReadOnlyList<PlaylistTrack> Tracks => _tracks;
 
         internal void Load(Dictionary<ulong, Track> trackRepository)
         {
-            Track[] newTracks = _tracks.Select(track => trackRepository[track.Id]).ToArray();
-
-            _tracks.Clear();
-            _tracks.AddRange(newTracks);
+            foreach (PlaylistTrack track in _tracks)
+            {
+                track.Load(trackRepository);
+            }
         }
 
         internal void AddTrack(ulong id, Dictionary<ulong, Track> trackRepository)
         {
-            Track newTrack = trackRepository[id];
-
-            newTrack.SortOrder = IsShuffled ? Random.Next(0, _tracks.Count) : 0;
+            PlaylistTrack newTrack = new PlaylistTrack(sortOrder: IsShuffled ? Random.Next(0, _tracks.Count) : 0,
+                                                       track: trackRepository[id]);
 
             _tracks.Add(newTrack);
         }
 
-        internal void RemoveTrack(Track track)
+        internal void RemoveTrack(ulong id)
         {
-            _tracks.Remove(track);
+            _tracks.Remove(_tracks.Single(playlistTrack => playlistTrack.Track.Id == id));
         }
 
         private void Sort()
         {
-            foreach (Track track in Tracks)
+            foreach (PlaylistTrack track in Tracks)
             {
                 track.SortOrder = 0;
             }
