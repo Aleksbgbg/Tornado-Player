@@ -45,11 +45,18 @@
                 {
                     PlaylistBucket.AddRange(_selectedPlaylist.Tracks.Select(track => _viewModelFactory.MakeViewModel<IEditTrackViewModel>(track)));
 
-                    IReadOnlyList<Track> playlistTracks = _selectedPlaylist.Playlist.Tracks;
+                    Track[] playlistTracks = _selectedPlaylist.Playlist.Tracks.Select(playlistTrack => playlistTrack.Track).ToArray();
 
-                    TrackBucket.AddRange(_contentManagerService.RetrieveTracks()
-                                                               .Where(track => !playlistTracks.Contains(track))
-                                                               .Select(track => _viewModelFactory.MakeViewModel<IEditTrackViewModel>(_viewModelFactory.MakeViewModel<ITrackViewModel>(track))));
+                    TrackBucket.AddRange
+                    (
+                             _contentManagerService.RetrieveTracks()
+                                                   .Where(track => !playlistTracks.Contains(track))
+                                                   .Select(track => _viewModelFactory.MakeViewModel<IEditTrackViewModel>
+                                                                   (
+                                                                        _viewModelFactory.MakeViewModel<ITrackViewModel>(new PlaylistTrack(0, track))
+                                                                   )
+                                                          )
+                    );
                 }
             }
         }
