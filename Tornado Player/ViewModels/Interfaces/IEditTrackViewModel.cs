@@ -2,6 +2,8 @@
 {
     internal interface IEditTrackViewModel : IViewModelBase
     {
+        ITrackViewModel Target { get; }
+
         bool IsSelected { get; }
     }
 }
