@@ -31,7 +31,7 @@
 
             _playlists = _dataService.Load(PlaylistsFile, () => new List<Playlist>
             {
-                new Playlist(0u, "Main", false, 0, _trackRepository.Values)
+                new Playlist(0u, "Main", 0, _trackRepository.Values)
             });
 
             foreach (Playlist playlist in _playlists)
@@ -42,7 +42,7 @@
 
         public Track AddTrack(string file)
         {
-            Track track = new Track(_snowflakeService.GenerateSnowflake(), 0, file);
+            Track track = new Track(_snowflakeService.GenerateSnowflake(), file);
 
             _trackRepository[track.Id] = track;
 
@@ -72,7 +72,7 @@
 
         public Playlist AddPlaylist(string name, IEnumerable<Track> tracks)
         {
-            Playlist playlist = new Playlist(_snowflakeService.GenerateSnowflake(), name, false, 0, tracks);
+            Playlist playlist = new Playlist(_snowflakeService.GenerateSnowflake(), name, 0, tracks);
 
             _playlists.Add(playlist);
 
@@ -86,7 +86,7 @@
 
         public void RemoveTrackFromPlaylist(Playlist playlist, Track track)
         {
-            playlist.RemoveTrack(track);
+            playlist.RemoveTrack(track.Id);
         }
 
         public IEnumerable<Playlist> RetrievePlaylists()
