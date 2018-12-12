@@ -43,6 +43,8 @@
 
         public int ModifiedTrackCount => _modifiedTracks.Count;
 
+        public bool CanApply => ModifiedTrackCount > 0;
+
         public void AddSelectedTracks()
         {
             foreach (IEditTrackViewModel editTrackViewModel in TrackBucket.Where(editTrackViewModel => editTrackViewModel.IsSelected).ToArray())
@@ -75,6 +77,10 @@
             UpdateModifiedTracks(track.Target.Track.Track);
         }
 
+        public void Apply()
+        {
+        }
+
         private void UpdateModifiedTracks(Track track)
         {
             if (_modifiedTracks.Contains(track))
@@ -87,6 +93,7 @@
             }
 
             NotifyOfPropertyChange(() => ModifiedTrackCount);
+            NotifyOfPropertyChange(() => CanApply);
         }
     }
 }
