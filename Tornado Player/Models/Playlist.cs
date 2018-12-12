@@ -70,17 +70,23 @@
             }
         }
 
-        internal void AddTrack(ulong id, Dictionary<ulong, Track> trackRepository)
+        internal PlaylistTrack AddTrack(ulong id, Dictionary<ulong, Track> trackRepository)
         {
             PlaylistTrack newTrack = new PlaylistTrack(sortOrder: IsShuffled ? Random.Next(0, _tracks.Count) : 0,
                                                        track: trackRepository[id]);
 
             _tracks.Add(newTrack);
+
+            return newTrack;
         }
 
-        internal void RemoveTrack(ulong id)
+        internal PlaylistTrack RemoveTrack(ulong id)
         {
-            _tracks.Remove(_tracks.Single(playlistTrack => playlistTrack.Track.Id == id));
+            PlaylistTrack track = _tracks.Single(playlistTrack => playlistTrack.Track.Id == id);
+
+            _tracks.Remove(track);
+
+            return track;
         }
 
         private void Sort()
