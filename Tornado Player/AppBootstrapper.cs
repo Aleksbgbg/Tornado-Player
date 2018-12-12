@@ -42,6 +42,7 @@
             viewModelFactory.Register<IPlaylistViewModel, PlaylistViewModel>();
             viewModelFactory.Register<ITrackViewModel, TrackViewModel>();
             viewModelFactory.Register<IEditTrackViewModel, EditTrackViewModel>();
+            viewModelFactory.Register<IEditPlaylistViewModel, EditPlaylistViewModel>();
         }
 
         protected override void OnStartupAfterDisplayRootView(object sender, StartupEventArgs e)
