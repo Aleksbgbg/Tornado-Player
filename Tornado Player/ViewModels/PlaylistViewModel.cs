@@ -24,7 +24,7 @@
             Items.AddRange(playlist.Tracks.Select(track => viewModelFactory.MakeViewModel<ITrackViewModel>(track)));
             ActivateItem(Items[playlist.SelectedTrackIndex]);
 
-            _tracksView.SortDescriptions.Add(new SortDescription(string.Join(".", nameof(ITrackViewModel.Track), nameof(ITrackViewModel.Track.SortOrder)), ListSortDirection.Ascending));
+            _tracksView.SortDescriptions.Add(new SortDescription(nameof(ITrackViewModel.Track), ListSortDirection.Ascending));
 
             eventAggregator.Subscribe(this);
 
@@ -86,7 +86,7 @@
                 return;
             }
 
-            _tracksView.Filter = item => ((ITrackViewModel)item).Track.MatchesSearch(searchText);
+            _tracksView.Filter = item => ((ITrackViewModel)item).Track.Track.MatchesSearch(searchText);
         }
 
         protected override void OnActivationProcessed(ITrackViewModel item, bool success)
