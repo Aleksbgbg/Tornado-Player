@@ -12,6 +12,10 @@
 
         IEnumerable<ITrackViewModel> Tracks { get; }
 
+        void Add(IEnumerable<Track> tracks);
+
+        void Remove(IEnumerable<Track> tracks);
+
         void SelectPrevious();
 
         void SelectNext();

@@ -9,14 +9,21 @@
     using Caliburn.Micro.Wrapper;
 
     using Tornado.Player.Models;
+    using Tornado.Player.Services.Interfaces;
     using Tornado.Player.ViewModels.Interfaces;
 
     internal sealed class PlaylistViewModel : Conductor<ITrackViewModel>.Collection.OneActive, IPlaylistViewModel, IHandle<Shortcut>
     {
+        private readonly IViewModelFactory _viewModelFactory;
+
+        private readonly IContentManagerService _contentManagerService;
+
         private readonly ICollectionView _tracksView;
 
-        public PlaylistViewModel(IViewModelFactory viewModelFactory, IEventAggregator eventAggregator, Playlist playlist)
+        public PlaylistViewModel(IViewModelFactory viewModelFactory, IEventAggregator eventAggregator, IContentManagerService contentManagerService, Playlist playlist)
         {
+            _viewModelFactory = viewModelFactory;
+            _contentManagerService = contentManagerService;
             _tracksView = CollectionViewSource.GetDefaultView(Items);
 
             DisplayName = playlist.Name;
@@ -59,6 +66,24 @@
         }
 
         public IEnumerable<ITrackViewModel> Tracks => Items;
+
+        public void Add(IEnumerable<Track> tracks)
+        {
+            foreach (Track track in tracks)
+            {
+                PlaylistTrack newTrack = _contentManagerService.AddTrackToPlaylist(Playlist, track);
+                Items.Add(_viewModelFactory.MakeViewModel<ITrackViewModel>(newTrack));
+            }
+        }
+
+        public void Remove(IEnumerable<Track> tracks)
+        {
+            foreach (Track track in tracks)
+            {
+                PlaylistTrack oldTrack = _contentManagerService.RemoveTrackFromPlaylist(Playlist, track);
+                Items.Remove(Items.Single(item => item.Track.Track.Equals(oldTrack.Track)));
+            }
+        }
 
         public void SelectPrevious()
         {
