@@ -14,7 +14,9 @@
     {
         private readonly IPlaylistViewModel _playlistViewModel;
 
-        private readonly HashSet<Track> _modifiedTracks = new HashSet<Track>();
+        private readonly HashSet<Track> _addedTracks = new HashSet<Track>();
+
+        private readonly HashSet<Track> _removedTracks = new HashSet<Track>();
 
         public EditPlaylistViewModel(IViewModelFactory viewModelFactory, IContentManagerService contentManagerService, IPlaylistViewModel playlistViewModel)
         {
@@ -41,7 +43,7 @@
 
         public IObservableCollection<IEditTrackViewModel> PlaylistBucket { get; } = new BindableCollection<IEditTrackViewModel>();
 
-        public int ModifiedTrackCount => _modifiedTracks.Count;
+        public int ModifiedTrackCount => _addedTracks.Count + _removedTracks.Count;
 
         public bool CanApply => ModifiedTrackCount > 0;
 
@@ -66,7 +68,19 @@
             TrackBucket.Remove(track);
             PlaylistBucket.Add(track);
 
-            UpdateModifiedTracks(track.Target.Track.Track);
+            Track addedTrack = track.Target.Track.Track;
+
+            if (_removedTracks.Contains(addedTrack))
+            {
+                _removedTracks.Remove(addedTrack);
+            }
+            else
+            {
+                _addedTracks.Add(addedTrack);
+            }
+
+            NotifyOfPropertyChange(() => ModifiedTrackCount);
+            NotifyOfPropertyChange(() => CanApply);
         }
 
         public void RemoveTrack(IEditTrackViewModel track)
@@ -74,23 +88,28 @@
             PlaylistBucket.Remove(track);
             TrackBucket.Add(track);
 
-            UpdateModifiedTracks(track.Target.Track.Track);
+            Track removedTrack = track.Target.Track.Track;
+
+            if (_addedTracks.Contains(removedTrack))
+            {
+                _addedTracks.Remove(removedTrack);
+            }
+            else
+            {
+                _removedTracks.Add(removedTrack);
+            }
+
+            NotifyOfPropertyChange(() => ModifiedTrackCount);
+            NotifyOfPropertyChange(() => CanApply);
         }
 
         public void Apply()
         {
-        }
+            _playlistViewModel.Add(_addedTracks);
+            _playlistViewModel.Remove(_removedTracks);
 
-        private void UpdateModifiedTracks(Track track)
-        {
-            if (_modifiedTracks.Contains(track))
-            {
-                _modifiedTracks.Remove(track);
-            }
-            else
-            {
-                _modifiedTracks.Add(track);
-            }
+            _addedTracks.Clear();
+            _removedTracks.Clear();
 
             NotifyOfPropertyChange(() => ModifiedTrackCount);
             NotifyOfPropertyChange(() => CanApply);
