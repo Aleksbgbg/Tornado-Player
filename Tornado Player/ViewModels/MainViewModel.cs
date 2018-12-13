@@ -40,21 +40,19 @@
 
         public void EditPlaylists()
         {
-            _playlistEditorViewModel.AttemptingDeactivation += PlaylistEditorViewModelAttemptingDeactivation;
-
-            SwapMainContent(_playlistEditorViewModel);
+            if (MainContent == _playlistCollectionViewModel)
+            {
+                SwapMainContent(_playlistEditorViewModel);
+            }
+            else
+            {
+                SwapMainContent(_playlistCollectionViewModel, closeOld: true);
+            }
         }
 
-        private void PlaylistEditorViewModelAttemptingDeactivation(object sender, DeactivationEventArgs e)
+        private void SwapMainContent(IViewModelBase newContent, bool closeOld = default)
         {
-            MainContent.AttemptingDeactivation -= PlaylistEditorViewModelAttemptingDeactivation;
-
-            SwapMainContent(_playlistCollectionViewModel);
-        }
-
-        private void SwapMainContent(IViewModelBase newContent)
-        {
-            DeactivateItem(MainContent, close: false);
+            DeactivateItem(MainContent, closeOld);
             ActivateItem(newContent);
 
             MainContent = newContent;
