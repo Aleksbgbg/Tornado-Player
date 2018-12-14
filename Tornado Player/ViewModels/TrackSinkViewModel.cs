@@ -39,7 +39,11 @@
 
                 Track track = trackViewModel.Track.Track;
 
-                _addedTracks.Add(track);
+                if (!_releasedTracks.Contains(track))
+                {
+                    _addedTracks.Add(track);
+                }
+
                 _releasedTracks.Remove(track);
             }
         }
