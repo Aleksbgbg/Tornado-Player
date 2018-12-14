@@ -118,9 +118,7 @@
     <Compile Include="Services\WebService.cs" />
     <Compile Include="Utilities\VirtualKey.cs" />
     <Compile Include="ViewModels\EditPlaylistViewModel.cs" />
-    <Compile Include="ViewModels\EditTrackViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IEditPlaylistViewModel.cs" />
-    <Compile Include="ViewModels\Interfaces\IEditTrackViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IPlaybarViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IPlaylistCollectionViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IPlaylistEditorViewModel.cs" />
@@ -131,9 +129,6 @@
     <Compile Include="ViewModels\TrackSinkViewModel.cs" />
     <Compile Include="Views\EditPlaylistView.xaml.cs">
       <DependentUpon>EditPlaylistView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EditTrackView.xaml.cs">
-      <DependentUpon>EditTrackView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PlaybarView.xaml.cs">
       <DependentUpon>PlaybarView.xaml</DependentUpon>
@@ -153,10 +148,6 @@
       <DependentUpon>TrackView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\EditPlaylistView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\EditTrackView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
