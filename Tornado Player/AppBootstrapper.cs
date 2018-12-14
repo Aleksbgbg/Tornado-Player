@@ -37,10 +37,12 @@
             Container.Singleton<IPlaylistCollectionViewModel, PlaylistCollectionViewModel>();
             Container.Singleton<IPlaybarViewModel, PlaybarViewModel>();
 
-            Container.Singleton<IPlaylistEditorViewModel, PlaylistEditorViewModel>();
+            Container.PerRequest<IPlaylistEditorViewModel, PlaylistEditorViewModel>();
 
             viewModelFactory.Register<IPlaylistViewModel, PlaylistViewModel>();
             viewModelFactory.Register<ITrackViewModel, TrackViewModel>();
+
+            viewModelFactory.Register<IPlaylistEditorViewModel, PlaylistEditorViewModel>();
             viewModelFactory.Register<IEditPlaylistViewModel, EditPlaylistViewModel>();
             viewModelFactory.Register<ITrackSinkViewModel, TrackSinkViewModel>();
         }
