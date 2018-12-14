@@ -117,17 +117,17 @@
     <Compile Include="Services\SnowflakeService.cs" />
     <Compile Include="Services\WebService.cs" />
     <Compile Include="Utilities\VirtualKey.cs" />
-    <Compile Include="ViewModels\EditPlaylistViewModel.cs" />
-    <Compile Include="ViewModels\Interfaces\IEditPlaylistViewModel.cs" />
+    <Compile Include="ViewModels\Editing\EditPlaylistViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\Editing\IEditPlaylistViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IPlaybarViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IPlaylistCollectionViewModel.cs" />
-    <Compile Include="ViewModels\Interfaces\IPlaylistEditorViewModel.cs" />
-    <Compile Include="ViewModels\Interfaces\ITrackSinkViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\Editing\IPlaylistEditorViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\Editing\ITrackSinkViewModel.cs" />
     <Compile Include="ViewModels\PlaybarViewModel.cs" />
     <Compile Include="ViewModels\PlaylistCollectionViewModel.cs" />
-    <Compile Include="ViewModels\PlaylistEditorViewModel.cs" />
-    <Compile Include="ViewModels\TrackSinkViewModel.cs" />
-    <Compile Include="Views\EditPlaylistView.xaml.cs">
+    <Compile Include="ViewModels\Editing\PlaylistEditorViewModel.cs" />
+    <Compile Include="ViewModels\Editing\TrackSinkViewModel.cs" />
+    <Compile Include="Views\Editing\EditPlaylistView.xaml.cs">
       <DependentUpon>EditPlaylistView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PlaybarView.xaml.cs">
@@ -137,17 +137,17 @@
     <Compile Include="Views\PlaylistCollectionView.xaml.cs">
       <DependentUpon>PlaylistCollectionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PlaylistEditorView.xaml.cs">
+    <Compile Include="Views\Editing\PlaylistEditorView.xaml.cs">
       <DependentUpon>PlaylistEditorView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\TrackSinkView.xaml.cs">
+    <Compile Include="Views\Editing\TrackSinkView.xaml.cs">
       <DependentUpon>TrackSinkView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TrackView.xaml.cs">
       <DependentUpon>TrackView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\EditPlaylistView.xaml">
+    <Page Include="Views\Editing\EditPlaylistView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -163,7 +163,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\PlaylistEditorView.xaml">
+    <Page Include="Views\Editing\PlaylistEditorView.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
@@ -237,7 +237,7 @@
     <Compile Include="AppBootstrapper.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\TrackSinkView.xaml">
+    <Page Include="Views\Editing\TrackSinkView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

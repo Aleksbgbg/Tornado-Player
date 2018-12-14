@@ -1,4 +1,4 @@
-﻿namespace Tornado.Player.ViewModels
+﻿namespace Tornado.Player.ViewModels.Editing
 {
     using System;
     using System.Collections.Generic;
@@ -9,6 +9,7 @@
     using Tornado.Player.EventArgs;
     using Tornado.Player.Models;
     using Tornado.Player.ViewModels.Interfaces;
+    using Tornado.Player.ViewModels.Interfaces.Editing;
 
     internal class TrackSinkViewModel : ViewModelBase, ITrackSinkViewModel
     {

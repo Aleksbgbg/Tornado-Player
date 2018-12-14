@@ -1,4 +1,4 @@
-﻿namespace Tornado.Player.ViewModels
+﻿namespace Tornado.Player.ViewModels.Editing
 {
     using System;
     using System.Collections.Generic;
@@ -10,6 +10,7 @@
     using Tornado.Player.Models;
     using Tornado.Player.Services.Interfaces;
     using Tornado.Player.ViewModels.Interfaces;
+    using Tornado.Player.ViewModels.Interfaces.Editing;
 
     internal sealed class EditPlaylistViewModel : ViewModelBase, IEditPlaylistViewModel
     {

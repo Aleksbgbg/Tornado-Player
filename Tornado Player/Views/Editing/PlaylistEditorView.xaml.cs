@@ -1,4 +1,4 @@
-﻿namespace Tornado.Player.Views
+﻿namespace Tornado.Player.Views.Editing
 {
     public partial class PlaylistEditorView
     {

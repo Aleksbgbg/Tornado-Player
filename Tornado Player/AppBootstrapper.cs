@@ -8,7 +8,9 @@
     using Tornado.Player.Services.Interfaces;
     using Tornado.Player.Utilities;
     using Tornado.Player.ViewModels;
+    using Tornado.Player.ViewModels.Editing;
     using Tornado.Player.ViewModels.Interfaces;
+    using Tornado.Player.ViewModels.Interfaces.Editing;
 
     using CM = Caliburn.Micro; // Required due to extension method conflict
 

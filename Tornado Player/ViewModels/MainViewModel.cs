@@ -4,6 +4,7 @@
     using Caliburn.Micro.Wrapper;
 
     using Tornado.Player.ViewModels.Interfaces;
+    using Tornado.Player.ViewModels.Interfaces.Editing;
 
     internal sealed class MainViewModel : Conductor<IViewModelBase>.Collection.AllActive, IMainViewModel
     {

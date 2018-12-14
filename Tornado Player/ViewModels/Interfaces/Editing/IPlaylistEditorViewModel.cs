@@ -1,4 +1,4 @@
-﻿namespace Tornado.Player.ViewModels.Interfaces
+﻿namespace Tornado.Player.ViewModels.Interfaces.Editing
 {
     using Caliburn.Micro;
 

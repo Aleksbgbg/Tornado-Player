@@ -1,11 +1,11 @@
-﻿<UserControl x:Class="Tornado.Player.Views.TrackSinkView"
+﻿<UserControl x:Class="Tornado.Player.Views.Editing.TrackSinkView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:Caliburn="http://www.caliburnproject.org"
              xmlns:Helpers="clr-namespace:Tornado.Player.Helpers"
-             xmlns:ViewModels="clr-namespace:Tornado.Player.ViewModels"
+             xmlns:ViewModels="clr-namespace:Tornado.Player.ViewModels.Editing"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance ViewModels:TrackSinkViewModel}">
     <DockPanel>
