@@ -92,6 +92,7 @@
     <Compile Include="Converters\VolumeToImageConverter.cs" />
     <Compile Include="EventArgs\HotKeyActuatedEventArgs.cs" />
     <Compile Include="EventArgs\ProgressUpdatedEventArgs.cs" />
+    <Compile Include="EventArgs\TracksReleasedEventArgs.cs" />
     <Compile Include="Helpers\ImageContentHelper.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />
     <Compile Include="Helpers\RoutedEventTrigger.cs" />
@@ -123,9 +124,11 @@
     <Compile Include="ViewModels\Interfaces\IPlaybarViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IPlaylistCollectionViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IPlaylistEditorViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\ITrackSinkViewModel.cs" />
     <Compile Include="ViewModels\PlaybarViewModel.cs" />
     <Compile Include="ViewModels\PlaylistCollectionViewModel.cs" />
     <Compile Include="ViewModels\PlaylistEditorViewModel.cs" />
+    <Compile Include="ViewModels\TrackSinkViewModel.cs" />
     <Compile Include="Views\EditPlaylistView.xaml.cs">
       <DependentUpon>EditPlaylistView.xaml</DependentUpon>
     </Compile>
@@ -142,6 +145,9 @@
     <Compile Include="Views\PlaylistEditorView.xaml.cs">
       <DependentUpon>PlaylistEditorView.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\TrackSinkView.xaml.cs">
+      <DependentUpon>TrackSinkView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TrackView.xaml.cs">
       <DependentUpon>TrackView.xaml</DependentUpon>
@@ -240,6 +246,10 @@
     <Compile Include="AppBootstrapper.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\TrackSinkView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\TrackView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
