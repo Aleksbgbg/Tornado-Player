@@ -18,9 +18,11 @@
             Track = track;
         }
 
+        public bool IsPlaying => _musicPlayerService.Track == Track.Track;
+
         public PlaylistTrack Track { get; }
 
-        protected override void OnActivate()
+        public void Play()
         {
             _musicPlayerService.SelectTrack(Track.Track);
         }

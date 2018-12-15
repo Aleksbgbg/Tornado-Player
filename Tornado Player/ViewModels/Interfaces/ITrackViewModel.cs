@@ -4,6 +4,10 @@
 
     internal interface ITrackViewModel : IViewModelBase
     {
+        bool IsPlaying { get; }
+
         PlaylistTrack Track { get; }
+
+        void Play();
     }
 }
