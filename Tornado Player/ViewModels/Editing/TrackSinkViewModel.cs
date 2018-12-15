@@ -45,7 +45,7 @@
             {
                 TrackSink.Add(trackViewModel);
 
-                Track track = trackViewModel.Track.Track;
+                Track track = trackViewModel.PlaylistTrack.Track;
 
                 if (!_releasedTracks.Contains(track))
                 {
@@ -83,7 +83,7 @@
         {
             TrackSink.Remove(trackViewModel);
 
-            Track track = trackViewModel.Track.Track;
+            Track track = trackViewModel.PlaylistTrack.Track;
 
             if (!_addedTracks.Contains(track))
             {

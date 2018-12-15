@@ -30,7 +30,7 @@
             Playlist = playlist;
             Items.AddRange(playlist.Tracks.Select(track => viewModelFactory.MakeViewModel<ITrackViewModel>(track)));
 
-            _tracksView.SortDescriptions.Add(new SortDescription(nameof(ITrackViewModel.Track), ListSortDirection.Ascending));
+            _tracksView.SortDescriptions.Add(new SortDescription(nameof(ITrackViewModel.PlaylistTrack), ListSortDirection.Ascending));
 
             eventAggregator.Subscribe(this);
 
@@ -80,7 +80,7 @@
             foreach (Track track in tracks)
             {
                 PlaylistTrack oldTrack = _contentManagerService.RemoveTrackFromPlaylist(Playlist, track);
-                Items.Remove(Items.Single(item => item.Track.Track == oldTrack.Track));
+                Items.Remove(Items.Single(item => item.PlaylistTrack.Track == oldTrack.Track));
             }
         }
 
@@ -118,7 +118,7 @@
                 return;
             }
 
-            _tracksView.Filter = item => ((ITrackViewModel)item).Track.Track.MatchesSearch(searchText);
+            _tracksView.Filter = item => ((ITrackViewModel)item).PlaylistTrack.Track.MatchesSearch(searchText);
         }
 
         protected override void OnActivationProcessed(ITrackViewModel item, bool success)

@@ -6,7 +6,7 @@
     {
         bool IsPlaying { get; }
 
-        PlaylistTrack Track { get; }
+        PlaylistTrack PlaylistTrack { get; }
 
         void Play();
     }
