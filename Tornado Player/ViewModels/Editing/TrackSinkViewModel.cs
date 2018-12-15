@@ -21,6 +21,8 @@
         {
             TrackSink.AddRange(tracks);
             ReleaseImage = releaseImage;
+
+            SelectedTracks.CollectionChanged += (sender, e) => NotifyOfPropertyChange(() => CanReleaseSelectedTracks);
         }
 
         public event EventHandler<TracksReleasedEventArgs> TracksReleased;
@@ -34,6 +36,8 @@
         public IEnumerable<Track> ReleasedTracks => _releasedTracks;
 
         public int ReleasedTracksCount => _releasedTracks.Count;
+
+        public bool CanReleaseSelectedTracks => SelectedTracks.Count > 0;
 
         public void AddTracks(IEnumerable<ITrackViewModel> tracks)
         {
@@ -65,11 +69,6 @@
 
         public void ReleaseSelectedTracks()
         {
-            if (SelectedTracks.Count == 0)
-            {
-                return;
-            }
-
             ITrackViewModel[] releasedTracks = SelectedTracks.ToArray();
 
             foreach (ITrackViewModel trackViewModel in releasedTracks)
