@@ -17,9 +17,10 @@
 
         private readonly HashSet<Track> _releasedTracks = new HashSet<Track>();
 
-        public TrackSinkViewModel(IEnumerable<ITrackViewModel> tracks)
+        public TrackSinkViewModel(IEnumerable<ITrackViewModel> tracks, string releaseImage)
         {
             TrackSink.AddRange(tracks);
+            ReleaseImage = releaseImage;
         }
 
         public event EventHandler<TracksReleasedEventArgs> TracksReleased;
@@ -27,6 +28,8 @@
         public IObservableCollection<ITrackViewModel> TrackSink { get; } = new BindableCollection<ITrackViewModel>();
 
         public IObservableCollection<ITrackViewModel> SelectedTracks { get; } = new BindableCollection<ITrackViewModel>();
+
+        public string ReleaseImage { get; }
 
         public IEnumerable<Track> ReleasedTracks => _releasedTracks;
 

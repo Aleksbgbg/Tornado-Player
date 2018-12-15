@@ -4,6 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:Caliburn="http://www.caliburnproject.org"
+             xmlns:Converters="clr-namespace:Tornado.Player.Converters"
              xmlns:Helpers="clr-namespace:Tornado.Player.Helpers"
              xmlns:ViewModels="clr-namespace:Tornado.Player.ViewModels.Editing"
              mc:Ignorable="d"
@@ -11,8 +12,14 @@
     <DockPanel>
         <TextBox DockPanel.Dock="Top"/>
 
-        <Button DockPanel.Dock="Bottom" Content="Release Selected"
-                Caliburn:Message.Attach="ReleaseSelectedTracks"/>
+        <Button DockPanel.Dock="Bottom"
+                HorizontalAlignment="Center"
+                Helpers:ImageContentHelper.Image="{Binding ReleaseImage, Mode=OneTime,
+            Converter={x:Static Converters:ResourceConverter.Default}}"
+                Helpers:ImageContentHelper.Content="Selected Tracks"
+                Caliburn:Message.Attach="ReleaseSelectedTracks"
+                Padding="5, 0"
+                Margin="5"/>
 
         <ListBox SelectionMode="Extended"
                  ItemsSource="{Binding TrackSink, Mode=OneTime}"
@@ -20,8 +27,15 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DockPanel>
-                        <Button DockPanel.Dock="Right" Content="-"
-                                Caliburn:Message.Attach="ReleaseTrack($dataContext)"/>
+                        <Button DockPanel.Dock="Right"
+                                Caliburn:Message.Attach="ReleaseTrack($dataContext)">
+                            <Image Source="{Binding DataContext.ReleaseImage,
+                            Mode=OneTime,
+                            RelativeSource={RelativeSource FindAncestor, AncestorType=ListBox},
+                            Converter={x:Static Converters:ResourceConverter.Default}}"
+                                   Height="15"
+                                   Width="15"/>
+                        </Button>
                         <ContentControl Caliburn:View.Model="{Binding Mode=OneTime}"/>
                     </DockPanel>
                 </DataTemplate>
