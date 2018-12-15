@@ -29,7 +29,6 @@
             DisplayName = playlist.Name;
             Playlist = playlist;
             Items.AddRange(playlist.Tracks.Select(track => viewModelFactory.MakeViewModel<ITrackViewModel>(track)));
-            ActivateItem(Items[playlist.SelectedTrackIndex]);
 
             _tracksView.SortDescriptions.Add(new SortDescription(nameof(ITrackViewModel.Track), ListSortDirection.Ascending));
 
@@ -81,7 +80,15 @@
             foreach (Track track in tracks)
             {
                 PlaylistTrack oldTrack = _contentManagerService.RemoveTrackFromPlaylist(Playlist, track);
-                Items.Remove(Items.Single(item => item.Track.Track.Equals(oldTrack.Track)));
+                Items.Remove(Items.Single(item => item.Track.Track == oldTrack.Track));
+            }
+        }
+
+        public void Play()
+        {
+            if (!Items[Playlist.SelectedTrackIndex].IsPlaying)
+            {
+                SelectTrack(Playlist.SelectedTrackIndex);
             }
         }
 
@@ -118,7 +125,10 @@
         {
             if (success && item != null)
             {
-                Playlist.SelectedTrackIndex = Items.IndexOf(item);
+                if (!item.IsPlaying)
+                {
+                    item.Play();
+                }
             }
         }
 
@@ -133,7 +143,11 @@
                 index = index % Items.Count;
             }
 
-            ActivateItem(Items[index]);
+            ITrackViewModel trackViewModel = Items[index];
+
+            ActivateItem(trackViewModel);
+            trackViewModel.Play();
+            Playlist.SelectedTrackIndex = index;
         }
     }
 }

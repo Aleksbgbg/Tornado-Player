@@ -16,6 +16,8 @@
 
         void Remove(IEnumerable<Track> tracks);
 
+        void Play();
+
         void SelectPrevious();
 
         void SelectNext();
