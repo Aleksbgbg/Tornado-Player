@@ -20,6 +20,8 @@
 
             Items.AddRange(contentManagerService.RetrievePlaylists()
                                                 .Select(playlist => viewModelFactory.MakeViewModel<IPlaylistViewModel>(playlist)));
+
+            ActivateItem(Items[0]);
         }
 
         public AppLayout AppLayout { get; }
@@ -31,12 +33,8 @@
             if (success && item != null)
             {
                 _eventAggregator.BeginPublishOnUIThread(item);
+                item.Play();
             }
-        }
-
-        protected override void OnInitialize()
-        {
-            ActivateItem(Items[0]);
         }
     }
 }
