@@ -10,7 +10,8 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance ViewModels:TrackSinkViewModel}">
     <DockPanel>
-        <TextBox DockPanel.Dock="Top"/>
+        <TextBox DockPanel.Dock="Top"
+                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Button DockPanel.Dock="Bottom"
                 HorizontalAlignment="Center"

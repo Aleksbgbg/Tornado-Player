@@ -2,7 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
+    using System.Windows.Data;
 
     using Caliburn.Micro;
 
@@ -13,6 +15,8 @@
 
     internal class TrackSinkViewModel : ViewModelBase, ITrackSinkViewModel
     {
+        private readonly ICollectionView _trackSinkView;
+
         private readonly HashSet<Track> _addedTracks = new HashSet<Track>();
 
         private readonly HashSet<Track> _releasedTracks = new HashSet<Track>();
@@ -23,6 +27,10 @@
             ReleaseImage = releaseImage;
 
             SelectedTracks.CollectionChanged += (sender, e) => NotifyOfPropertyChange(() => CanReleaseSelectedTracks);
+
+            _trackSinkView = CollectionViewSource.GetDefaultView(TrackSink);
+
+            _trackSinkView.SortDescriptions.Add(new SortDescription(string.Join(".", nameof(ITrackViewModel.PlaylistTrack), nameof(ITrackViewModel.PlaylistTrack.Track)), ListSortDirection.Ascending));
         }
 
         public event EventHandler<TracksReleasedEventArgs> TracksReleased;
@@ -38,6 +46,29 @@
         public int ReleasedTracksCount => _releasedTracks.Count;
 
         public bool CanReleaseSelectedTracks => SelectedTracks.Count > 0;
+
+        private string _searchText;
+        public string SearchText
+        {
+            get => _searchText;
+
+            set
+            {
+                if (_searchText == value) return;
+
+                _searchText = value;
+                NotifyOfPropertyChange(() => SearchText);
+
+                if (string.IsNullOrWhiteSpace(_searchText))
+                {
+                    _trackSinkView.Filter = null;
+                }
+                else
+                {
+                    _trackSinkView.Filter = item => ((ITrackViewModel)item).PlaylistTrack.Track.MatchesSearch(_searchText);
+                }
+            }
+        }
 
         public void AddTracks(IEnumerable<ITrackViewModel> tracks)
         {
