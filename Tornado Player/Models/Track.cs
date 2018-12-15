@@ -19,6 +19,21 @@
         [JsonIgnore]
         public string Name => Path.GetFileNameWithoutExtension(Filepath);
 
+        public static bool operator ==(Track left, Track right)
+        {
+            if (left is null)
+            {
+                return right is null;
+            }
+
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(Track left, Track right)
+        {
+            return !(left == right);
+        }
+
         public int CompareTo(Track other)
         {
             return string.Compare(Name, other.Name, StringComparison.Ordinal);
