@@ -25,8 +25,9 @@
 
             TrackSource = viewModelFactory.MakeViewModel<ITrackSinkViewModel>(contentManagerService.RetrieveTracks()
                                                                                                    .Where(track => !playlistTracks.Contains(track))
-                                                                                                   .Select(track => viewModelFactory.MakeViewModel<ITrackViewModel>(new PlaylistTrack(0, track))));
-            PlaylistTarget = viewModelFactory.MakeViewModel<ITrackSinkViewModel>(playlistViewModel.Tracks);
+                                                                                                   .Select(track => viewModelFactory.MakeViewModel<ITrackViewModel>(new PlaylistTrack(0, track))),
+                                                                              "Plus");
+            PlaylistTarget = viewModelFactory.MakeViewModel<ITrackSinkViewModel>(playlistViewModel.Tracks, "Minus");
 
             EventHandler<TracksReleasedEventArgs> MakeAddTracksEventHandler(ITrackSinkViewModel target)
             {
