@@ -31,5 +31,10 @@
         {
             _webService.YouTubeTrackQueryInBrowser(PlaylistTrack.Track.Name);
         }
+
+        public override object GetView(object context = default)
+        {
+            return null;
+        }
     }
 }
