@@ -11,6 +11,8 @@
 
         event EventHandler Paused;
 
+        event EventHandler MediaOpened;
+
         event EventHandler MediaEnded;
 
         event EventHandler<ProgressUpdatedEventArgs> ProgressUpdated;

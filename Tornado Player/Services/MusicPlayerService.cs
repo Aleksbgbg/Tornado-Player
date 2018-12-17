@@ -30,6 +30,13 @@
             remove => _tornadoPlayer.Paused -= value;
         }
 
+        public event EventHandler MediaOpened
+        {
+            add => _tornadoPlayer.MediaOpened += value;
+
+            remove => _tornadoPlayer.MediaOpened -= value;
+        }
+
         public event EventHandler MediaEnded
         {
             add => _tornadoPlayer.MediaEnded += value;
