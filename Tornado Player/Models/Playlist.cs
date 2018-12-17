@@ -13,11 +13,12 @@
         private readonly List<PlaylistTrack> _tracks;
 
         [JsonConstructor]
-        internal Playlist(ulong id, string name, bool isShuffled, int selectedTrackIndex, IEnumerable<PlaylistTrack> tracks) : base(id)
+        internal Playlist(ulong id, string name, bool isShuffled, int selectedTrackIndex, TimeSpan trackProgress, IEnumerable<PlaylistTrack> tracks) : base(id)
         {
             Name = name;
             _isShuffled = isShuffled;
             SelectedTrackIndex = selectedTrackIndex;
+            TrackProgress = trackProgress;
             _tracks = new List<PlaylistTrack>(tracks);
         }
 
@@ -58,6 +59,9 @@
 
         [JsonProperty("SelectedTrackIndex")]
         public int SelectedTrackIndex { get; set; }
+
+        [JsonProperty("TrackProgress")]
+        public TimeSpan TrackProgress { get; set; }
 
         [JsonProperty("Tracks")]
         public IReadOnlyList<PlaylistTrack> Tracks => _tracks;
