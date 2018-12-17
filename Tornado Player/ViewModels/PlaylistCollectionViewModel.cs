@@ -11,17 +11,23 @@
 
     internal sealed class PlaylistCollectionViewModel : Conductor<IPlaylistViewModel>.Collection.OneActive, IPlaylistCollectionViewModel
     {
+        private const string ActivePlaylistDataName = "ActivePlaylist";
+
         private readonly IEventAggregator _eventAggregator;
 
-        public PlaylistCollectionViewModel(IViewModelFactory viewModelFactory, IEventAggregator eventAggregator, IContentManagerService contentManagerService, ILayoutService layoutService)
+        private readonly IDataService _dataService;
+
+        public PlaylistCollectionViewModel(IViewModelFactory viewModelFactory, IEventAggregator eventAggregator, IContentManagerService contentManagerService, IDataService dataService, ILayoutService layoutService)
         {
             _eventAggregator = eventAggregator;
+            _dataService = dataService;
             AppLayout = layoutService.AppLayout;
 
             Items.AddRange(contentManagerService.RetrievePlaylists()
                                                 .Select(playlist => viewModelFactory.MakeViewModel<IPlaylistViewModel>(playlist)));
 
-            ActivateItem(Items[0]);
+            int activePlaylist = dataService.Load<int>(ActivePlaylistDataName);
+            ActivateItem(Items[activePlaylist]);
         }
 
         public AppLayout AppLayout { get; }
@@ -34,6 +40,7 @@
             {
                 _eventAggregator.BeginPublishOnUIThread(item);
                 item.Play();
+                _dataService.Save(ActivePlaylistDataName, Items.IndexOf(item));
             }
         }
     }
