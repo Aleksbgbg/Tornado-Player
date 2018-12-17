@@ -13,6 +13,11 @@
         <TextBox DockPanel.Dock="Top"
                  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
 
+        <TextBlock DockPanel.Dock="Bottom"
+                   HorizontalAlignment="Center">
+            <Run Text="{Binding SelectedTracks.Count, Mode=OneWay}"/> selected
+        </TextBlock>
+
         <Button DockPanel.Dock="Bottom"
                 HorizontalAlignment="Center"
                 Helpers:ImageContentHelper.Image="{Binding ReleaseImage, Mode=OneTime,
