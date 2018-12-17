@@ -58,6 +58,7 @@
         {
             Container.GetInstance<IContentManagerService>().SaveContent();
             Container.GetInstance<ILayoutService>().SaveLayout();
+            Container.GetInstance<IPlaybarViewModel>().SavePlaybarState();
         }
     }
 }

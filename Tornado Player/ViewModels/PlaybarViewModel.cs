@@ -4,17 +4,23 @@
 
     using Caliburn.Micro;
 
+    using Tornado.Player.Models;
     using Tornado.Player.Services.Interfaces;
     using Tornado.Player.ViewModels.Interfaces;
 
     internal class PlaybarViewModel : ViewModelBase, IPlaybarViewModel, IHandle<IPlaylistViewModel>
     {
+        private const string PlaybarStateDataName = "Playbar State";
+
+        private readonly IDataService _dataService;
+
         private readonly IMusicPlayerService _musicPlayerService;
 
         private bool _syncPlayer = true;
 
-        public PlaybarViewModel(IEventAggregator eventAggregator, IMusicPlayerService musicPlayerService)
+        public PlaybarViewModel(IEventAggregator eventAggregator, IDataService dataService, IMusicPlayerService musicPlayerService)
         {
+            _dataService = dataService;
             _musicPlayerService = musicPlayerService;
 
             eventAggregator.Subscribe(this);
@@ -46,6 +52,10 @@
                     ActivePlaylist.SelectNext();
                 }
             };
+
+            PlaybarState playbarState = dataService.Load(PlaybarStateDataName, () => new PlaybarState(0.5, false));
+            Volume = playbarState.Volume;
+            Loop = playbarState.Loop;
         }
 
         private IPlaylistViewModel _activePlaylist;
@@ -109,6 +119,11 @@
         }
 
         public bool Playing => _musicPlayerService.IsPlaying;
+
+        public void SavePlaybarState()
+        {
+            _dataService.Save(PlaybarStateDataName, new PlaybarState(Volume, Loop));
+        }
 
         public void Handle(IPlaylistViewModel message)
         {
