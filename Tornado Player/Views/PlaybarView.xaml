@@ -10,7 +10,13 @@
              xmlns:ViewModels="clr-namespace:Tornado.Player.ViewModels"
              mc:Ignorable="d"
 			 d:DataContext="{d:DesignInstance ViewModels:PlaybarViewModel}">
-    <StackPanel>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="5"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -18,27 +24,27 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Height="30" DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                <Popup AllowsTransparency="True" IsOpen="{Binding IsChecked, ElementName=VolumeButton}"
-                       Placement="Left" PlacementTarget="{Binding ElementName=VolumeButton, Mode=OneTime}"
-                       StaysOpen="False" Width="75">
-                    <Slider
-                        Value="{Binding Volume, Delay=1, Converter={x:Static Converters:FractionToPercentageConverter.Default}}"
-                        Maximum="100" IsMoveToPointEnabled="True"
-                        AutoToolTipPlacement="TopLeft" Style="{StaticResource Slider.Smooth}"/>
-                </Popup>
+            <StackPanel Height="30" DockPanel.Dock="Right" Orientation="Horizontal"
+                        HorizontalAlignment="Right" VerticalAlignment="Center">
+                <ToggleButton BorderBrush="Transparent" Background="Transparent" 
+                              IsChecked="{Binding Loop}" ToolTip="Loop">
+                    <Image Source="{StaticResource Loop}"/>
+                </ToggleButton>
 
-                <ToggleButton x:Name="VolumeButton" ToolTip="Volume">
-                    <Image Source="{Binding Volume, Converter={x:Static Converters:VolumeToImageConverter.Default}}"/>
+                <ToggleButton BorderBrush="Transparent" Background="Transparent"
+                              IsChecked="{Binding ActivePlaylist.Playlist.IsShuffled}" ToolTip="Shuffle">
+                    <Image Source="{StaticResource Shuffle}"/>
                 </ToggleButton>
             </StackPanel>
 
             <StackPanel Grid.Column="1" Height="50" Orientation="Horizontal" Margin="5, 0">
-                <Button Caliburn:Message.Attach="Previous" ToolTip="Previous (Ctrl+F5)">
+                <Button BorderBrush="Transparent" Background="Transparent" 
+                        ToolTip="Previous (Ctrl+F5)" Caliburn:Message.Attach="Previous">
                     <Image Source="{StaticResource Back}"/>
                 </Button>
 
-                <Button Caliburn:Message.Attach="TogglePlayback">
+                <Button BorderBrush="Transparent" Background="Transparent" 
+                        Caliburn:Message.Attach="TogglePlayback">
                     <Image>
                         <Image.Style>
                             <Style TargetType="Image" BasedOn="{StaticResource {x:Type Image}}">
@@ -58,7 +64,8 @@
                     </Image>
                 </Button>
 
-                <Button Caliburn:Message.Attach="Next" ToolTip="Next (Ctrl+F7)">
+                <Button BorderBrush="Transparent" Background="Transparent"
+                        ToolTip="Next (Ctrl+F7)" Caliburn:Message.Attach="Next">
                     <Image Source="{StaticResource Back}" RenderTransformOrigin="0.5, 0.5">
                         <Image.RenderTransform>
                             <RotateTransform Angle="180"/>
@@ -67,18 +74,23 @@
                 </Button>
             </StackPanel>
 
-            <StackPanel Grid.Column="2" Height="30" DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Bottom">
-                <ToggleButton IsChecked="{Binding Loop}" ToolTip="Loop">
-                    <Image Source="{StaticResource Loop}"/>
-                </ToggleButton>
+            <StackPanel Grid.Column="2" Height="30" Orientation="Horizontal" VerticalAlignment="Center">
+                <Popup AllowsTransparency="True" IsOpen="{Binding IsChecked, ElementName=VolumeButton}"
+                       Placement="Right"  PlacementTarget="{Binding ElementName=VolumeButton, Mode=OneTime}"
+                       StaysOpen="False"  HorizontalOffset="5" Width="75" Margin="5">
+                    <Slider Value="{Binding Volume, Delay=1, Converter={x:Static Converters:FractionToPercentageConverter.Default}}"
+                            AutoToolTipPlacement="TopLeft" IsMoveToPointEnabled="True"
+                            Maximum="100" Style="{StaticResource Slider.Smooth}"/>
+                </Popup>
 
-                <ToggleButton IsChecked="{Binding ActivePlaylist.Playlist.IsShuffled}" ToolTip="Shuffle">
-                    <Image Source="{StaticResource Shuffle}"/>
+                <ToggleButton x:Name="VolumeButton" ToolTip="Volume"
+                              BorderBrush="Transparent" Background="Transparent">
+                    <Image Source="{Binding Volume, Converter={x:Static Converters:VolumeToImageConverter.Default}}"/>
                 </ToggleButton>
             </StackPanel>
         </Grid>
-
-        <DockPanel>
+        
+        <DockPanel Grid.Row="2">
             <TextBlock Text="{Binding CurrentProgress, Mode=OneWay, Converter={x:Static Converters:TimeSpanDurationFormatConverter.Default}}"/>
 
             <TextBlock DockPanel.Dock="Right"
@@ -99,5 +111,5 @@
                 </Interactivity:Interaction.Triggers>
             </Slider>
         </DockPanel>
-    </StackPanel>
+    </Grid>
 </UserControl>
