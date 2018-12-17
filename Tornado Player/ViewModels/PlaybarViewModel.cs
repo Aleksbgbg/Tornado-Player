@@ -26,6 +26,8 @@
                     _currentProgress = e.NewProgress;
                     NotifyOfPropertyChange(() => CurrentProgress);
                 }
+
+                ActivePlaylist.Playlist.TrackProgress = e.NewProgress;
             };
             _musicPlayerService.TrackChanged += (sender, e) => NotifyOfPropertyChange(() => Duration);
 
