@@ -51,7 +51,7 @@
 
         public bool Equals(Track other)
         {
-            if (other == null)
+            if (other is null)
             {
                 return false;
             }
