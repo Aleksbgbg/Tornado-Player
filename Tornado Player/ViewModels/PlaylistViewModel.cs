@@ -18,12 +18,15 @@
 
         private readonly IContentManagerService _contentManagerService;
 
+        private readonly IMusicPlayerService _musicPlayerService;
+
         private readonly ICollectionView _tracksView;
 
-        public PlaylistViewModel(IViewModelFactory viewModelFactory, IEventAggregator eventAggregator, IContentManagerService contentManagerService, Playlist playlist)
+        public PlaylistViewModel(IViewModelFactory viewModelFactory, IEventAggregator eventAggregator, IContentManagerService contentManagerService, IMusicPlayerService musicPlayerService, Playlist playlist)
         {
             _viewModelFactory = viewModelFactory;
             _contentManagerService = contentManagerService;
+            _musicPlayerService = musicPlayerService;
             _tracksView = CollectionViewSource.GetDefaultView(Items);
 
             DisplayName = playlist.Name;
@@ -86,10 +89,12 @@
 
         public void Play()
         {
-            if (!Items[Playlist.SelectedTrackIndex].IsPlaying)
+            if (Items.Count == 0 || Playlist.SelectedTrackIndex < 0)
             {
-                SelectTrack(Playlist.SelectedTrackIndex);
+                return;
             }
+
+            ActivateItem(Items[Playlist.SelectedTrackIndex]);
         }
 
         public void SelectPrevious()
@@ -125,10 +130,7 @@
         {
             if (success && item != null)
             {
-                if (!item.IsPlaying)
-                {
-                    item.Play();
-                }
+                SelectTrack(Items.IndexOf(item));
             }
         }
 
@@ -143,10 +145,13 @@
                 index = index % Items.Count;
             }
 
-            ITrackViewModel trackViewModel = Items[index];
+            Items[index].Play();
 
-            ActivateItem(trackViewModel);
-            trackViewModel.Play();
+            if (Playlist.SelectedTrackIndex == index) // Assume this condition means that the playlist has been resumed
+            {
+                _musicPlayerService.Progress = Playlist.TrackProgress;
+            }
+
             Playlist.SelectedTrackIndex = index;
         }
     }
