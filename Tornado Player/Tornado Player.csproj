@@ -119,7 +119,9 @@
     <Compile Include="Services\SnowflakeService.cs" />
     <Compile Include="Services\WebService.cs" />
     <Compile Include="Utilities\VirtualKey.cs" />
+    <Compile Include="ViewModels\Dialogs\DialogViewModel.cs" />
     <Compile Include="ViewModels\Editing\EditPlaylistViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\Dialogs\IDialogViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\Editing\IEditPlaylistViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IPlaybarViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IPlaylistCollectionViewModel.cs" />
