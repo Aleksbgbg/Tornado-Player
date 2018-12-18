@@ -8,8 +8,10 @@
     using Tornado.Player.Services.Interfaces;
     using Tornado.Player.Utilities;
     using Tornado.Player.ViewModels;
+    using Tornado.Player.ViewModels.Dialogs;
     using Tornado.Player.ViewModels.Editing;
     using Tornado.Player.ViewModels.Interfaces;
+    using Tornado.Player.ViewModels.Interfaces.Dialogs;
     using Tornado.Player.ViewModels.Interfaces.Editing;
 
     using CM = Caliburn.Micro; // Required due to extension method conflict
@@ -47,6 +49,8 @@
             viewModelFactory.Register<IPlaylistEditorViewModel, PlaylistEditorViewModel>();
             viewModelFactory.Register<IEditPlaylistViewModel, EditPlaylistViewModel>();
             viewModelFactory.Register<ITrackSinkViewModel, TrackSinkViewModel>();
+
+            viewModelFactory.Register<ICreatePlaylistDialogViewModel, CreatePlaylistDialogViewModel>();
         }
 
         protected override void OnStartupAfterDisplayRootView(object sender, StartupEventArgs e)

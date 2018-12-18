@@ -119,8 +119,10 @@
     <Compile Include="Services\SnowflakeService.cs" />
     <Compile Include="Services\WebService.cs" />
     <Compile Include="Utilities\VirtualKey.cs" />
+    <Compile Include="ViewModels\Dialogs\CreatePlaylistDialogViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\DialogViewModel.cs" />
     <Compile Include="ViewModels\Editing\EditPlaylistViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\Dialogs\ICreatePlaylistDialogViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\Dialogs\IDialogViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\Editing\IEditPlaylistViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IPlaybarViewModel.cs" />
@@ -131,6 +133,9 @@
     <Compile Include="ViewModels\PlaylistCollectionViewModel.cs" />
     <Compile Include="ViewModels\Editing\PlaylistEditorViewModel.cs" />
     <Compile Include="ViewModels\Editing\TrackSinkViewModel.cs" />
+    <Compile Include="Views\Dialogs\CreatePlaylistDialogView.xaml.cs">
+      <DependentUpon>CreatePlaylistDialogView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Editing\EditPlaylistView.xaml.cs">
       <DependentUpon>EditPlaylistView.xaml</DependentUpon>
     </Compile>
@@ -151,6 +156,10 @@
     <Compile Include="Views\TrackView.xaml.cs">
       <DependentUpon>TrackView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Dialogs\CreatePlaylistDialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Editing\EditPlaylistView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
