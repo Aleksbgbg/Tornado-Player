@@ -99,6 +99,7 @@
     <Compile Include="Models\AppLayout.cs" />
     <Compile Include="Models\PlaybarState.cs" />
     <Compile Include="Models\Playlist.cs" />
+    <Compile Include="Models\PlaylistCreation.cs" />
     <Compile Include="Models\PlaylistTrack.cs" />
     <Compile Include="Models\Shortcut.cs" />
     <Compile Include="Models\Snowflake.cs" />
