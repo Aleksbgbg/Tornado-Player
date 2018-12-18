@@ -25,6 +25,7 @@
             Container.Singleton<IAppDataService, AppDataService>();
             Container.Singleton<IContentManagerService, ContentManagerService>();
             Container.Singleton<IDataService, DataService>();
+            Container.Singleton<IDialogService, DialogService>();
             Container.Singleton<IFileSystemService, FileSystemService>();
             Container.Singleton<IHotKeyService, HotKeyService>();
             Container.Singleton<ILayoutService, LayoutService>();
