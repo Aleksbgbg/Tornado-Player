@@ -120,6 +120,7 @@
     <Compile Include="Services\LayoutService.cs" />
     <Compile Include="Services\SnowflakeService.cs" />
     <Compile Include="Services\WebService.cs" />
+    <Compile Include="Utilities\EventAggregator\PlaylistCreationMessage.cs" />
     <Compile Include="Utilities\VirtualKey.cs" />
     <Compile Include="ViewModels\Dialogs\CreatePlaylistDialogViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\DialogViewModel.cs" />
@@ -292,7 +293,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extensions\" />
-    <Folder Include="Utilities\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Tornado.ico" />
