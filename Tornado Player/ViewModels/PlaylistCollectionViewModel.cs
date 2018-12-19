@@ -7,9 +7,10 @@
 
     using Tornado.Player.Models;
     using Tornado.Player.Services.Interfaces;
+    using Tornado.Player.Utilities.EventAggregator;
     using Tornado.Player.ViewModels.Interfaces;
 
-    internal sealed class PlaylistCollectionViewModel : Conductor<IPlaylistViewModel>.Collection.OneActive, IPlaylistCollectionViewModel
+    internal sealed class PlaylistCollectionViewModel : Conductor<IPlaylistViewModel>.Collection.OneActive, IPlaylistCollectionViewModel, IHandle<PlaylistCreationMessage>
     {
         private const string ActivePlaylistDataName = "ActivePlaylist";
 
@@ -23,6 +24,8 @@
             _dataService = dataService;
             AppLayout = layoutService.AppLayout;
 
+            eventAggregator.Subscribe(this);
+
             Items.AddRange(contentManagerService.RetrievePlaylists()
                                                 .Select(playlist => viewModelFactory.MakeViewModel<IPlaylistViewModel>(playlist)));
 
@@ -33,6 +36,11 @@
         public AppLayout AppLayout { get; }
 
         public IObservableCollection<IPlaylistViewModel> Playlists => Items;
+
+        public void Handle(PlaylistCreationMessage message)
+        {
+            Items.Add(message.PlaylistViewModel);
+        }
 
         protected override void OnActivationProcessed(IPlaylistViewModel item, bool success)
         {
