@@ -4,19 +4,29 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:Caliburn="http://www.caliburnproject.org"
+             xmlns:Helpers="clr-namespace:Tornado.Player.Helpers"
              xmlns:ViewModels="clr-namespace:Tornado.Player.ViewModels.Editing"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance ViewModels:PlaylistEditorViewModel}">
     <DockPanel>
-        <ComboBox DockPanel.Dock="Top"
-                  ItemsSource="{Binding Items, Mode=OneTime}"
-                  SelectedItem="{Binding ActiveItem}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding DisplayName, Mode=OneTime}"/>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
+        <DockPanel DockPanel.Dock="Top">
+            <Button DockPanel.Dock="Right"
+                    ToolTip="Create New"
+                    Height="20" Margin="5, 0"
+                    Caliburn:Message.Attach="CreateNewPlaylist">
+                <Image Source="{StaticResource Plus}"/>
+            </Button>
+
+            <ComboBox ItemsSource="{Binding Items, Mode=OneTime}"
+                      SelectedItem="{Binding ActiveItem}"
+                      VerticalAlignment="Center">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding DisplayName, Mode=OneTime}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </DockPanel>
 
         <ContentControl Caliburn:View.Model="{Binding ActiveItem}"/>
     </DockPanel>
