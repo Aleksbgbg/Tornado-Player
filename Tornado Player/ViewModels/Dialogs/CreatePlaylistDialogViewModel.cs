@@ -3,10 +3,11 @@
     using Tornado.Player.Models;
     using Tornado.Player.ViewModels.Interfaces.Dialogs;
 
-    internal class CreatePlaylistDialogViewModel : DialogViewModel<PlaylistCreation>, ICreatePlaylistDialogViewModel
+    internal sealed class CreatePlaylistDialogViewModel : DialogViewModel<PlaylistCreation>, ICreatePlaylistDialogViewModel
     {
         public CreatePlaylistDialogViewModel(PlaylistCreation data) : base(data)
         {
+            DisplayName = "New Playlist";
         }
 
         private string _playlistName;
@@ -39,7 +40,7 @@
         private void CloseWithResponse(bool create)
         {
             Data.Create = create;
-            Data.Name = PlaylistName.Trim();
+            Data.Name = PlaylistName?.Trim();
 
             TryClose();
         }
