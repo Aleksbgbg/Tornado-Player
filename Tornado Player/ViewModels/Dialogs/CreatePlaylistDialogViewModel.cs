@@ -9,6 +9,23 @@
         {
         }
 
+        private string _playlistName;
+        public string PlaylistName
+        {
+            get => _playlistName;
+
+            set
+            {
+                if (_playlistName == value) return;
+
+                _playlistName = value;
+                NotifyOfPropertyChange(() => PlaylistName);
+                NotifyOfPropertyChange(() => CanOk);
+            }
+        }
+
+        public bool CanOk => !string.IsNullOrWhiteSpace(PlaylistName);
+
         public void Ok()
         {
             CloseWithResponse(true);
@@ -22,6 +39,8 @@
         private void CloseWithResponse(bool create)
         {
             Data.Create = create;
+            Data.Name = PlaylistName.Trim();
+
             TryClose();
         }
     }

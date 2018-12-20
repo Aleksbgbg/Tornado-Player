@@ -10,7 +10,7 @@
     <StackPanel>
         <TextBlock Text="Enter a name for your new playlist."/>
 
-        <TextBox Text="{Binding Data.Name, Mode=OneWayToSource}"/>
+        <TextBox Text="{Binding PlaylistName, UpdateSourceTrigger=PropertyChanged}"/>
 
         <StackPanel Background="DimGray" Orientation="Horizontal" 
                     HorizontalAlignment="Right">
