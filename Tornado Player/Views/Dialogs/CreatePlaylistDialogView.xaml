@@ -8,14 +8,18 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Dialogs:CreatePlaylistDialogViewModel}">
     <StackPanel>
-        <TextBlock Text="Enter a name for your new playlist."/>
+        <StackPanel Margin="5">
+            <TextBlock Text="Enter a name for your new playlist:"/>
 
-        <TextBox Text="{Binding PlaylistName, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Text="{Binding PlaylistName, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
 
-        <StackPanel Background="DimGray" Orientation="Horizontal" 
+        <StackPanel Orientation="Horizontal" 
                     HorizontalAlignment="Right">
-            <Button Content="OK" Caliburn:Message.Attach="Ok"/>
-            <Button Content="Cancel" Caliburn:Message.Attach="Cancel"/>
+            <Button Content="OK" Caliburn:Message.Attach="Ok"
+                    Style="{StaticResource Button.CommandOption}"/>
+            <Button Content="Cancel" Caliburn:Message.Attach="Cancel"
+                    Style="{StaticResource Button.CommandOption}"/>
         </StackPanel>
     </StackPanel>
 </UserControl>
