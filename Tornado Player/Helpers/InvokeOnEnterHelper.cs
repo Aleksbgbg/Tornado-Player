@@ -1,5 +1,6 @@
 ﻿namespace Tornado.Player.Helpers
 {
+    using System;
     using System.Diagnostics;
     using System.Windows;
     using System.Windows.Automation.Peers;
@@ -40,27 +41,29 @@
 
         private static void ButtonPropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
-            if (dependencyObject is TextBox textBox)
+            if (!(dependencyObject is TextBox textBox))
             {
-                bool oldValueIsButton = e.OldValue is Button;
+                throw new ArgumentOutOfRangeException(nameof(dependencyObject), dependencyObject, $"{nameof(InvokeOnEnterHelper)} must be applied to {nameof(TextBox)} objects only");
+            }
 
-                if (e.NewValue is Button button)
+            bool oldValueIsButton = e.OldValue is Button;
+
+            if (e.NewValue is Button button)
+            {
+                IInvokeProvider invokeProvider = (IInvokeProvider)new ButtonAutomationPeer(button).GetPattern(PatternInterface.Invoke);
+                Debug.Assert(invokeProvider != null);
+
+                SetInvokeProvider(textBox, invokeProvider);
+
+                if (!oldValueIsButton)
                 {
-                    IInvokeProvider invokeProvider = (IInvokeProvider)new ButtonAutomationPeer(button).GetPattern(PatternInterface.Invoke);
-                    Debug.Assert(invokeProvider != null);
-
-                    SetInvokeProvider(textBox, invokeProvider);
-
-                    if (!oldValueIsButton)
-                    {
-                        textBox.KeyDown += TextBox_KeyDown;
-                    }
+                    textBox.KeyDown += TextBox_KeyDown;
                 }
-                else if (oldValueIsButton)
-                {
-                    SetInvokeProvider(textBox, null);
-                    textBox.KeyDown -= TextBox_KeyDown;
-                }
+            }
+            else if (oldValueIsButton)
+            {
+                SetInvokeProvider(textBox, null);
+                textBox.KeyDown -= TextBox_KeyDown;
             }
         }
 
