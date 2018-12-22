@@ -118,12 +118,14 @@
             <StackPanel Margin="5">
                 <TextBlock Text="Search Tracks by Name" FontWeight="DemiBold"
                            HorizontalAlignment="Center"/>
-                <TextBox x:Name="SearchText">
+                <TextBox x:Name="SearchText"
+                         Helpers:InvokeOnEnterHelper.Button="{Binding ElementName=SearchButton, Mode=OneTime}">
                     <i:Interaction.Behaviors>
                         <Helpers:FocusOnVisibleBehavior/>
                     </i:Interaction.Behaviors>
                 </TextBox>
-                <Button Content="Search" HorizontalAlignment="Right"
+                <Button x:Name="SearchButton"
+                        Content="Search" HorizontalAlignment="Right"
                         Width="75" Margin="0, 5"
                         Caliburn:Message.Attach="Search(searchText)"/>
             </StackPanel>
