@@ -2,16 +2,22 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:Caliburn="http://www.caliburnproject.org"
              xmlns:Dialogs="clr-namespace:Tornado.Player.ViewModels.Dialogs"
+             xmlns:Helpers="clr-namespace:Tornado.Player.Helpers"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Dialogs:CreatePlaylistDialogViewModel}">
     <StackPanel>
         <StackPanel Margin="5">
             <TextBlock Text="Enter a name for your new playlist:"/>
 
-            <TextBox Text="{Binding PlaylistName, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Text="{Binding PlaylistName, UpdateSourceTrigger=PropertyChanged}">
+                <i:Interaction.Behaviors>
+                    <Helpers:FocusOnLoadedBehavior/>
+                </i:Interaction.Behaviors>
+            </TextBox>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" 
