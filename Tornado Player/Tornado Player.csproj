@@ -93,6 +93,7 @@
     <Compile Include="EventArgs\HotKeyActuatedEventArgs.cs" />
     <Compile Include="EventArgs\ProgressUpdatedEventArgs.cs" />
     <Compile Include="EventArgs\TracksReleasedEventArgs.cs" />
+    <Compile Include="Helpers\FocusOnLoadedBehavior.cs" />
     <Compile Include="Helpers\ImageContentHelper.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />
     <Compile Include="Helpers\RoutedEventTrigger.cs" />
