@@ -103,6 +103,7 @@
     <Compile Include="Models\PlaylistTrack.cs" />
     <Compile Include="Models\Shortcut.cs" />
     <Compile Include="Models\Snowflake.cs" />
+    <Compile Include="Models\WindowSettings.cs" />
     <Compile Include="Services\AppDataService.cs" />
     <Compile Include="Services\ContentManagerService.cs" />
     <Compile Include="Services\DataService.cs" />
