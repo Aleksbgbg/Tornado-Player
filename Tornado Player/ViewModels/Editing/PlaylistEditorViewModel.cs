@@ -33,6 +33,44 @@
             Items.AddRange(playlistCollectionViewModel.Playlists.Select(playlist => viewModelFactory.MakeViewModel<IEditPlaylistViewModel>(playlist)));
         }
 
+        private int _selectedIndex;
+        public int SelectedIndex
+        {
+            get => _selectedIndex;
+
+            set
+            {
+                if (_selectedIndex == value) return;
+
+                _selectedIndex = value;
+                NotifyOfPropertyChange(() => SelectedIndex);
+                NotifyOfPropertyChange(() => CanDeletePlaylist);
+            }
+        }
+
+        public bool CanDeletePlaylist => SelectedIndex != -1;
+
+        public void DeletePlaylist()
+        {
+            Confirmation confirmation = new Confirmation
+            {
+                Message = $"delete playlist '{ActiveItem.Playlist.Name}'"
+            };
+
+            _dialogService.ShowDialog<Confirmation, IConfirmationDialogViewModel>(confirmation);
+
+            if (!confirmation.Confirmed)
+            {
+                return;
+            }
+
+            _contentManagerService.DeletePlaylist(ActiveItem.Playlist);
+
+            _eventAggregator.BeginPublishOnUIThread(new PlaylistDeletionMessage(ActiveItem.PlaylistViewModel));
+
+            Items.Remove(ActiveItem);
+        }
+
         public void CreateNewPlaylist()
         {
             PlaylistCreation playlistCreation = _dialogService.ShowDialog<PlaylistCreation, ICreatePlaylistDialogViewModel>

@@ -10,15 +10,27 @@
              d:DataContext="{d:DesignInstance ViewModels:PlaylistEditorViewModel}">
     <DockPanel>
         <DockPanel DockPanel.Dock="Top">
-            <Button DockPanel.Dock="Right"
-                    ToolTip="Create New"
-                    Height="20" Margin="5, 0"
-                    Caliburn:Message.Attach="CreateNewPlaylist">
-                <Image Source="{StaticResource Plus}"/>
-            </Button>
+            <StackPanel DockPanel.Dock="Right"
+                        Orientation="Horizontal"
+                        Margin="5, 0">
+                <Button ToolTip="Delete Selected"
+                        Height="20"
+                        Caliburn:Message.Attach="DeletePlaylist">
+                    <Image Source="{StaticResource Delete}"/>
+                </Button>
+
+                <Separator Width="5" Visibility="Hidden"/>
+
+                <Button ToolTip="Create New"
+                        Height="20"
+                        Caliburn:Message.Attach="CreateNewPlaylist">
+                    <Image Source="{StaticResource Plus}"/>
+                </Button>
+            </StackPanel>
 
             <ComboBox ItemsSource="{Binding Items, Mode=OneTime}"
                       SelectedItem="{Binding ActiveItem}"
+                      SelectedIndex="{Binding SelectedIndex, Mode=OneWayToSource}"
                       VerticalAlignment="Center">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
