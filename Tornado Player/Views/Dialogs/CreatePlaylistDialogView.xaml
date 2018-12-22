@@ -13,7 +13,8 @@
         <StackPanel Margin="5">
             <TextBlock Text="Enter a name for your new playlist:"/>
 
-            <TextBox Text="{Binding PlaylistName, UpdateSourceTrigger=PropertyChanged}">
+            <TextBox Text="{Binding PlaylistName, UpdateSourceTrigger=PropertyChanged}"
+                     Helpers:InvokeOnEnterHelper.Button="{Binding ElementName=Ok, Mode=OneTime}">
                 <i:Interaction.Behaviors>
                     <Helpers:FocusOnLoadedBehavior/>
                 </i:Interaction.Behaviors>
@@ -22,7 +23,7 @@
 
         <StackPanel Orientation="Horizontal" 
                     HorizontalAlignment="Right">
-            <Button Content="OK" Caliburn:Message.Attach="Ok"
+            <Button x:Name="Ok" Content="OK"
                     Style="{StaticResource Button.CommandOption}"/>
             <Button Content="Cancel" Caliburn:Message.Attach="Cancel"
                     Style="{StaticResource Button.CommandOption}"/>
