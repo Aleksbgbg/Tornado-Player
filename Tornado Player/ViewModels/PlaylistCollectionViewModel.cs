@@ -1,5 +1,6 @@
 ﻿namespace Tornado.Player.ViewModels
 {
+    using System.Collections.Generic;
     using System.Linq;
 
     using Caliburn.Micro;
@@ -10,7 +11,7 @@
     using Tornado.Player.Utilities.EventAggregator;
     using Tornado.Player.ViewModels.Interfaces;
 
-    internal sealed class PlaylistCollectionViewModel : Conductor<IPlaylistViewModel>.Collection.OneActive, IPlaylistCollectionViewModel, IHandle<PlaylistCreationMessage>
+    internal sealed class PlaylistCollectionViewModel : Conductor<IPlaylistViewModel>.Collection.OneActive, IPlaylistCollectionViewModel, IHandle<PlaylistCreationMessage>, IHandle<PlaylistDeletionMessage>
     {
         private const string ActivePlaylistDataName = "ActivePlaylist";
 
@@ -42,6 +43,11 @@
             Items.Add(message.PlaylistViewModel);
         }
 
+        public void Handle(PlaylistDeletionMessage message)
+        {
+            Items.Remove(message.PlaylistViewModel);
+        }
+
         protected override void OnActivationProcessed(IPlaylistViewModel item, bool success)
         {
             if (success && item != null)
@@ -50,6 +56,17 @@
                 item.Play();
                 _dataService.Save(ActivePlaylistDataName, Items.IndexOf(item));
             }
+        }
+
+        protected override IPlaylistViewModel DetermineNextItemToActivate(IList<IPlaylistViewModel> list, int lastIndex)
+        {
+            if (list.Count == 0)
+            {
+                return null;
+            }
+
+            int nextIndex = lastIndex + 1;
+            return list[nextIndex >= list.Count ? nextIndex - list.Count : nextIndex];
         }
     }
 }
