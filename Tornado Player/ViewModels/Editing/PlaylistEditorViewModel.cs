@@ -1,6 +1,7 @@
 ﻿namespace Tornado.Player.ViewModels.Editing
 {
     using System.Linq;
+    using System.Windows;
 
     using Caliburn.Micro;
     using Caliburn.Micro.Wrapper;
@@ -34,7 +35,14 @@
 
         public void CreateNewPlaylist()
         {
-            PlaylistCreation playlistCreation = _dialogService.ShowDialog<PlaylistCreation, ICreatePlaylistDialogViewModel>();
+            PlaylistCreation playlistCreation = _dialogService.ShowDialog<PlaylistCreation, ICreatePlaylistDialogViewModel>
+            (
+                new WindowSettings
+                {
+                    ResizeMode = ResizeMode.NoResize,
+                    ShowInTaskbar = false
+                }
+            );
 
             if (!playlistCreation.Create)
             {
