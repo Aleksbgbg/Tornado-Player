@@ -127,6 +127,7 @@
     <Compile Include="Services\SnowflakeService.cs" />
     <Compile Include="Services\WebService.cs" />
     <Compile Include="Utilities\EventAggregator\PlaylistCreationMessage.cs" />
+    <Compile Include="Utilities\EventAggregator\PlaylistDeletionMessage.cs" />
     <Compile Include="Utilities\VirtualKey.cs" />
     <Compile Include="ViewModels\Dialogs\ConfirmationDialogViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\CreatePlaylistDialogViewModel.cs" />
