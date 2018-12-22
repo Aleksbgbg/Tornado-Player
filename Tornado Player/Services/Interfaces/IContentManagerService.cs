@@ -14,6 +14,8 @@
 
         Playlist AddPlaylist(string name, IEnumerable<Track> tracks);
 
+        bool DeletePlaylist(Playlist playlist);
+
         PlaylistTrack AddTrackToPlaylist(Playlist playlist, Track track);
 
         PlaylistTrack RemoveTrackFromPlaylist(Playlist playlist, Track track);

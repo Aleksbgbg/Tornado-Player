@@ -79,6 +79,11 @@
             return playlist;
         }
 
+        public bool DeletePlaylist(Playlist playlist)
+        {
+            return _playlists.Remove(playlist);
+        }
+
         public PlaylistTrack AddTrackToPlaylist(Playlist playlist, Track track)
         {
             return playlist.AddTrack(track.Id, _trackRepository);
