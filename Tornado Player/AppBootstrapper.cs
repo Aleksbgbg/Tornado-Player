@@ -52,6 +52,7 @@
             viewModelFactory.Register<ITrackSinkViewModel, TrackSinkViewModel>();
 
             viewModelFactory.Register<ICreatePlaylistDialogViewModel, CreatePlaylistDialogViewModel>();
+            viewModelFactory.Register<IConfirmationDialogViewModel, ConfirmationDialogViewModel>();
         }
 
         protected override void OnStartupAfterDisplayRootView(object sender, StartupEventArgs e)

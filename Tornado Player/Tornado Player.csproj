@@ -101,6 +101,7 @@
     <Compile Include="Helpers\RelayCommand.cs" />
     <Compile Include="Helpers\RoutedEventTrigger.cs" />
     <Compile Include="Models\AppLayout.cs" />
+    <Compile Include="Models\Confirmation.cs" />
     <Compile Include="Models\PlaybarState.cs" />
     <Compile Include="Models\Playlist.cs" />
     <Compile Include="Models\PlaylistCreation.cs" />
@@ -127,9 +128,11 @@
     <Compile Include="Services\WebService.cs" />
     <Compile Include="Utilities\EventAggregator\PlaylistCreationMessage.cs" />
     <Compile Include="Utilities\VirtualKey.cs" />
+    <Compile Include="ViewModels\Dialogs\ConfirmationDialogViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\CreatePlaylistDialogViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\DialogViewModel.cs" />
     <Compile Include="ViewModels\Editing\EditPlaylistViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\Dialogs\IConfirmationDialogViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\Dialogs\ICreatePlaylistDialogViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\Dialogs\IDialogViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\Editing\IEditPlaylistViewModel.cs" />
@@ -141,6 +144,9 @@
     <Compile Include="ViewModels\PlaylistCollectionViewModel.cs" />
     <Compile Include="ViewModels\Editing\PlaylistEditorViewModel.cs" />
     <Compile Include="ViewModels\Editing\TrackSinkViewModel.cs" />
+    <Compile Include="Views\Dialogs\ConfirmationDialogView.xaml.cs">
+      <DependentUpon>ConfirmationDialogView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Dialogs\CreatePlaylistDialogView.xaml.cs">
       <DependentUpon>CreatePlaylistDialogView.xaml</DependentUpon>
     </Compile>
@@ -164,6 +170,10 @@
     <Compile Include="Views\TrackView.xaml.cs">
       <DependentUpon>TrackView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Dialogs\ConfirmationDialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Dialogs\CreatePlaylistDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
