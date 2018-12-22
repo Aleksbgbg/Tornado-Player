@@ -2,9 +2,11 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:Caliburn="http://www.caliburnproject.org"
              xmlns:Converters="clr-namespace:Tornado.Player.Converters"
+             xmlns:Helpers="clr-namespace:Tornado.Player.Helpers"
              xmlns:ViewModels="clr-namespace:Tornado.Player.ViewModels"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance ViewModels:PlaylistViewModel}"
@@ -116,7 +118,11 @@
             <StackPanel Margin="5">
                 <TextBlock Text="Search Tracks by Name" FontWeight="DemiBold"
                            HorizontalAlignment="Center"/>
-                <TextBox x:Name="SearchText"/>
+                <TextBox x:Name="SearchText">
+                    <i:Interaction.Behaviors>
+                        <Helpers:FocusOnVisibleBehavior/>
+                    </i:Interaction.Behaviors>
+                </TextBox>
                 <Button Content="Search" HorizontalAlignment="Right"
                         Width="75" Margin="0, 5"
                         Caliburn:Message.Attach="Search(searchText)"/>
