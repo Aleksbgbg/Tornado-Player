@@ -4,9 +4,9 @@
 
     public class WindowSettings
     {
-        public ResizeMode ResizeMode { get; set; } = ResizeMode.CanResize;
+        public ResizeMode ResizeMode { get; set; } = ResizeMode.NoResize;
 
-        public bool ShowInTaskbar { get; set; } = true;
+        public bool ShowInTaskbar { get; set; } = false;
 
         public string Title { get; set; }
 

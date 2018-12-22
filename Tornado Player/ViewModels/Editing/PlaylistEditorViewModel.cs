@@ -57,7 +57,7 @@
                 Message = $"delete playlist '{ActiveItem.Playlist.Name}'"
             };
 
-            _dialogService.ShowDialog<Confirmation, IConfirmationDialogViewModel>(confirmation);
+            _dialogService.ShowDialog<Confirmation, IConfirmationDialogViewModel>(confirmation, new WindowSettings());
 
             if (!confirmation.Confirmed)
             {
@@ -73,14 +73,7 @@
 
         public void CreateNewPlaylist()
         {
-            PlaylistCreation playlistCreation = _dialogService.ShowDialog<PlaylistCreation, ICreatePlaylistDialogViewModel>
-            (
-                new WindowSettings
-                {
-                    ResizeMode = ResizeMode.NoResize,
-                    ShowInTaskbar = false
-                }
-            );
+            PlaylistCreation playlistCreation = _dialogService.ShowDialog<PlaylistCreation, ICreatePlaylistDialogViewModel>(new WindowSettings());
 
             if (!playlistCreation.Create)
             {
