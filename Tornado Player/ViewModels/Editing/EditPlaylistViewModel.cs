@@ -14,11 +14,9 @@
 
     internal sealed class EditPlaylistViewModel : ViewModelBase, IEditPlaylistViewModel
     {
-        private readonly IPlaylistViewModel _playlistViewModel;
-
         public EditPlaylistViewModel(IViewModelFactory viewModelFactory, IContentManagerService contentManagerService, IPlaylistViewModel playlistViewModel)
         {
-            _playlistViewModel = playlistViewModel;
+            PlaylistViewModel = playlistViewModel;
             DisplayName = playlistViewModel.Playlist.Name;
 
             HashSet<Track> playlistTracks = new HashSet<Track>(playlistViewModel.Playlist.Tracks.Select(playlistTrack => playlistTrack.Track));
@@ -42,6 +40,10 @@
             PlaylistTarget.TracksReleased += MakeAddTracksEventHandler(TrackSource);
         }
 
+        public Playlist Playlist => PlaylistViewModel.Playlist;
+
+        public IPlaylistViewModel PlaylistViewModel { get; }
+
         public ITrackSinkViewModel TrackSource { get; }
 
         public ITrackSinkViewModel PlaylistTarget { get; }
@@ -52,8 +54,8 @@
 
         public void Apply()
         {
-            _playlistViewModel.Remove(PlaylistTarget.ReleasedTracks);
-            _playlistViewModel.Add(TrackSource.ReleasedTracks);
+            PlaylistViewModel.Remove(PlaylistTarget.ReleasedTracks);
+            PlaylistViewModel.Add(TrackSource.ReleasedTracks);
 
             TrackSource.Reset();
             PlaylistTarget.Reset();
