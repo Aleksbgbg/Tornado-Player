@@ -34,7 +34,7 @@
                 if (_sortOrder == value) return;
 
                 _sortOrder = value;
-                NotifyOfPropertyChange(() => SortOrder);
+                NotifyOfPropertyChange(nameof(SortOrder));
             }
         }
 

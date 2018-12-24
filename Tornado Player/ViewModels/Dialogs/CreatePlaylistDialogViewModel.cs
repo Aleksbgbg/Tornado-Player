@@ -21,8 +21,8 @@
                 if (_playlistName == value) return;
 
                 _playlistName = value;
-                NotifyOfPropertyChange(() => PlaylistName);
-                NotifyOfPropertyChange(() => CanOk);
+                NotifyOfPropertyChange(nameof(PlaylistName));
+                NotifyOfPropertyChange(nameof(CanOk));
             }
         }
 

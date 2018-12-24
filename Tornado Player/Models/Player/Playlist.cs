@@ -44,7 +44,7 @@
                 if (_isShuffled == value) return;
 
                 _isShuffled = value;
-                NotifyOfPropertyChange(() => IsShuffled);
+                NotifyOfPropertyChange(nameof(IsShuffled));
 
                 if (IsShuffled)
                 {

@@ -30,15 +30,15 @@
                 if (_syncPlayer)
                 {
                     _currentProgress = e.NewProgress;
-                    NotifyOfPropertyChange(() => CurrentProgress);
+                    NotifyOfPropertyChange(nameof(CurrentProgress));
                 }
 
                 ActivePlaylist.Playlist.TrackProgress = e.NewProgress;
             };
-            _musicPlayerService.TrackChanged += (sender, e) => NotifyOfPropertyChange(() => Duration);
+            _musicPlayerService.TrackChanged += (sender, e) => NotifyOfPropertyChange(nameof(Duration));
 
-            _musicPlayerService.Paused += (sender, e) => NotifyOfPropertyChange(() => Playing);
-            _musicPlayerService.Played += (sender, e) => NotifyOfPropertyChange(() => Playing);
+            _musicPlayerService.Paused += (sender, e) => NotifyOfPropertyChange(nameof(Playing));
+            _musicPlayerService.Played += (sender, e) => NotifyOfPropertyChange(nameof(Playing));
 
             _musicPlayerService.MediaEnded += (sender, e) =>
             {
@@ -68,7 +68,7 @@
                 if (_activePlaylist == value) return;
 
                 _activePlaylist = value;
-                NotifyOfPropertyChange(() => ActivePlaylist);
+                NotifyOfPropertyChange(nameof(ActivePlaylist));
             }
         }
 
@@ -82,7 +82,7 @@
                 if (_currentProgress == value) return;
 
                 _currentProgress = value;
-                NotifyOfPropertyChange(() => CurrentProgress);
+                NotifyOfPropertyChange(nameof(CurrentProgress));
 
                 if (_syncPlayer)
                 {
@@ -100,7 +100,7 @@
             set
             {
                 _musicPlayerService.Volume = value;
-                NotifyOfPropertyChange(() => Volume);
+                NotifyOfPropertyChange(nameof(Volume));
             }
         }
 
@@ -114,7 +114,7 @@
                 if (Loop == value) return;
 
                 _loop = value;
-                NotifyOfPropertyChange(() => Loop);
+                NotifyOfPropertyChange(nameof(Loop));
             }
         }
 

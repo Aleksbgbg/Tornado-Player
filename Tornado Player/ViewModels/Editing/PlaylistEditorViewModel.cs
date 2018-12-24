@@ -45,8 +45,8 @@
                 if (_selectedIndex == value) return;
 
                 _selectedIndex = value;
-                NotifyOfPropertyChange(() => SelectedIndex);
-                NotifyOfPropertyChange(() => CanDeletePlaylist);
+                NotifyOfPropertyChange(nameof(SelectedIndex));
+                NotifyOfPropertyChange(nameof(CanDeletePlaylist));
             }
         }
 

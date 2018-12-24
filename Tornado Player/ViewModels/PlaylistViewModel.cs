@@ -59,7 +59,7 @@
                 if (_isSearching == value) return;
 
                 _isSearching = value;
-                NotifyOfPropertyChange(() => IsSearching);
+                NotifyOfPropertyChange(nameof(IsSearching));
 
                 if (!_isSearching)
                 {

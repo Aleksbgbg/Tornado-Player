@@ -34,7 +34,7 @@
                 if (_mainContent == value) return;
 
                 _mainContent = value;
-                NotifyOfPropertyChange(() => MainContent);
+                NotifyOfPropertyChange(nameof(MainContent));
             }
         }
 

@@ -24,7 +24,7 @@
                 if (_showPlaylists == value) return;
 
                 _showPlaylists = value;
-                NotifyOfPropertyChange(() => ShowPlaylists);
+                NotifyOfPropertyChange(nameof(ShowPlaylists));
             }
         }
 
@@ -37,7 +37,7 @@
             set
             {
                 _playlistsBoxColumnWidth = value;
-                NotifyOfPropertyChange(() => PlaylistsBoxColumnWidth);
+                NotifyOfPropertyChange(nameof(PlaylistsBoxColumnWidth));
             }
         }
     }

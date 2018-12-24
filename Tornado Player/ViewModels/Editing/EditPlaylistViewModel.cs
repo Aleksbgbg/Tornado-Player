@@ -66,8 +66,8 @@
 
         private void ModifiedTrackCountChanged()
         {
-            NotifyOfPropertyChange(() => ModifiedTrackCount);
-            NotifyOfPropertyChange(() => CanApply);
+            NotifyOfPropertyChange(nameof(ModifiedTrackCount));
+            NotifyOfPropertyChange(nameof(CanApply));
         }
     }
 }

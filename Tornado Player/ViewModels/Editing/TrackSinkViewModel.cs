@@ -27,7 +27,7 @@
             TrackSink.AddRange(tracks);
             ReleaseImage = releaseImage;
 
-            SelectedTracks.CollectionChanged += (sender, e) => NotifyOfPropertyChange(() => CanReleaseSelectedTracks);
+            SelectedTracks.CollectionChanged += (sender, e) => NotifyOfPropertyChange(nameof(CanReleaseSelectedTracks));
 
             _trackSinkView = CollectionViewSource.GetDefaultView(TrackSink);
 
@@ -58,7 +58,7 @@
                 if (_searchText == value) return;
 
                 _searchText = value;
-                NotifyOfPropertyChange(() => SearchText);
+                NotifyOfPropertyChange(nameof(SearchText));
 
                 if (string.IsNullOrWhiteSpace(_searchText))
                 {
