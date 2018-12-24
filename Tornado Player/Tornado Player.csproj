@@ -101,14 +101,14 @@
     <Compile Include="Helpers\RelayCommand.cs" />
     <Compile Include="Helpers\RoutedEventTrigger.cs" />
     <Compile Include="Models\AppLayout.cs" />
-    <Compile Include="Models\Confirmation.cs" />
+    <Compile Include="Models\Dialogs\Confirmation.cs" />
     <Compile Include="Models\PlaybarState.cs" />
-    <Compile Include="Models\Playlist.cs" />
-    <Compile Include="Models\PlaylistCreation.cs" />
-    <Compile Include="Models\PlaylistTrack.cs" />
+    <Compile Include="Models\Player\Playlist.cs" />
+    <Compile Include="Models\Dialogs\PlaylistCreation.cs" />
+    <Compile Include="Models\Player\PlaylistTrack.cs" />
     <Compile Include="Models\Shortcut.cs" />
-    <Compile Include="Models\Snowflake.cs" />
-    <Compile Include="Models\WindowSettings.cs" />
+    <Compile Include="Models\Player\Snowflake.cs" />
+    <Compile Include="Models\Dialogs\WindowSettings.cs" />
     <Compile Include="Services\AppDataService.cs" />
     <Compile Include="Services\ContentManagerService.cs" />
     <Compile Include="Services\DataService.cs" />
@@ -209,7 +209,7 @@
     </Page>
     <Compile Include="EventArgs\PlaylistLoadedEventArgs.cs" />
     <Compile Include="EventArgs\TrackChangedEventArgs.cs" />
-    <Compile Include="Models\Track.cs" />
+    <Compile Include="Models\Player\Track.cs" />
     <Compile Include="Services\FileSystemService.cs" />
     <Compile Include="Services\Interfaces\IFileSystemService.cs" />
     <Compile Include="Services\Interfaces\IMusicPlayerService.cs" />

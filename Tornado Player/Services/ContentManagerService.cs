@@ -5,6 +5,7 @@
     using System.Linq;
 
     using Tornado.Player.Models;
+    using Tornado.Player.Models.Player;
     using Tornado.Player.Services.Interfaces;
 
     internal class ContentManagerService : IContentManagerService

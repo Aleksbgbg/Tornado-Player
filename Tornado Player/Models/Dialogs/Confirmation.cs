@@ -1,4 +1,4 @@
-﻿namespace Tornado.Player.Models
+﻿namespace Tornado.Player.Models.Dialogs
 {
     internal class Confirmation
     {

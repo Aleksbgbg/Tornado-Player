@@ -1,6 +1,7 @@
 ﻿namespace Tornado.Player.ViewModels
 {
     using Tornado.Player.Models;
+    using Tornado.Player.Models.Player;
     using Tornado.Player.Services.Interfaces;
     using Tornado.Player.ViewModels.Interfaces;
 

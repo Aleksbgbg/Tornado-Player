@@ -1,4 +1,4 @@
-﻿namespace Tornado.Player.Models
+﻿namespace Tornado.Player.Models.Player
 {
     using System;
     using System.IO;

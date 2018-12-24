@@ -7,6 +7,8 @@
     using Caliburn.Micro.Wrapper;
 
     using Tornado.Player.Models;
+    using Tornado.Player.Models.Dialogs;
+    using Tornado.Player.Models.Player;
     using Tornado.Player.Services.Interfaces;
     using Tornado.Player.Utilities.EventAggregator;
     using Tornado.Player.ViewModels.Interfaces;

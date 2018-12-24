@@ -1,6 +1,7 @@
 ﻿namespace Tornado.Player.Services.Interfaces
 {
     using Tornado.Player.Models;
+    using Tornado.Player.Models.Dialogs;
     using Tornado.Player.ViewModels.Interfaces.Dialogs;
 
     internal interface IDialogService

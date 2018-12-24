@@ -1,6 +1,7 @@
 ﻿namespace Tornado.Player.ViewModels.Dialogs
 {
     using Tornado.Player.Models;
+    using Tornado.Player.Models.Dialogs;
     using Tornado.Player.ViewModels.Interfaces.Dialogs;
 
     internal sealed class ConfirmationDialogViewModel : DialogViewModel<Confirmation>, IConfirmationDialogViewModel
