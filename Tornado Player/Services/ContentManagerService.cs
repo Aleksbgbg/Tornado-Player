@@ -4,7 +4,6 @@
     using System.IO;
     using System.Linq;
 
-    using Tornado.Player.Models;
     using Tornado.Player.Models.Player;
     using Tornado.Player.Services.Interfaces;
 
@@ -30,10 +29,7 @@
             Track[] tracks = dataService.Load(TracksFile, () => new Track[0]);
             _trackRepository = tracks.ToDictionary(track => track.Id, track => track);
 
-            _playlists = _dataService.Load(PlaylistsFile, () => new List<Playlist>
-            {
-                new Playlist(0u, "Main", 0, _trackRepository.Values)
-            });
+            _playlists = _dataService.Load(PlaylistsFile, () => new List<Playlist>());
 
             foreach (Playlist playlist in _playlists)
             {
@@ -46,8 +42,6 @@
             Track track = new Track(_snowflakeService.GenerateSnowflake(), file);
 
             _trackRepository[track.Id] = track;
-
-            AddTrackToPlaylist(_playlists[0], track); // Main playlist contains all tracks
 
             return track;
         }
