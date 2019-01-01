@@ -14,7 +14,7 @@
         }
 
         private bool _showPlaylists;
-        [JsonProperty("ShowPlaylists")]
+        [JsonProperty(nameof(ShowPlaylists))]
         public bool ShowPlaylists
         {
             get => _showPlaylists;
@@ -29,7 +29,7 @@
         }
 
         private double _playlistsBoxColumnWidth;
-        [JsonProperty("PlaylistsBoxColumnWidth")]
+        [JsonProperty(nameof(PlaylistsBoxColumnWidth))]
         public double PlaylistsBoxColumnWidth
         {
             get => _playlistsBoxColumnWidth;

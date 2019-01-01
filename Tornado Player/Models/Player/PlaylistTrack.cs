@@ -24,7 +24,7 @@
         }
 
         private int _sortOrder;
-        [JsonProperty("SortOrder")]
+        [JsonProperty(nameof(SortOrder))]
         public int SortOrder
         {
             get => _sortOrder;
@@ -41,7 +41,7 @@
         [JsonIgnore]
         public Track Track { get; private set; }
 
-        [JsonProperty("TrackId")]
+        [JsonProperty(nameof(TrackId))]
         private ulong TrackId { get; }
 
         public int CompareTo(PlaylistTrack other)

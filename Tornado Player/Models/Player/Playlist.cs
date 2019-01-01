@@ -30,11 +30,11 @@
             _tracks = new List<PlaylistTrack>(tracks.Select(track => new PlaylistTrack(0, track)));
         }
 
-        [JsonProperty("Name")]
+        [JsonProperty(nameof(Name))]
         public string Name { get; }
 
         private bool _isShuffled;
-        [JsonProperty("IsShuffled")]
+        [JsonProperty(nameof(IsShuffled))]
         public bool IsShuffled
         {
             get => _isShuffled;
@@ -57,13 +57,13 @@
             }
         }
 
-        [JsonProperty("SelectedTrackIndex")]
+        [JsonProperty(nameof(SelectedTrackIndex))]
         public int SelectedTrackIndex { get; set; }
 
-        [JsonProperty("TrackProgress")]
+        [JsonProperty(nameof(TrackProgress))]
         public TimeSpan TrackProgress { get; set; }
 
-        [JsonProperty("Tracks")]
+        [JsonProperty(nameof(Tracks))]
         public IReadOnlyList<PlaylistTrack> Tracks => _tracks;
 
         internal void Load(Dictionary<ulong, Track> trackRepository)

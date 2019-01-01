@@ -11,10 +11,10 @@
             Loop = loop;
         }
 
-        [JsonProperty("Volume")]
+        [JsonProperty(nameof(Volume))]
         internal double Volume { get; }
 
-        [JsonProperty("Loop")]
+        [JsonProperty(nameof(Loop))]
         internal bool Loop { get; }
     }
 }

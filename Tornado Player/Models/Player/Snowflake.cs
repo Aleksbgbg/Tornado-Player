@@ -11,7 +11,7 @@
             Id = id;
         }
 
-        [JsonProperty("Id")]
+        [JsonProperty(nameof(Id))]
         public ulong Id { get; }
     }
 }

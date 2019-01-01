@@ -16,19 +16,19 @@
             Shuffle = shuffle;
         }
 
-        [JsonProperty("TrackIndex")]
+        [JsonProperty(nameof(TrackIndex))]
         internal int TrackIndex { get; }
 
-        [JsonProperty("Progress")]
+        [JsonProperty(nameof(Progress))]
         internal TimeSpan Progress { get; }
 
-        [JsonProperty("Volume")]
+        [JsonProperty(nameof(Volume))]
         internal double Volume { get; }
 
-        [JsonProperty("Loop")]
+        [JsonProperty(nameof(Loop))]
         internal bool Loop { get; }
 
-        [JsonProperty("Shuffle")]
+        [JsonProperty(nameof(Shuffle))]
         internal bool Shuffle { get; }
     }
 }

@@ -13,7 +13,7 @@
             Filepath = filepath;
         }
 
-        [JsonProperty("Filepath")]
+        [JsonProperty(nameof(Filepath))]
         public string Filepath { get; }
 
         [JsonIgnore]
