@@ -6,10 +6,10 @@
 
     using Newtonsoft.Json;
 
+    using Tornado.Player.Utilities;
+
     internal class Playlist : Snowflake
     {
-        private static readonly Random Random = new Random();
-
         private readonly List<PlaylistTrack> _tracks;
 
         [JsonConstructor]
@@ -76,7 +76,7 @@
 
         internal PlaylistTrack AddTrack(ulong id, Dictionary<ulong, Track> trackRepository)
         {
-            PlaylistTrack newTrack = new PlaylistTrack(sortOrder: IsShuffled ? Random.Next(0, _tracks.Count) : 0,
+            PlaylistTrack newTrack = new PlaylistTrack(sortOrder: IsShuffled ? GlobalRandom.Next(0, _tracks.Count) : 0,
                                                        track: trackRepository[id]);
 
             _tracks.Add(newTrack);
@@ -108,7 +108,7 @@
             {
                 for (int index = 0; index < sortOrders.Length; ++index)
                 {
-                    int shuffleIndex = Random.Next(0, index + 1);
+                    int shuffleIndex = GlobalRandom.Next(0, index + 1);
 
                     if (shuffleIndex != index)
                     {
