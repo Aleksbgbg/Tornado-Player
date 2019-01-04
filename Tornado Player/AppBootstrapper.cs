@@ -18,6 +18,11 @@
 
     internal class AppBootstrapper : BootstrapperBase<IShellViewModel>
     {
+        internal AppBootstrapper()
+        {
+            CM.ViewLocator.NameTransformer.AddRule(@"^Tornado\.Player\.ViewModels\.[A-Z][a-z]+PlaylistViewModel$", "Tornado.Player.Views.PlaylistView");
+        }
+
         protected override void RegisterServices()
         {
             Container.Singleton<CM.IEventAggregator, CM.EventAggregator>();
