@@ -27,6 +27,9 @@
 
             eventAggregator.Subscribe(this);
 
+            Items.AddRange(contentManagerService.RetrieveManagedPlaylists()
+                                                .Values
+                                                .Select(managedPlaylist => viewModelFactory.MakeViewModel<IManagedPlaylistViewModel>(managedPlaylist)));
             Items.AddRange(contentManagerService.RetrievePlaylists()
                                                 .Select(playlist => viewModelFactory.MakeViewModel<ICustomPlaylistViewModel>(playlist)));
 

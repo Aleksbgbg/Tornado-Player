@@ -140,10 +140,12 @@
     <Compile Include="ViewModels\Interfaces\Dialogs\IDialogViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\Editing\IEditPlaylistViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\ICustomPlaylistViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\IManagedPlaylistViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IPlaybarViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IPlaylistCollectionViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\Editing\IPlaylistEditorViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\Editing\ITrackSinkViewModel.cs" />
+    <Compile Include="ViewModels\ManagedPlaylistViewModel.cs" />
     <Compile Include="ViewModels\PlaybarViewModel.cs" />
     <Compile Include="ViewModels\PlaylistCollectionViewModel.cs" />
     <Compile Include="ViewModels\Editing\PlaylistEditorViewModel.cs" />
