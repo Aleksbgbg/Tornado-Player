@@ -33,7 +33,9 @@
             _contentManagerService = contentManagerService;
             _dialogService = dialogService;
 
-            Items.AddRange(playlistCollectionViewModel.Playlists.Select(playlist => viewModelFactory.MakeViewModel<IEditPlaylistViewModel>(playlist)));
+            Items.AddRange(playlistCollectionViewModel.Playlists
+                                                      .OfType<ICustomPlaylistViewModel>()
+                                                      .Select(playlist => viewModelFactory.MakeViewModel<IEditPlaylistViewModel>(playlist)));
         }
 
         private int _selectedIndex;
