@@ -130,7 +130,7 @@
     <Compile Include="Utilities\EventAggregator\PlaylistCreationMessage.cs" />
     <Compile Include="Utilities\EventAggregator\PlaylistDeletionMessage.cs" />
     <Compile Include="Utilities\VirtualKey.cs" />
-    <Compile Include="ViewModels\CustomPlaylistViewModel.cs" />
+    <Compile Include="ViewModels\Playlist\CustomPlaylistViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\ConfirmationDialogViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\CreatePlaylistDialogViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\DialogViewModel.cs" />
@@ -139,15 +139,15 @@
     <Compile Include="ViewModels\Interfaces\Dialogs\ICreatePlaylistDialogViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\Dialogs\IDialogViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\Editing\IEditPlaylistViewModel.cs" />
-    <Compile Include="ViewModels\Interfaces\ICustomPlaylistViewModel.cs" />
-    <Compile Include="ViewModels\Interfaces\IManagedPlaylistViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\Playlist\ICustomPlaylistViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\Playlist\IManagedPlaylistViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IPlaybarViewModel.cs" />
-    <Compile Include="ViewModels\Interfaces\IPlaylistCollectionViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\Playlist\IPlaylistCollectionViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\Editing\IPlaylistEditorViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\Editing\ITrackSinkViewModel.cs" />
-    <Compile Include="ViewModels\ManagedPlaylistViewModel.cs" />
+    <Compile Include="ViewModels\Playlist\ManagedPlaylistViewModel.cs" />
     <Compile Include="ViewModels\PlaybarViewModel.cs" />
-    <Compile Include="ViewModels\PlaylistCollectionViewModel.cs" />
+    <Compile Include="ViewModels\Playlist\PlaylistCollectionViewModel.cs" />
     <Compile Include="ViewModels\Editing\PlaylistEditorViewModel.cs" />
     <Compile Include="ViewModels\Editing\TrackSinkViewModel.cs" />
     <Compile Include="Views\Dialogs\ConfirmationDialogView.xaml.cs">
@@ -163,7 +163,7 @@
       <DependentUpon>PlaybarView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\PlaylistCollectionView.xaml.cs">
+    <Compile Include="Views\Playlist\PlaylistCollectionView.xaml.cs">
       <DependentUpon>PlaylistCollectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editing\PlaylistEditorView.xaml.cs">
@@ -196,7 +196,7 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="Views\PlaylistCollectionView.xaml">
+    <Page Include="Views\Playlist\PlaylistCollectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -204,7 +204,7 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="Views\PlaylistView.xaml">
+    <Page Include="Views\Playlist\PlaylistView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -222,15 +222,15 @@
     <Compile Include="Utilities\TornadoPlayer.cs" />
     <Compile Include="Utilities\Win32Handler.cs" />
     <Compile Include="Utilities\Win32HotKey.cs" />
-    <Compile Include="ViewModels\Interfaces\IPlaylistViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\Playlist\IPlaylistViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\ITrackViewModel.cs" />
-    <Compile Include="ViewModels\PlaylistViewModel.cs" />
+    <Compile Include="ViewModels\Playlist\PlaylistViewModel.cs" />
     <Compile Include="ViewModels\TrackViewModel.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\PlaylistView.xaml.cs">
+    <Compile Include="Views\Playlist\PlaylistView.xaml.cs">
       <DependentUpon>PlaylistView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShellView.xaml.cs">

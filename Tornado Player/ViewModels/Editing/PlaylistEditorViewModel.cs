@@ -14,6 +14,7 @@
     using Tornado.Player.ViewModels.Interfaces;
     using Tornado.Player.ViewModels.Interfaces.Dialogs;
     using Tornado.Player.ViewModels.Interfaces.Editing;
+    using Tornado.Player.ViewModels.Interfaces.Playlist;
 
     internal class PlaylistEditorViewModel : Conductor<IEditPlaylistViewModel>.Collection.OneActive, IPlaylistEditorViewModel
     {

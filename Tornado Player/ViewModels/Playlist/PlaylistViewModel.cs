@@ -1,4 +1,4 @@
-﻿namespace Tornado.Player.ViewModels
+﻿namespace Tornado.Player.ViewModels.Playlist
 {
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -12,6 +12,7 @@
     using Tornado.Player.Models.Player;
     using Tornado.Player.Services.Interfaces;
     using Tornado.Player.ViewModels.Interfaces;
+    using Tornado.Player.ViewModels.Interfaces.Playlist;
 
     internal abstract class PlaylistViewModel : Conductor<ITrackViewModel>.Collection.OneActive, IPlaylistViewModel, IHandle<Shortcut>
     {

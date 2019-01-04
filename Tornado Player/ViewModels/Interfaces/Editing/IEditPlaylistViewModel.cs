@@ -2,6 +2,7 @@
 {
     using Tornado.Player.Models;
     using Tornado.Player.Models.Player;
+    using Tornado.Player.ViewModels.Interfaces.Playlist;
 
     internal interface IEditPlaylistViewModel : IViewModelBase
     {

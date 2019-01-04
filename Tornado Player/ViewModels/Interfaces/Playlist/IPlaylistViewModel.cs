@@ -1,4 +1,4 @@
-﻿namespace Tornado.Player.ViewModels.Interfaces
+﻿namespace Tornado.Player.ViewModels.Interfaces.Playlist
 {
     using System.Collections.Generic;
 

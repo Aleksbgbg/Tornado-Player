@@ -1,13 +1,13 @@
-﻿<UserControl x:Class="Tornado.Player.Views.PlaylistCollectionView"
+﻿<UserControl x:Class="Tornado.Player.Views.Playlist.PlaylistCollectionView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:Caliburn="http://www.caliburnproject.org"
              xmlns:Converters="clr-namespace:Tornado.Player.Converters"
-             xmlns:ViewModels="clr-namespace:Tornado.Player.ViewModels"
+             xmlns:Playlist="clr-namespace:Tornado.Player.ViewModels.Playlist"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance ViewModels:PlaylistCollectionViewModel}">
+             d:DataContext="{d:DesignInstance Playlist:PlaylistCollectionViewModel}">
     <ContentControl>
         <ContentControl.Style>
             <Style TargetType="ContentControl">

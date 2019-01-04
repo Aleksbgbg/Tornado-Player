@@ -1,4 +1,4 @@
-﻿namespace Tornado.Player.ViewModels
+﻿namespace Tornado.Player.ViewModels.Playlist
 {
     using System.Linq;
 
@@ -8,10 +8,13 @@
     using Tornado.Player.Models.Player;
     using Tornado.Player.Services.Interfaces;
     using Tornado.Player.ViewModels.Interfaces;
+    using Tornado.Player.ViewModels.Interfaces.Playlist;
 
-    internal class CustomPlaylistViewModel : PlaylistViewModel, ICustomPlaylistViewModel
+    internal class ManagedPlaylistViewModel : PlaylistViewModel, IManagedPlaylistViewModel
     {
-        public CustomPlaylistViewModel
+        private readonly IViewModelFactory _viewModelFactory;
+
+        public ManagedPlaylistViewModel
         (
                 IViewModelFactory viewModelFactory,
                 IEventAggregator eventAggregator,
@@ -21,7 +24,13 @@
         )
                 : base(viewModelFactory, eventAggregator, contentManagerService, musicPlayerService, playlist)
         {
-            Items.AddRange(playlist.Tracks.Select(track => viewModelFactory.MakeViewModel<ITrackViewModel>(track)));
+            _viewModelFactory = viewModelFactory;
+        }
+
+        private protected override void OnPlayed()
+        {
+            Items.Clear();
+            Items.AddRange(Playlist.Tracks.Select(playlistTrack => _viewModelFactory.MakeViewModel<ITrackViewModel>(playlistTrack)));
         }
     }
 }

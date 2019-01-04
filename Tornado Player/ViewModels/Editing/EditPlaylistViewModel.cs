@@ -12,6 +12,7 @@
     using Tornado.Player.Services.Interfaces;
     using Tornado.Player.ViewModels.Interfaces;
     using Tornado.Player.ViewModels.Interfaces.Editing;
+    using Tornado.Player.ViewModels.Interfaces.Playlist;
 
     internal sealed class EditPlaylistViewModel : ViewModelBase, IEditPlaylistViewModel
     {

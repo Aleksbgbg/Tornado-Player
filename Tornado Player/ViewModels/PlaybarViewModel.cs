@@ -7,6 +7,7 @@
     using Tornado.Player.Models;
     using Tornado.Player.Services.Interfaces;
     using Tornado.Player.ViewModels.Interfaces;
+    using Tornado.Player.ViewModels.Interfaces.Playlist;
 
     internal class PlaybarViewModel : ViewModelBase, IPlaybarViewModel, IHandle<IPlaylistViewModel>
     {

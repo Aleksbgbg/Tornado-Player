@@ -13,6 +13,8 @@
     using Tornado.Player.ViewModels.Interfaces;
     using Tornado.Player.ViewModels.Interfaces.Dialogs;
     using Tornado.Player.ViewModels.Interfaces.Editing;
+    using Tornado.Player.ViewModels.Interfaces.Playlist;
+    using Tornado.Player.ViewModels.Playlist;
 
     using CM = Caliburn.Micro; // Required due to extension method conflict
 
@@ -20,7 +22,7 @@
     {
         internal AppBootstrapper()
         {
-            CM.ViewLocator.NameTransformer.AddRule(@"^Tornado\.Player\.ViewModels\.[A-Z][a-z]+PlaylistViewModel$", "Tornado.Player.Views.PlaylistView");
+            CM.ViewLocator.NameTransformer.AddRule(@"^Tornado\.Player\.ViewModels\.Playlist\.[A-Z][a-z]+PlaylistViewModel$", "Tornado.Player.Views.Playlist.PlaylistView");
         }
 
         protected override void RegisterServices()

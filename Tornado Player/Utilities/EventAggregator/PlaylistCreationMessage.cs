@@ -1,6 +1,7 @@
 ﻿namespace Tornado.Player.Utilities.EventAggregator
 {
     using Tornado.Player.ViewModels.Interfaces;
+    using Tornado.Player.ViewModels.Interfaces.Playlist;
 
     internal class PlaylistCreationMessage
     {

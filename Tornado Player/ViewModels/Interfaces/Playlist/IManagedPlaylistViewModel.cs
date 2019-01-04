@@ -1,4 +1,4 @@
-﻿namespace Tornado.Player.ViewModels.Interfaces
+﻿namespace Tornado.Player.ViewModels.Interfaces.Playlist
 {
     internal interface IManagedPlaylistViewModel : IPlaylistViewModel
     {

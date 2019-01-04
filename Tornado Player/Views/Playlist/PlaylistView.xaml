@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Tornado.Player.Views.PlaylistView"
+﻿<UserControl x:Class="Tornado.Player.Views.Playlist.PlaylistView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,9 +7,9 @@
              xmlns:Caliburn="http://www.caliburnproject.org"
              xmlns:Converters="clr-namespace:Tornado.Player.Converters"
              xmlns:Helpers="clr-namespace:Tornado.Player.Helpers"
-             xmlns:ViewModels="clr-namespace:Tornado.Player.ViewModels"
+             xmlns:Playlist="clr-namespace:Tornado.Player.ViewModels.Playlist"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance ViewModels:PlaylistViewModel}"
+             d:DataContext="{d:DesignInstance Playlist:PlaylistViewModel}"
              Loaded="OnLoaded">
     <Grid>
         <ListBox x:Name="Items">
