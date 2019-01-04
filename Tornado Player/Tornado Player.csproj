@@ -130,6 +130,7 @@
     <Compile Include="Utilities\EventAggregator\PlaylistCreationMessage.cs" />
     <Compile Include="Utilities\EventAggregator\PlaylistDeletionMessage.cs" />
     <Compile Include="Utilities\VirtualKey.cs" />
+    <Compile Include="ViewModels\CustomPlaylistViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\ConfirmationDialogViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\CreatePlaylistDialogViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\DialogViewModel.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="ViewModels\Interfaces\Dialogs\ICreatePlaylistDialogViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\Dialogs\IDialogViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\Editing\IEditPlaylistViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\ICustomPlaylistViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IPlaybarViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IPlaylistCollectionViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\Editing\IPlaylistEditorViewModel.cs" />

@@ -44,7 +44,7 @@
 
             Container.PerRequest<IPlaylistEditorViewModel, PlaylistEditorViewModel>();
 
-            viewModelFactory.Register<IPlaylistViewModel, PlaylistViewModel>();
+            viewModelFactory.Register<ICustomPlaylistViewModel, CustomPlaylistViewModel>();
             viewModelFactory.Register<ITrackViewModel, TrackViewModel>();
 
             viewModelFactory.Register<IPlaylistEditorViewModel, PlaylistEditorViewModel>();

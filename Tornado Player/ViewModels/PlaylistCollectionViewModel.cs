@@ -28,7 +28,7 @@
             eventAggregator.Subscribe(this);
 
             Items.AddRange(contentManagerService.RetrievePlaylists()
-                                                .Select(playlist => viewModelFactory.MakeViewModel<IPlaylistViewModel>(playlist)));
+                                                .Select(playlist => viewModelFactory.MakeViewModel<ICustomPlaylistViewModel>(playlist)));
 
             int activePlaylist = dataService.Load<int>(ActivePlaylistDataName);
             ActivateItem(Items[activePlaylist]);
