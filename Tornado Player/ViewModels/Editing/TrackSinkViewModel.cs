@@ -9,7 +9,6 @@
     using Caliburn.Micro;
 
     using Tornado.Player.EventArgs;
-    using Tornado.Player.Models;
     using Tornado.Player.Models.Player;
     using Tornado.Player.ViewModels.Interfaces;
     using Tornado.Player.ViewModels.Interfaces.Editing;

@@ -3,7 +3,6 @@
     using System;
 
     using Tornado.Player.EventArgs;
-    using Tornado.Player.Models;
     using Tornado.Player.Models.Player;
 
     internal interface IMusicPlayerService

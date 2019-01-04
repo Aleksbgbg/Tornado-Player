@@ -2,7 +2,6 @@
 {
     using System;
 
-    using Tornado.Player.Models;
     using Tornado.Player.Models.Player;
 
     internal class PlaylistLoadedEventArgs : EventArgs

@@ -1,17 +1,14 @@
 ﻿namespace Tornado.Player.ViewModels.Editing
 {
     using System.Linq;
-    using System.Windows;
 
     using Caliburn.Micro;
     using Caliburn.Micro.Wrapper;
 
-    using Tornado.Player.Models;
     using Tornado.Player.Models.Dialogs;
     using Tornado.Player.Models.Player;
     using Tornado.Player.Services.Interfaces;
     using Tornado.Player.Utilities.EventAggregator;
-    using Tornado.Player.ViewModels.Interfaces;
     using Tornado.Player.ViewModels.Interfaces.Dialogs;
     using Tornado.Player.ViewModels.Interfaces.Editing;
     using Tornado.Player.ViewModels.Interfaces.Playlist;

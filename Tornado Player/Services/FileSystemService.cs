@@ -3,7 +3,6 @@
     using System.IO;
     using System.Linq;
 
-    using Tornado.Player.Models;
     using Tornado.Player.Models.Player;
     using Tornado.Player.Services.Interfaces;
 

@@ -3,7 +3,6 @@
     using System;
 
     using Tornado.Player.EventArgs;
-    using Tornado.Player.Models;
     using Tornado.Player.Models.Player;
     using Tornado.Player.Services.Interfaces;
     using Tornado.Player.Utilities;

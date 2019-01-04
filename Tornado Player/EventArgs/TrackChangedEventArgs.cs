@@ -1,7 +1,7 @@
 ﻿namespace Tornado.Player.EventArgs
 {
     using System;
-    using Tornado.Player.Models;
+
     using Tornado.Player.Models.Player;
 
     internal class TrackChangedEventArgs : EventArgs
