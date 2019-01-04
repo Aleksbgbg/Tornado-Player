@@ -102,6 +102,7 @@
     <Compile Include="Helpers\RoutedEventTrigger.cs" />
     <Compile Include="Models\AppLayout.cs" />
     <Compile Include="Models\Dialogs\Confirmation.cs" />
+    <Compile Include="Models\ManagedPlaylist.cs" />
     <Compile Include="Models\PlaybarState.cs" />
     <Compile Include="Models\Player\Playlist.cs" />
     <Compile Include="Models\Dialogs\PlaylistCreation.cs" />
