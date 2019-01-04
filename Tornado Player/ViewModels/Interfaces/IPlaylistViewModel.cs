@@ -4,7 +4,6 @@
 
     using Caliburn.Micro;
 
-    using Tornado.Player.Models;
     using Tornado.Player.Models.Player;
 
     internal interface IPlaylistViewModel : IViewModelBase, IConductor

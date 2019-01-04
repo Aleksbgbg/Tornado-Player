@@ -13,7 +13,7 @@
     using Tornado.Player.Services.Interfaces;
     using Tornado.Player.ViewModels.Interfaces;
 
-    internal sealed class PlaylistViewModel : Conductor<ITrackViewModel>.Collection.OneActive, IPlaylistViewModel, IHandle<Shortcut>
+    internal abstract class PlaylistViewModel : Conductor<ITrackViewModel>.Collection.OneActive, IPlaylistViewModel, IHandle<Shortcut>
     {
         private readonly IViewModelFactory _viewModelFactory;
 
@@ -23,7 +23,7 @@
 
         private readonly ICollectionView _tracksView;
 
-        public PlaylistViewModel(IViewModelFactory viewModelFactory, IEventAggregator eventAggregator, IContentManagerService contentManagerService, IMusicPlayerService musicPlayerService, Playlist playlist)
+        private protected PlaylistViewModel(IViewModelFactory viewModelFactory, IEventAggregator eventAggregator, IContentManagerService contentManagerService, IMusicPlayerService musicPlayerService, Playlist playlist)
         {
             _viewModelFactory = viewModelFactory;
             _contentManagerService = contentManagerService;
@@ -32,7 +32,6 @@
 
             DisplayName = playlist.Name;
             Playlist = playlist;
-            Items.AddRange(playlist.Tracks.Select(track => viewModelFactory.MakeViewModel<ITrackViewModel>(track)));
 
             _tracksView.SortDescriptions.Add(new SortDescription(nameof(ITrackViewModel.PlaylistTrack), ListSortDirection.Ascending));
 
@@ -45,6 +44,13 @@
                     _tracksView.Refresh();
                 }
             };
+        }
+
+        public sealed override string DisplayName
+        {
+            get => base.DisplayName;
+
+            set => base.DisplayName = value;
         }
 
         public Playlist Playlist { get; }
@@ -95,6 +101,8 @@
                 return;
             }
 
+            OnPlayed();
+
             ActivateItem(Items[Playlist.SelectedTrackIndex]);
         }
 
@@ -133,6 +141,10 @@
             {
                 SelectTrack(Items.IndexOf(item));
             }
+        }
+
+        private protected virtual void OnPlayed()
+        {
         }
 
         private void SelectTrack(int index)
