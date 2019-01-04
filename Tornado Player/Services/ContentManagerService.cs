@@ -1,9 +1,11 @@
 ﻿namespace Tornado.Player.Services
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
 
+    using Tornado.Player.Models;
     using Tornado.Player.Models.Player;
     using Tornado.Player.Services.Interfaces;
 
@@ -13,6 +15,8 @@
 
         private const string PlaylistsFile = "Playlists";
 
+        private const string ManagedPlaylistsFile = "ManagedPlaylists";
+
         private readonly IDataService _dataService;
 
         private readonly ISnowflakeService _snowflakeService;
@@ -20,6 +24,8 @@
         private readonly Dictionary<ulong, Track> _trackRepository;
 
         private readonly List<Playlist> _playlists;
+
+        private readonly Dictionary<ManagedPlaylist, Playlist> _managedPlaylists;
 
         public ContentManagerService(IDataService dataService, ISnowflakeService snowflakeService)
         {
@@ -30,6 +36,28 @@
             _trackRepository = tracks.ToDictionary(track => track.Id, track => track);
 
             _playlists = _dataService.Load(PlaylistsFile, () => new List<Playlist>());
+
+            _managedPlaylists = dataService.Load(ManagedPlaylistsFile, () => Enumerable.Empty<Playlist>())
+                                           .ToDictionary(playlist =>
+                                                         {
+                                                             Enum.TryParse(playlist.Name, out ManagedPlaylist result);
+                                                             return result;
+                                                         },
+                                                         playlist => playlist);
+
+            if (!_managedPlaylists.ContainsKey(ManagedPlaylist.Favorites))
+            {
+                _managedPlaylists[ManagedPlaylist.Favorites] = new Playlist
+                (
+                    _snowflakeService.GenerateSnowflake(),
+                    ManagedPlaylist.Favorites.ToString(),
+                    false,
+                    0,
+                    TimeSpan.Zero,
+                    _trackRepository.Values.Where(track => track.IsFavourite)
+                                    .Select(track => new PlaylistTrack(0, track))
+                );
+            }
 
             foreach (Playlist playlist in _playlists)
             {
@@ -89,9 +117,26 @@
             return playlist.RemoveTrack(track.Id);
         }
 
+        public void Favourite(Track track)
+        {
+            track.IsFavourite = true;
+            AddTrackToPlaylist(_managedPlaylists[ManagedPlaylist.Favorites], track);
+        }
+
+        public void UnFavourite(Track track)
+        {
+            track.IsFavourite = false;
+            RemoveTrackFromPlaylist(_managedPlaylists[ManagedPlaylist.Favorites], track);
+        }
+
         public IEnumerable<Playlist> RetrievePlaylists()
         {
             return _playlists;
+        }
+
+        public IDictionary<ManagedPlaylist, Playlist> RetrieveManagedPlaylists()
+        {
+            return _managedPlaylists;
         }
 
         public IEnumerable<Track> RetrieveTracks()

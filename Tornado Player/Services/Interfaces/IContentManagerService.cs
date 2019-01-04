@@ -21,7 +21,13 @@
 
         PlaylistTrack RemoveTrackFromPlaylist(Playlist playlist, Track track);
 
+        void Favourite(Track track);
+
+        void UnFavourite(Track track);
+
         IEnumerable<Playlist> RetrievePlaylists();
+
+        IDictionary<ManagedPlaylist, Playlist> RetrieveManagedPlaylists();
 
         IEnumerable<Track> RetrieveTracks();
 
