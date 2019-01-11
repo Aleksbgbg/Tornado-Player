@@ -31,6 +31,15 @@
         {
             Items.Clear();
             Items.AddRange(Playlist.Tracks.Select(playlistTrack => _viewModelFactory.MakeViewModel<ITrackViewModel>(playlistTrack)));
+
+            if (Items.Count == 0)
+            {
+                Playlist.SelectedTrackIndex = -1;
+            }
+            else if (Playlist.SelectedTrackIndex >= Items.Count)
+            {
+                Playlist.SelectedTrackIndex %= Items.Count;
+            }
         }
     }
 }
