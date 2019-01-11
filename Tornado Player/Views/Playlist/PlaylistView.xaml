@@ -109,6 +109,76 @@
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </ListBox.Template>
+
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
+                                    <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <!-- Favourite and Selected -->
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding PlaylistTrack.Track.IsFavorite}" Value="True"/>
+                                            <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="True"/>
+                                        </MultiDataTrigger.Conditions>
+
+                                        <Setter Property="Background" Value="#A3E4D7"/>
+                                        <Setter Property="BorderBrush" Value="#48C9B0"/>
+                                    </MultiDataTrigger>
+
+                                    <!-- Not Favourite and Selected -->
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding PlaylistTrack.Track.IsFavorite}" Value="False"/>
+                                            <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="True"/>
+                                        </MultiDataTrigger.Conditions>
+
+                                        <Setter Property="Background" Value="#AED6F1"/>
+                                        <Setter Property="BorderBrush" Value="#5DADE2"/>
+                                    </MultiDataTrigger>
+
+                                    <!-- Favourite and Hover -->
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding PlaylistTrack.Track.IsFavorite}" Value="True"/>
+                                            <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True"/>
+                                        </MultiDataTrigger.Conditions>
+
+                                        <Setter Property="Background" Value="#D1F2EB"/>
+                                        <Setter Property="BorderBrush" Value="#76D7C4"/>
+                                    </MultiDataTrigger>
+
+                                    <!-- Not Favourite and Hover -->
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding PlaylistTrack.Track.IsFavorite}" Value="False"/>
+                                            <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True"/>
+                                        </MultiDataTrigger.Conditions>
+
+                                        <Setter Property="Background" Value="#D6EAF8"/>
+                                        <Setter Property="BorderBrush" Value="#85C1E9"/>
+                                    </MultiDataTrigger>
+
+                                    <!-- Favourite and No Selection -->
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding PlaylistTrack.Track.IsFavorite}" Value="True"/>
+                                            <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="False"/>
+                                            <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="False"/>
+                                        </MultiDataTrigger.Conditions>
+
+                                        <Setter Property="Background" Value="#D1F2EB"/>
+                                    </MultiDataTrigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
         </ListBox>
 
         <Border BorderBrush="DeepSkyBlue" BorderThickness="1" Background="White"
