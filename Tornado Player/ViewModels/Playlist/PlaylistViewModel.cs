@@ -97,12 +97,12 @@
 
         public void Play()
         {
+            OnPlayed();
+
             if (Items.Count == 0 || Playlist.SelectedTrackIndex < 0)
             {
                 return;
             }
-
-            OnPlayed();
 
             ActivateItem(Items[Playlist.SelectedTrackIndex]);
         }
