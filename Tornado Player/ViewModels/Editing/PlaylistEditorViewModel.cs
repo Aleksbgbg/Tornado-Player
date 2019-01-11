@@ -84,7 +84,7 @@
 
             Playlist playlist = _contentManagerService.AddPlaylist(playlistCreation.Name);
 
-            IPlaylistViewModel playlistViewModel = _viewModelFactory.MakeViewModel<IPlaylistViewModel>(playlist);
+            IPlaylistViewModel playlistViewModel = _viewModelFactory.MakeViewModel<ICustomPlaylistViewModel>(playlist);
 
             IEditPlaylistViewModel editPlaylistViewModel = _viewModelFactory.MakeViewModel<IEditPlaylistViewModel>(playlistViewModel);
 
