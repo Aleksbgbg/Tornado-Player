@@ -11,7 +11,7 @@
         internal Track(ulong id, string filepath, bool isFavorite = default) : base(id)
         {
             Filepath = filepath;
-            IsFavorite = isFavorite;
+            _isFavorite = isFavorite;
         }
 
         [JsonProperty(nameof(Filepath))]
@@ -21,7 +21,19 @@
         public string Name => Path.GetFileNameWithoutExtension(Filepath);
 
         [JsonProperty(nameof(IsFavorite))]
-        public bool IsFavorite { get; set; }
+        private bool _isFavorite;
+        public bool IsFavorite
+        {
+            get => _isFavorite;
+
+            set
+            {
+                if (_isFavorite == value) return;
+
+                _isFavorite = value;
+                NotifyOfPropertyChange(nameof(IsFavorite));
+            }
+        }
 
         public static bool operator ==(Track left, Track right)
         {
