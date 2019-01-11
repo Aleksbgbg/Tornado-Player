@@ -330,7 +330,7 @@
     <Resource Include="Images\Shuffle.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Favourite.png" />
+    <Resource Include="Images\Favorite.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Max Volume.png" />

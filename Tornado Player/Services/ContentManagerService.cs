@@ -54,7 +54,7 @@
                     false,
                     0,
                     TimeSpan.Zero,
-                    _trackRepository.Values.Where(track => track.IsFavourite)
+                    _trackRepository.Values.Where(track => track.IsFavorite)
                                     .Select(track => new PlaylistTrack(0, track))
                 );
             }
@@ -117,15 +117,15 @@
             return playlist.RemoveTrack(track.Id);
         }
 
-        public void Favourite(Track track)
+        public void Favorite(Track track)
         {
-            track.IsFavourite = true;
+            track.IsFavorite = true;
             AddTrackToPlaylist(_managedPlaylists[ManagedPlaylist.Favorites], track);
         }
 
-        public void UnFavourite(Track track)
+        public void UnFavorite(Track track)
         {
-            track.IsFavourite = false;
+            track.IsFavorite = false;
             RemoveTrackFromPlaylist(_managedPlaylists[ManagedPlaylist.Favorites], track);
         }
 

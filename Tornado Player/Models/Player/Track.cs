@@ -8,10 +8,10 @@
     internal class Track : Snowflake, IComparable, IComparable<Track>, IEquatable<Track>
     {
         [JsonConstructor]
-        internal Track(ulong id, string filepath, bool isFavourite = default) : base(id)
+        internal Track(ulong id, string filepath, bool isFavorite = default) : base(id)
         {
             Filepath = filepath;
-            IsFavourite = isFavourite;
+            IsFavorite = isFavorite;
         }
 
         [JsonProperty(nameof(Filepath))]
@@ -20,8 +20,8 @@
         [JsonIgnore]
         public string Name => Path.GetFileNameWithoutExtension(Filepath);
 
-        [JsonProperty(nameof(IsFavourite))]
-        public bool IsFavourite { get; set; }
+        [JsonProperty(nameof(IsFavorite))]
+        public bool IsFavorite { get; set; }
 
         public static bool operator ==(Track left, Track right)
         {

@@ -35,15 +35,15 @@
             _webService.YouTubeTrackQueryInBrowser(PlaylistTrack.Track.Name);
         }
 
-        public void ToggleFavourite()
+        public void ToggleFavorite()
         {
-            if (PlaylistTrack.Track.IsFavourite)
+            if (PlaylistTrack.Track.IsFavorite)
             {
-                _contentManagerService.UnFavourite(PlaylistTrack.Track);
+                _contentManagerService.UnFavorite(PlaylistTrack.Track);
             }
             else
             {
-                _contentManagerService.Favourite(PlaylistTrack.Track);
+                _contentManagerService.Favorite(PlaylistTrack.Track);
             }
         }
 
