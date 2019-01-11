@@ -1,7 +1,9 @@
 ﻿namespace Tornado.Player.ViewModels.Playlist
 {
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
+    using System.Windows.Data;
 
     using Caliburn.Micro;
     using Caliburn.Micro.Wrapper;
@@ -35,6 +37,17 @@
 
             int activePlaylist = dataService.Load<int>(ActivePlaylistDataName);
             ActivateItem(Items[activePlaylist]);
+
+            CollectionViewSource.GetDefaultView(Items)
+                                .SortDescriptions
+                                .Add
+            (
+                new SortDescription
+                (
+                    string.Join(".", nameof(IPlaylistViewModel.Playlist), nameof(IPlaylistViewModel.Playlist.Name)),
+                    ListSortDirection.Ascending
+                )
+            );
         }
 
         public AppLayout AppLayout { get; }
