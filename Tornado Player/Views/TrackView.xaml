@@ -13,6 +13,11 @@
             <MenuItem Header="Find on YouTube"
                       Helpers:ImageContentHelper.Image="{StaticResource Youtube}"
                       Caliburn:Message.Attach="FindOnYouTube"/>
+
+            <MenuItem Header="Favourite"
+                      IsCheckable="True"
+                      IsChecked="{Binding PlaylistTrack.Track.IsFavourite, Mode=OneWay}"
+                      Caliburn:Message.Attach="ToggleFavourite"/>
         </ContextMenu>
     </UserControl.ContextMenu>
 

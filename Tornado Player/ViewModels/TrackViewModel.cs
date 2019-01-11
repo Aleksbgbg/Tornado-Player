@@ -6,12 +6,15 @@
 
     internal class TrackViewModel : ViewModelBase, ITrackViewModel
     {
+        private readonly IContentManagerService _contentManagerService;
+
         private readonly IMusicPlayerService _musicPlayerService;
 
         private readonly IWebService _webService;
 
-        public TrackViewModel(IMusicPlayerService musicPlayerService, IWebService webService, PlaylistTrack playlistTrack)
+        public TrackViewModel(IContentManagerService contentManagerService, IMusicPlayerService musicPlayerService, IWebService webService, PlaylistTrack playlistTrack)
         {
+            _contentManagerService = contentManagerService;
             _musicPlayerService = musicPlayerService;
             _webService = webService;
 
@@ -30,6 +33,18 @@
         public void FindOnYouTube()
         {
             _webService.YouTubeTrackQueryInBrowser(PlaylistTrack.Track.Name);
+        }
+
+        public void ToggleFavourite()
+        {
+            if (PlaylistTrack.Track.IsFavourite)
+            {
+                _contentManagerService.UnFavourite(PlaylistTrack.Track);
+            }
+            else
+            {
+                _contentManagerService.Favourite(PlaylistTrack.Track);
+            }
         }
 
         public override object GetView(object context = default)
