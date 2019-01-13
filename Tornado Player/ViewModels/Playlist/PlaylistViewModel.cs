@@ -104,7 +104,7 @@
                 return;
             }
 
-            ActivateItem(Items[Playlist.SelectedTrackIndex]);
+            SelectTrack(Playlist.SelectedTrackIndex);
         }
 
         public void SelectPrevious()
@@ -140,7 +140,16 @@
         {
             if (success && item != null)
             {
-                SelectTrack(Items.IndexOf(item));
+                item.Play();
+
+                int index = Items.IndexOf(item);
+
+                if (Playlist.SelectedTrackIndex == index) // Assume this condition means that the playlist has been resumed
+                {
+                    _musicPlayerService.Progress = Playlist.TrackProgress;
+                }
+
+                Playlist.SelectedTrackIndex = index;
             }
         }
 
@@ -156,17 +165,10 @@
             }
             else if (index >= Items.Count)
             {
-                index = index % Items.Count;
+                index %= Items.Count;
             }
 
-            Items[index].Play();
-
-            if (Playlist.SelectedTrackIndex == index) // Assume this condition means that the playlist has been resumed
-            {
-                _musicPlayerService.Progress = Playlist.TrackProgress;
-            }
-
-            Playlist.SelectedTrackIndex = index;
+            ActivateItem(Items[index]);
         }
     }
 }
