@@ -12,7 +12,7 @@
              d:DataContext="{d:DesignInstance Playlist:PlaylistViewModel}"
              Loaded="OnLoaded">
     <Grid>
-        <ListBox x:Name="Items">
+        <ListBox x:Name="Items" SelectedIndex="{Binding SelectedIndex}">
             <ListBox.Template>
                 <ControlTemplate TargetType="ListBox">
                     <Border x:Name="Bd"

@@ -33,6 +33,7 @@
 
             DisplayName = playlist.Name;
             Playlist = playlist;
+            SelectedIndex = Playlist.SelectedTrackIndex;
 
             _tracksView.SortDescriptions.Add(new SortDescription(nameof(ITrackViewModel.PlaylistTrack), ListSortDirection.Ascending));
 
@@ -55,6 +56,20 @@
         }
 
         public Playlist Playlist { get; }
+
+        private int _selectedIndex;
+        public int SelectedIndex
+        {
+            get => _selectedIndex;
+
+            set
+            {
+                if (_selectedIndex == value) return;
+
+                _selectedIndex = value;
+                NotifyOfPropertyChange(nameof(SelectedIndex));
+            }
+        }
 
         private bool _isSearching;
         public bool IsSearching
@@ -104,7 +119,13 @@
                 return;
             }
 
-            SelectTrack(Playlist.SelectedTrackIndex);
+            if (ActiveItem == null)
+            {
+                SelectTrack(Playlist.SelectedTrackIndex);
+                return;
+            }
+
+            PlayTrack(ActiveItem);
         }
 
         public void SelectPrevious()
@@ -140,16 +161,8 @@
         {
             if (success && item != null)
             {
-                item.Play();
-
-                int index = Items.IndexOf(item);
-
-                if (Playlist.SelectedTrackIndex == index) // Assume this condition means that the playlist has been resumed
-                {
-                    _musicPlayerService.Progress = Playlist.TrackProgress;
-                }
-
-                Playlist.SelectedTrackIndex = index;
+                PlayTrack(item);
+                Playlist.SelectedTrackIndex = SelectedIndex;
             }
         }
 
@@ -168,7 +181,18 @@
                 index %= Items.Count;
             }
 
-            ActivateItem(Items[index]);
+            SelectedIndex = index;
+        }
+
+        private void PlayTrack(ITrackViewModel trackViewModel)
+        {
+            trackViewModel.Play();
+
+            if (Playlist.SelectedTrackIndex == SelectedIndex) // Resumed
+            {
+                // Cannot use callback because play command will override TrackProgress to 0
+                _musicPlayerService.Progress = Playlist.TrackProgress;
+            }
         }
     }
 }
