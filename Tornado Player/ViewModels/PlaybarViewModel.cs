@@ -19,7 +19,7 @@
 
         private bool _syncPlayer = true;
 
-        public PlaybarViewModel(IEventAggregator eventAggregator, IDataService dataService, IMusicPlayerService musicPlayerService)
+        public PlaybarViewModel(IEventAggregator eventAggregator, IDataService dataService, IHotKeyService hotKeyService, IMusicPlayerService musicPlayerService)
         {
             _dataService = dataService;
             _musicPlayerService = musicPlayerService;
@@ -51,6 +51,24 @@
                 else
                 {
                     ActivePlaylist.SelectNext();
+                }
+            };
+
+            hotKeyService.HotKeyActuated += (sender, e) =>
+            {
+                switch (e.Shortcut)
+                {
+                    case Shortcut.TogglePlayback:
+                        _musicPlayerService.TogglePlayback();
+                        break;
+
+                    case Shortcut.SkipBackward:
+                        Previous();
+                        break;
+
+                    case Shortcut.SkipForward:
+                        Next();
+                        break;
                 }
             };
 
