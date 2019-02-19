@@ -44,16 +44,24 @@
                 if (_isShuffled == value) return;
 
                 _isShuffled = value;
-                NotifyOfPropertyChange(nameof(IsShuffled));
 
-                if (IsShuffled)
-                {
-                    Sort();
-                }
-                else
+                // _isShuffled contains the user's new
+                // shuffle choice - true means shuffle
+                // the playlist
+                if (_isShuffled)
                 {
                     Shuffle();
                 }
+                else
+                {
+                    Sort();
+                }
+
+                // Must notify *after* shuffle, to ensure
+                // that the UI displays the correct order
+                // after the action has been taken
+                // (otherwise out of sync)
+                NotifyOfPropertyChange(nameof(IsShuffled));
             }
         }
 
@@ -105,20 +113,18 @@
         {
             int[] sortOrders = new int[Tracks.Count];
 
+            for (int index = 0; index < sortOrders.Length; ++index)
             {
-                for (int index = 0; index < sortOrders.Length; ++index)
+                int shuffleIndex = GlobalRandom.Next(0, index + 1);
+
+                if (shuffleIndex != index)
                 {
-                    int shuffleIndex = GlobalRandom.Next(0, index + 1);
-
-                    if (shuffleIndex != index)
-                    {
-                        sortOrders[index] = sortOrders[shuffleIndex];
-                    }
-
-                    // In this assignment, index is the next value from a function
-                    // which generates the random numbers 0 .. sortOrders.Length in order
-                    sortOrders[shuffleIndex] = index;
+                    sortOrders[index] = sortOrders[shuffleIndex];
                 }
+
+                // In this assignment, index is the next value from a function
+                // which generates the random numbers 0 .. sortOrders.Length in order
+                sortOrders[shuffleIndex] = index;
             }
 
             for (int index = 0; index < sortOrders.Length; ++index)
