@@ -14,24 +14,5 @@
                     Command="{Binding SearchCommand, Mode=OneTime}"/>
     </Window.InputBindings>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-
-        <Menu>
-            <MenuItem Header="View">
-                <MenuItem Header="Edit Playlists"
-                          Caliburn:Message.Attach="EditPlaylists"/>
-
-                <MenuItem Header="Show Playlists"
-                          IsCheckable="True"
-                          IsChecked="{Binding AppLayout.ShowPlaylists}"/>
-            </MenuItem>
-        </Menu>
-
-        <ContentControl Grid.Row="1"
-                        Caliburn:View.Model="{Binding ActiveItem, Mode=OneTime}"/>
-    </Grid>
+    <ContentControl Caliburn:View.Model="{Binding ActiveItem, Mode=OneTime}"/>
 </Window>

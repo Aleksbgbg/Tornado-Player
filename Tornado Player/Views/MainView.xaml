@@ -5,12 +5,74 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:Caliburn="http://www.caliburnproject.org"
 			 xmlns:ViewModels="clr-namespace:Tornado.Player.ViewModels"
+			 xmlns:Converters="clr-namespace:Tornado.Player.Converters"
+			 xmlns:System="clr-namespace:System;assembly=mscorlib"
 			 mc:Ignorable="d"
 			 d:DataContext="{d:DesignInstance ViewModels:MainViewModel}">
-    <DockPanel>
-        <ContentControl DockPanel.Dock="Bottom"
-                        Caliburn:View.Model="{Binding PlaybarViewModel, Mode=OneTime}"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-        <ContentControl Caliburn:View.Model="{Binding MainContent}"/>
-    </DockPanel>
+        <Menu>
+            <MenuItem Header="_View">
+                <MenuItem Header="_Select Main Content">
+                    <MenuItem Header="_Track Selection"
+                              IsCheckable="True"
+                              IsEnabled="{Binding IsChecked, RelativeSource={RelativeSource Self}, Converter={x:Static Converters:NotConverter.Default}}"
+                              Caliburn:Message.Attach="SelectView(0)">
+                        <MenuItem.IsChecked>
+                            <Binding Path="MainContentIndex"
+                                     Mode="OneWay"
+                                     Converter="{x:Static Converters:EqualityConverter.Default}">
+                                <Binding.ConverterParameter>
+                                    <System:Int32>0</System:Int32>
+                                </Binding.ConverterParameter>
+                            </Binding>
+                        </MenuItem.IsChecked>
+                    </MenuItem>
+                    <MenuItem Header="_Edit Playlists"
+                              IsCheckable="True"
+                              IsEnabled="{Binding IsChecked, RelativeSource={RelativeSource Self}, Converter={x:Static Converters:NotConverter.Default}}"
+                              Caliburn:Message.Attach="SelectView(1)">
+                        <MenuItem.IsChecked>
+                            <Binding Path="MainContentIndex"
+                                     Mode="OneWay"
+                                     Converter="{x:Static Converters:EqualityConverter.Default}">
+                                <Binding.ConverterParameter>
+                                    <System:Int32>1</System:Int32>
+                                </Binding.ConverterParameter>
+                            </Binding>
+                        </MenuItem.IsChecked>
+                    </MenuItem>
+                    <MenuItem Header="_Settings"
+                              IsCheckable="True"
+                              IsEnabled="{Binding IsChecked, RelativeSource={RelativeSource Self}, Converter={x:Static Converters:NotConverter.Default}}"
+                              Caliburn:Message.Attach="SelectView(2)">
+                        <MenuItem.IsChecked>
+                            <Binding Path="MainContentIndex"
+                                     Mode="OneWay"
+                                     Converter="{x:Static Converters:EqualityConverter.Default}">
+                                <Binding.ConverterParameter>
+                                    <System:Int32>2</System:Int32>
+                                </Binding.ConverterParameter>
+                            </Binding>
+                        </MenuItem.IsChecked>
+                    </MenuItem>
+                </MenuItem>
+
+                <MenuItem Header="_Show Playlists"
+                          IsCheckable="True"
+                          IsChecked="{Binding AppLayout.ShowPlaylists}"/>
+            </MenuItem>
+        </Menu>
+
+        <ContentControl Grid.Row="1"
+                        Caliburn:View.Model="{Binding MainContent}"/>
+
+        <ContentControl Grid.Row="2"
+                        Caliburn:View.Model="{Binding PlaybarViewModel, Mode=OneTime}"/>
+    </Grid>
 </UserControl>

@@ -3,6 +3,8 @@
     using Caliburn.Micro;
     using Caliburn.Micro.Wrapper;
 
+    using Tornado.Player.Models;
+    using Tornado.Player.Services.Interfaces;
     using Tornado.Player.ViewModels.Interfaces;
     using Tornado.Player.ViewModels.Interfaces.Editing;
     using Tornado.Player.ViewModels.Interfaces.Playlist;
@@ -11,18 +13,36 @@
     {
         private readonly IViewModelFactory _viewModelFactory;
 
-        private readonly IPlaylistCollectionViewModel _playlistCollectionViewModel;
-
-        public MainViewModel(IViewModelFactory viewModelFactory, IPlaybarViewModel playbarViewModel, IPlaylistCollectionViewModel playlistCollectionViewModel)
+        public MainViewModel(IViewModelFactory viewModelFactory, ILayoutService layoutService, IPlaybarViewModel playbarViewModel, IPlaylistCollectionViewModel playlistCollectionViewModel, ISettingsViewModel settingsViewModel)
         {
             _viewModelFactory = viewModelFactory;
-            _playlistCollectionViewModel = playlistCollectionViewModel;
 
-            _mainContent = playlistCollectionViewModel;
+            AppLayout = layoutService.AppLayout;
             PlaybarViewModel = playbarViewModel;
 
-            ActivateItem(playlistCollectionViewModel);
+            Items.Add(playlistCollectionViewModel);
+            Items.Add(null); // At index = 1, select IPlaylistEditorViewModel which is lazily instantiated
+            Items.Add(settingsViewModel);
+
+            SelectView(0);
+
             ActivateItem(PlaybarViewModel);
+        }
+
+        public AppLayout AppLayout { get; }
+
+        private int _mainContentIndex;
+        public int MainContentIndex
+        {
+            get => _mainContentIndex;
+
+            set
+            {
+                if (_mainContentIndex == value) return;
+
+                _mainContentIndex = value;
+                NotifyOfPropertyChange(nameof(MainContentIndex));
+            }
         }
 
         private IViewModelBase _mainContent;
@@ -41,16 +61,24 @@
 
         public IPlaybarViewModel PlaybarViewModel { get; }
 
-        public void EditPlaylists()
+        public void SelectView(int index)
         {
-            if (MainContent == _playlistCollectionViewModel)
+            IViewModelBase view;
+
+            // Delayed construction to prevent
+            // unnecessary cascade of instantiations
+            if (index == 1)
             {
-                SwapMainContent(_viewModelFactory.MakeViewModel<IPlaylistEditorViewModel>());
+                view = _viewModelFactory.MakeViewModel<IPlaylistEditorViewModel>();
             }
             else
             {
-                SwapMainContent(_playlistCollectionViewModel, closeOld: true);
+                // index = 1 is null
+                view = Items[index];
             }
+
+            SwapMainContent(view);
+            MainContentIndex = index;
         }
 
         private void SwapMainContent(IViewModelBase newContent, bool closeOld = default)
