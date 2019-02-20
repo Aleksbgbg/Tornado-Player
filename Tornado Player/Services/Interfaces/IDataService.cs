@@ -8,6 +8,6 @@
 
         T Load<T>(string dataName, Func<T> emptyData);
 
-        void Save<T>(string dataName, T data);
+        void Save(string dataName, object data);
     }
 }

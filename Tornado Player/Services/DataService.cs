@@ -26,7 +26,7 @@
             return JsonConvert.DeserializeObject<T>(File.ReadAllText(_appDataService.GetFile($"Data/{dataName}.json", () => JsonConvert.SerializeObject(emptyData()))));
         }
 
-        public void Save<T>(string dataName, T data)
+        public void Save(string dataName, object data)
         {
             File.WriteAllText(_appDataService.GetFile($"Data/{dataName}.json"), JsonConvert.SerializeObject(data));
         }
