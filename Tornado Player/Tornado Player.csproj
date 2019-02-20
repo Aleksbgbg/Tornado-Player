@@ -73,18 +73,6 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System.Xaml" />
-    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
-    </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
-    </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
-    </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
-    </Reference>
     <Reference Include="Xceed.Wpf.Toolkit, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
     </Reference>
@@ -153,6 +141,7 @@
     <Compile Include="Utilities\HotKeyModifiers.cs" />
     <Compile Include="Utilities\IHotKey.cs" />
     <Compile Include="Utilities\VirtualKey.cs" />
+    <Compile Include="ViewModels\Interfaces\ISettingsViewModel.cs" />
     <Compile Include="ViewModels\Playlist\CustomPlaylistViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\ConfirmationDialogViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\CreatePlaylistDialogViewModel.cs" />
@@ -173,6 +162,7 @@
     <Compile Include="ViewModels\Playlist\PlaylistCollectionViewModel.cs" />
     <Compile Include="ViewModels\Editing\PlaylistEditorViewModel.cs" />
     <Compile Include="ViewModels\Editing\TrackSinkViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="Views\Dialogs\ConfirmationDialogView.xaml.cs">
       <DependentUpon>ConfirmationDialogView.xaml</DependentUpon>
     </Compile>
@@ -195,6 +185,10 @@
     </Compile>
     <Compile Include="Views\Editing\TrackSinkView.xaml.cs">
       <DependentUpon>TrackSinkView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\TrackView.xaml.cs">
       <DependentUpon>TrackView.xaml</DependentUpon>
@@ -230,6 +224,10 @@
     <Page Include="Views\Playlist\PlaylistView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Views\ShellView.xaml">
       <Generator>MSBuild:Compile</Generator>
