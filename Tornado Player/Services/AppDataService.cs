@@ -7,9 +7,7 @@
 
     internal class AppDataService : IAppDataService
     {
-        private static readonly string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-
-        private static readonly string ApplicationPath = Path.Combine(AppDataPath, "Tornado Player");
+        private static readonly string ApplicationPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Tornado Player");
 
         public AppDataService()
         {
