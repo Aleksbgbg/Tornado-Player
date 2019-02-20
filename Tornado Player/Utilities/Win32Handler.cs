@@ -1,49 +1,75 @@
 ﻿namespace Tornado.Player.Utilities
 {
     using System;
+    using System.Collections.Generic;
     using System.Windows;
     using System.Windows.Interop;
 
-    internal delegate void Win32HandlerInstanceConsumer(Win32Handler instance);
-
-    internal class Win32Handler
+    internal class Win32Handler : IDisposable
     {
-        private Win32Handler(Window mainWindow)
+        private readonly HwndSource _windowHandleSource;
+
+        private readonly Dictionary<int, Win32HotKey> _registeredHotKeys = new Dictionary<int, Win32HotKey>();
+
+        internal Win32Handler(Window mainWindow)
         {
-            MainWindowHandle = new WindowInteropHelper(mainWindow).Handle;
+            IntPtr mainWindowHandle = new WindowInteropHelper(mainWindow).Handle;
+
+            _windowHandleSource = HwndSource.FromHwnd(mainWindowHandle);
+            _windowHandleSource.AddHook(EventCallback);
         }
 
-        internal static event EventHandler Initialised;
-
-        internal static Win32Handler Instance { get; private set; }
-
-        internal static bool IsInitialised => Instance != null;
-
-        // Guarantee this is set after MainWindow creation
-        internal IntPtr MainWindowHandle { get; }
-
-        internal static void Initialise(Window mainWindow)
+        ~Win32Handler()
         {
-            Instance = new Win32Handler(mainWindow);
-
-            Initialised?.Invoke(null, EventArgs.Empty);
+            Dispose(false);
         }
 
-        internal static void WithWin32HandlerInstance(Win32HandlerInstanceConsumer consumer)
+        private enum WindowsEvents
         {
-            if (IsInitialised)
+            WM_HOTKEY = 0x0312
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        internal IHotKey RegisterHotKey(VirtualKey key, HotKeyModifiers modifiers = 0)
+        {
+            KeyValuePair<int, Win32HotKey> hotKeyKeyValuePair = Win32HotKey.RegisterHotKey(_windowHandleSource.Handle, key, modifiers);
+
+            _registeredHotKeys.Add(hotKeyKeyValuePair.Key, hotKeyKeyValuePair.Value);
+
+            return hotKeyKeyValuePair.Value;
+        }
+
+        private void Dispose(bool disposing)
+        {
+            _windowHandleSource.RemoveHook(EventCallback);
+
+            if (disposing)
             {
-                consumer(Instance);
-                return;
+                foreach (KeyValuePair<int, Win32HotKey> registeredHotKey in _registeredHotKeys)
+                {
+                    registeredHotKey.Value.Dispose();
+                }
+
+                _windowHandleSource.Dispose();
+            }
+        }
+
+        private IntPtr EventCallback(IntPtr windowHandle, int message, IntPtr wParam, IntPtr lParam, ref bool handled)
+        {
+            if (message == (int)WindowsEvents.WM_HOTKEY)
+            {
+                int hotKeyId = wParam.ToInt32();
+                _registeredHotKeys[hotKeyId].Actuate();
+
+                handled = true;
             }
 
-            void OnInitialised(object sender, EventArgs e)
-            {
-                Initialised -= OnInitialised;
-                consumer(Instance);
-            }
-
-            Initialised += OnInitialised;
+            return IntPtr.Zero;
         }
     }
 }

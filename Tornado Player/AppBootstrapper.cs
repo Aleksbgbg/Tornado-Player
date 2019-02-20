@@ -6,7 +6,6 @@
 
     using Tornado.Player.Services;
     using Tornado.Player.Services.Interfaces;
-    using Tornado.Player.Utilities;
     using Tornado.Player.ViewModels;
     using Tornado.Player.ViewModels.Dialogs;
     using Tornado.Player.ViewModels.Editing;
@@ -65,7 +64,7 @@
 
         protected override void OnStartupAfterDisplayRootView(object sender, StartupEventArgs e)
         {
-            Win32Handler.Initialise(Application.Current.MainWindow);
+            ((HotKeyService)Container.GetInstance<IHotKeyService>()).Initialize(Application.Current.MainWindow);
         }
 
         protected override void OnExit(object sender, System.EventArgs e)

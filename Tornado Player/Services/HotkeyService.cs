@@ -1,6 +1,7 @@
 ﻿namespace Tornado.Player.Services
 {
     using System;
+    using System.Windows;
 
     using Tornado.Player.EventArgs;
     using Tornado.Player.Models;
@@ -9,17 +10,15 @@
 
     internal class HotKeyService : IHotKeyService
     {
-        private readonly Win32HotKey _skipBackwardHotKey = new Win32HotKey(VirtualKey.F5, Win32HotKey.Modifiers.ControlKey | Win32HotKey.Modifiers.NoRepeat);
+        private Win32Handler _win32Handler;
 
-        private readonly Win32HotKey _togglePlaybackHotKey = new Win32HotKey(VirtualKey.F6, Win32HotKey.Modifiers.ControlKey | Win32HotKey.Modifiers.NoRepeat);
-
-        private readonly Win32HotKey _skipForwardHotKey = new Win32HotKey(VirtualKey.F7, Win32HotKey.Modifiers.ControlKey | Win32HotKey.Modifiers.NoRepeat);
-
-        public HotKeyService()
+        internal void Initialize(Window mainWindow)
         {
-            _skipBackwardHotKey.Actuated += (sender, e) => OnHotKeyActuated(Shortcut.SkipBackward);
-            _togglePlaybackHotKey.Actuated += (sender, e) => OnHotKeyActuated(Shortcut.TogglePlayback);
-            _skipForwardHotKey.Actuated += (sender, e) => OnHotKeyActuated(Shortcut.SkipForward);
+            _win32Handler = new Win32Handler(mainWindow);
+
+            _win32Handler.RegisterHotKey(VirtualKey.F5, HotKeyModifiers.ControlKey | HotKeyModifiers.NoRepeat).Actuated += (sender, e) => OnHotKeyActuated(Shortcut.SkipBackward);
+            _win32Handler.RegisterHotKey(VirtualKey.F6, HotKeyModifiers.ControlKey | HotKeyModifiers.NoRepeat).Actuated += (sender, e) => OnHotKeyActuated(Shortcut.TogglePlayback);
+            _win32Handler.RegisterHotKey(VirtualKey.F7, HotKeyModifiers.ControlKey | HotKeyModifiers.NoRepeat).Actuated += (sender, e) => OnHotKeyActuated(Shortcut.SkipForward);
         }
 
         public event EventHandler<HotKeyActuatedEventArgs> HotKeyActuated;
