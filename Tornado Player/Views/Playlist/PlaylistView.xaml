@@ -180,6 +180,10 @@
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                 </Style>
             </ListBox.ItemContainerStyle>
+
+            <i:Interaction.Behaviors>
+                <Helpers:PreventItemFocusOnRightClickBehavior/>
+            </i:Interaction.Behaviors>
         </ListBox>
 
         <Border BorderBrush="DeepSkyBlue" BorderThickness="1" Background="White"

@@ -94,6 +94,7 @@
     <Compile Include="EventArgs\HotKeyActuatedEventArgs.cs" />
     <Compile Include="EventArgs\ProgressUpdatedEventArgs.cs" />
     <Compile Include="EventArgs\TracksReleasedEventArgs.cs" />
+    <Compile Include="Helpers\PreventItemFocusOnRightClickBehavior.cs" />
     <Compile Include="Helpers\FocusOnLoadedBehavior.cs" />
     <Compile Include="Helpers\FocusOnVisibleBehavior.cs" />
     <Compile Include="Helpers\ImageContentHelper.cs" />
