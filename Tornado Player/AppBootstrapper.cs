@@ -36,6 +36,7 @@
             Container.Singleton<IHotKeyService, HotKeyService>();
             Container.Singleton<ILayoutService, LayoutService>();
             Container.Singleton<IMusicPlayerService, MusicPlayerService>();
+            Container.Singleton<ISettingsService, SettingsService>();
             Container.Singleton<ISnowflakeService, SnowflakeService>();
             Container.Singleton<IWebService, WebService>();
         }
@@ -72,6 +73,7 @@
             Container.GetInstance<IContentManagerService>().SaveContent();
             Container.GetInstance<ILayoutService>().SaveLayout();
             Container.GetInstance<IPlaybarViewModel>().SavePlaybarState();
+            Container.GetInstance<ISettingsService>().Save();
         }
     }
 }
