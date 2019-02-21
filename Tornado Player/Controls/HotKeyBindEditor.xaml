@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="Tornado.Player.Controls.HotKeyBindEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:Utilities="clr-namespace:Tornado.Player.Utilities">
+    <StackPanel Orientation="Horizontal">
+        <CheckBox Content="Control" IsChecked="{Binding EnableControl, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" Margin="5, 0"/>
+        <CheckBox Content="Shift" IsChecked="{Binding EnableShift, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" Margin="5, 0"/>
+        <CheckBox Content="Alt" IsChecked="{Binding EnableAlt, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" Margin="5, 0"/>
+        <CheckBox Content="Windows Key" IsChecked="{Binding EnableWindowsKey, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" Margin="5, 0"/>
+
+        <ComboBox Text="Key" SelectedValue="{Binding Value.Key}" Margin="5, 0">
+            <ComboBox.ItemsSource>
+                <Binding>
+                    <Binding.Source>
+                        <ObjectDataProvider MethodName="GetValues"
+                                            ObjectType="{x:Type System:Enum}">
+                            <ObjectDataProvider.MethodParameters>
+                                <x:Type TypeName="Utilities:VirtualKey"/>
+                            </ObjectDataProvider.MethodParameters>
+                        </ObjectDataProvider>
+                    </Binding.Source>
+                </Binding>
+            </ComboBox.ItemsSource>
+        </ComboBox>
+    </StackPanel>
+</UserControl>

@@ -87,6 +87,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Constants.cs" />
+    <Compile Include="Controls\HotKeyBindEditor.xaml.cs">
+      <DependentUpon>HotKeyBindEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\EqualityConverter.cs" />
     <Compile Include="Converters\FractionToPercentageConverter.cs" />
@@ -114,6 +117,7 @@
     <Compile Include="Models\Dialogs\PlaylistCreation.cs" />
     <Compile Include="Models\Player\PlaylistTrack.cs" />
     <Compile Include="Models\Settings\HotKeyBind.cs" />
+    <Compile Include="Models\Settings\HotKeyBindArray.cs" />
     <Compile Include="Models\Settings\Settings.cs" />
     <Compile Include="Models\Shortcut.cs" />
     <Compile Include="Models\Player\Snowflake.cs" />
@@ -142,6 +146,7 @@
     <Compile Include="Utilities\GlobalRandom.cs" />
     <Compile Include="Utilities\HotKeyModifiers.cs" />
     <Compile Include="Utilities\IHotKey.cs" />
+    <Compile Include="Utilities\PropertyGrid\HotKeyBindPropertyDescriptor.cs" />
     <Compile Include="Utilities\VirtualKey.cs" />
     <Compile Include="ViewModels\Interfaces\ISettingsViewModel.cs" />
     <Compile Include="ViewModels\Playlist\CustomPlaylistViewModel.cs" />
@@ -195,6 +200,10 @@
     <Compile Include="Views\TrackView.xaml.cs">
       <DependentUpon>TrackView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\HotKeyBindEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Dialogs\ConfirmationDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
