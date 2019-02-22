@@ -57,6 +57,11 @@
             {
                 playlist.Load(_trackRepository);
             }
+
+            foreach (Playlist playlist in _managedPlaylists.Values)
+            {
+                playlist.Load(_trackRepository);
+            }
         }
 
         public Track AddTrack(string file)
@@ -142,6 +147,7 @@
         {
             _dataService.Save(Constants.DataStoreNames.Tracks, _trackRepository.Values);
             _dataService.Save(Constants.DataStoreNames.Playlists, _playlists);
+            _dataService.Save(Constants.DataStoreNames.ManagedPlaylists, _managedPlaylists.Select(managedPlaylistPair => managedPlaylistPair.Value));
         }
     }
 }
