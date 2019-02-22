@@ -11,15 +11,15 @@
         {
             _dataService = dataService;
 
-            AppLayout = _dataService.Load("Layout", () => new AppLayout(showPlaylists: true,
-                                                                        playlistsBoxColumnWidth: 300.0));
+            AppLayout = _dataService.Load(Constants.DataStoreNames.AppLayout, () => new AppLayout(showPlaylists: true,
+                                                                                                  playlistsBoxColumnWidth: 300.0));
         }
 
         public AppLayout AppLayout { get; }
 
         public void SaveLayout()
         {
-            _dataService.Save("Layout", AppLayout);
+            _dataService.Save(Constants.DataStoreNames.AppLayout, AppLayout);
         }
     }
 }

@@ -11,12 +11,6 @@
 
     internal class ContentManagerService : IContentManagerService
     {
-        private const string TracksFile = "TrackTest";
-
-        private const string PlaylistsFile = "Playlists";
-
-        private const string ManagedPlaylistsFile = "ManagedPlaylists";
-
         private readonly IDataService _dataService;
 
         private readonly ISnowflakeService _snowflakeService;
@@ -32,12 +26,12 @@
             _dataService = dataService;
             _snowflakeService = snowflakeService;
 
-            Track[] tracks = dataService.Load(TracksFile, () => new Track[0]);
+            Track[] tracks = dataService.Load(Constants.DataStoreNames.Tracks, () => new Track[0]);
             _trackRepository = tracks.ToDictionary(track => track.Id, track => track);
 
-            _playlists = _dataService.Load(PlaylistsFile, () => new List<Playlist>());
+            _playlists = _dataService.Load(Constants.DataStoreNames.Playlists, () => new List<Playlist>());
 
-            _managedPlaylists = dataService.Load(ManagedPlaylistsFile, () => Enumerable.Empty<Playlist>())
+            _managedPlaylists = dataService.Load(Constants.DataStoreNames.ManagedPlaylists, () => Enumerable.Empty<Playlist>())
                                            .ToDictionary(playlist =>
                                                          {
                                                              Enum.TryParse(playlist.Name, out ManagedPlaylist result);
@@ -146,8 +140,8 @@
 
         public void SaveContent()
         {
-            _dataService.Save(TracksFile, _trackRepository.Values);
-            _dataService.Save(PlaylistsFile, _playlists);
+            _dataService.Save(Constants.DataStoreNames.Tracks, _trackRepository.Values);
+            _dataService.Save(Constants.DataStoreNames.Playlists, _playlists);
         }
     }
 }

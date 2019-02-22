@@ -11,8 +11,6 @@
 
     internal class PlaybarViewModel : ViewModelBase, IPlaybarViewModel, IHandle<IPlaylistViewModel>
     {
-        private const string PlaybarStateDataName = "Playbar State";
-
         private readonly IDataService _dataService;
 
         private readonly IMusicPlayerService _musicPlayerService;
@@ -72,7 +70,7 @@
                 }
             };
 
-            PlaybarState playbarState = dataService.Load(PlaybarStateDataName, () => new PlaybarState(0.5, false));
+            PlaybarState playbarState = dataService.Load(Constants.DataStoreNames.PlaybarState, () => new PlaybarState(0.5, false));
             Volume = playbarState.Volume;
             Loop = playbarState.Loop;
         }
@@ -141,7 +139,7 @@
 
         public void SavePlaybarState()
         {
-            _dataService.Save(PlaybarStateDataName, new PlaybarState(Volume, Loop));
+            _dataService.Save(Constants.DataStoreNames.PlaybarState, new PlaybarState(Volume, Loop));
         }
 
         public void Handle(IPlaylistViewModel message)

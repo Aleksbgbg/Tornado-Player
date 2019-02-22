@@ -15,8 +15,6 @@
 
     internal sealed class PlaylistCollectionViewModel : Conductor<IPlaylistViewModel>.Collection.OneActive, IPlaylistCollectionViewModel, IHandle<PlaylistCreationMessage>, IHandle<PlaylistDeletionMessage>
     {
-        private const string ActivePlaylistDataName = "ActivePlaylist";
-
         private readonly IEventAggregator _eventAggregator;
 
         private readonly IDataService _dataService;
@@ -35,7 +33,7 @@
             Items.AddRange(contentManagerService.RetrievePlaylists()
                                                 .Select(playlist => viewModelFactory.MakeViewModel<ICustomPlaylistViewModel>(playlist)));
 
-            int activePlaylist = dataService.Load<int>(ActivePlaylistDataName);
+            int activePlaylist = dataService.Load<int>(Constants.DataStoreNames.ActivePlaylist);
             ActivateItem(Items[activePlaylist]);
 
             CollectionViewSource.GetDefaultView(Items)
@@ -70,7 +68,7 @@
             {
                 _eventAggregator.BeginPublishOnUIThread(item);
                 item.Play();
-                _dataService.Save(ActivePlaylistDataName, Items.IndexOf(item));
+                _dataService.Save(Constants.DataStoreNames.ActivePlaylist, Items.IndexOf(item));
             }
         }
 
