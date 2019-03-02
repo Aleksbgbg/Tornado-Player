@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
+    using System.Diagnostics;
     using System.Linq;
 
     using Tornado.Player.Models;
@@ -13,6 +13,8 @@
     {
         private readonly IDataService _dataService;
 
+        private readonly IFileSystemService _fileSystemService;
+
         private readonly ISnowflakeService _snowflakeService;
 
         private readonly Dictionary<ulong, Track> _trackRepository;
@@ -21,9 +23,10 @@
 
         private readonly Dictionary<ManagedPlaylist, Playlist> _managedPlaylists;
 
-        public ContentManagerService(IDataService dataService, ISnowflakeService snowflakeService)
+        public ContentManagerService(IDataService dataService, IFileSystemService fileSystemService, ISnowflakeService snowflakeService)
         {
             _dataService = dataService;
+            _fileSystemService = fileSystemService;
             _snowflakeService = snowflakeService;
 
             Track[] tracks = dataService.Load(Constants.DataStoreNames.Tracks, () => new Track[0]);
@@ -66,6 +69,8 @@
 
         public Track AddTrack(string file)
         {
+            Debug.Assert(_fileSystemService.IsValidTrack(file));
+
             Track track = new Track(_snowflakeService.GenerateSnowflake(), file);
 
             _trackRepository[track.Id] = track;
@@ -75,7 +80,7 @@
 
         public Track[] AddTracks(string directory)
         {
-            string[] files = Directory.GetFiles(directory);
+            string[] files = _fileSystemService.LoadFiles(directory).ToArray();
 
             Track[] newTracks = new Track[files.Length];
 
