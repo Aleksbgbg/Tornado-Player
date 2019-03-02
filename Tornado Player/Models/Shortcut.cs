@@ -5,6 +5,9 @@
         Search,
         TogglePlayback,
         SkipBackward,
-        SkipForward
+        SkipForward,
+        VolumeUp,
+        VolumeDown,
+        ToggleMute
     }
 }
