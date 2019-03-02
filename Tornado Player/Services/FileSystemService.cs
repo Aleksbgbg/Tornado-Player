@@ -1,5 +1,6 @@
 ﻿namespace Tornado.Player.Services
 {
+    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
 
@@ -15,12 +16,21 @@
             _snowflakeService = snowflakeService;
         }
 
-        public Track[] LoadTracks(string directory)
+        public bool IsValidTrack(string file)
+        {
+            return Constants.SupportedMediaFormats.Contains(Path.GetExtension(file));
+        }
+
+        public IEnumerable<string> LoadFiles(string directory)
         {
             return Directory.GetFiles(directory)
-                            .Where(file => Constants.SupportedMediaFormats.Contains(Path.GetExtension(file)))
-                            .Select(file => new Track(_snowflakeService.GenerateSnowflake(), file))
-                            .ToArray();
+                            .Where(IsValidTrack);
+        }
+
+        public Track[] LoadTracks(string directory)
+        {
+            return LoadFiles(directory).Select(file => new Track(_snowflakeService.GenerateSnowflake(), file))
+                                       .ToArray();
         }
     }
 }
