@@ -60,6 +60,14 @@
             set => _mediaPlayer.Volume = value;
         }
 
+        internal bool Mute
+        {
+            get => _mediaPlayer.IsMuted;
+
+            set => _mediaPlayer.IsMuted = value;
+        }
+
+
         internal void Stop()
         {
             _mediaPlayer.Stop();
