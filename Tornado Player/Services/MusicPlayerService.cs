@@ -3,6 +3,7 @@
     using System;
 
     using Tornado.Player.EventArgs;
+    using Tornado.Player.Models;
     using Tornado.Player.Models.Player;
     using Tornado.Player.Services.Interfaces;
     using Tornado.Player.Utilities;
@@ -11,9 +12,31 @@
     {
         private readonly TornadoPlayer _tornadoPlayer = new TornadoPlayer();
 
-        public MusicPlayerService()
+        public MusicPlayerService(IHotKeyService hotKeyService)
         {
             _tornadoPlayer.MediaOpened += (sender, e) => OnTrackChanged();
+
+            hotKeyService.HotKeyActuated += (sender, e) =>
+            {
+                switch (e.Shortcut)
+                {
+                    case Shortcut.TogglePlayback:
+                        TogglePlayback();
+                        break;
+
+                    case Shortcut.VolumeUp:
+                        Volume += 0.02;
+                        break;
+
+                    case Shortcut.VolumeDown:
+                        Volume -= 0.02;
+                        break;
+
+                    case Shortcut.ToggleMute:
+                        Mute = !Mute;
+                        break;
+                }
+            };
         }
 
         public event EventHandler Played
