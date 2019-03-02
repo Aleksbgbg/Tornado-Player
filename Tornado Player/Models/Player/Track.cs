@@ -20,8 +20,8 @@
         [JsonIgnore]
         public string Name => Path.GetFileNameWithoutExtension(Filepath);
 
-        [JsonProperty(nameof(IsFavorite))]
         private bool _isFavorite;
+        [JsonProperty(nameof(IsFavorite))]
         public bool IsFavorite
         {
             get => _isFavorite;
