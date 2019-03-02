@@ -17,7 +17,10 @@
             {
                 new HotKeyBind(Shortcut.SkipBackward, VirtualKey.F5, HotKeyModifiers.ControlKey | HotKeyModifiers.NoRepeat),
                 new HotKeyBind(Shortcut.TogglePlayback, VirtualKey.F6, HotKeyModifiers.ControlKey | HotKeyModifiers.NoRepeat),
-                new HotKeyBind(Shortcut.SkipForward, VirtualKey.F7, HotKeyModifiers.ControlKey | HotKeyModifiers.NoRepeat)
+                new HotKeyBind(Shortcut.SkipForward, VirtualKey.F7, HotKeyModifiers.ControlKey | HotKeyModifiers.NoRepeat),
+                new HotKeyBind(Shortcut.VolumeUp, VirtualKey.F3, HotKeyModifiers.ControlKey),
+                new HotKeyBind(Shortcut.VolumeDown, VirtualKey.F2, HotKeyModifiers.ControlKey),
+                new HotKeyBind(Shortcut.ToggleMute, VirtualKey.F1, HotKeyModifiers.ControlKey | HotKeyModifiers.NoRepeat)
             }));
         }
 
