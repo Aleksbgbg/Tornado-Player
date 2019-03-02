@@ -29,6 +29,8 @@
 
         double Volume { get; set; }
 
+        bool Mute { get; set; }
+
         void Play();
 
         void Pause();

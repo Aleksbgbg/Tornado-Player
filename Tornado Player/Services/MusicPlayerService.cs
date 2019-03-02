@@ -83,6 +83,13 @@
             set => _tornadoPlayer.Volume = value;
         }
 
+        public bool Mute
+        {
+            get => _tornadoPlayer.Mute;
+
+            set => _tornadoPlayer.Mute = value;
+        }
+
         public void Play()
         {
             _tornadoPlayer.Play();
