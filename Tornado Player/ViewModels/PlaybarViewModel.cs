@@ -56,10 +56,6 @@
             {
                 switch (e.Shortcut)
                 {
-                    case Shortcut.TogglePlayback:
-                        _musicPlayerService.TogglePlayback();
-                        break;
-
                     case Shortcut.SkipBackward:
                         Previous();
                         break;
