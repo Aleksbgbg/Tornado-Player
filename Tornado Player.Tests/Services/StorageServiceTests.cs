@@ -7,6 +7,7 @@
     using Tornado.Player.Models;
     using Tornado.Player.Services;
     using Tornado.Player.Services.Interfaces;
+    using Tornado.Player.Tests.Util;
 
     using Xunit;
 
@@ -31,11 +32,7 @@
         [Fact]
         public void TestGetTrackFolders()
         {
-            TrackFolder[] folders =
-            {
-                new TrackFolder("folder1"),
-                new TrackFolder("folder2")
-            };
+            TrackFolder[] folders = Data.TrackFolders;
 
             SetupDataServiceLoad(folders);
             CreateInstance();
