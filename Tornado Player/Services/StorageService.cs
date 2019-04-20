@@ -1,15 +1,26 @@
 ﻿namespace Tornado.Player.Services
 {
+    using System.Collections.Generic;
+
     using Tornado.Player.Models;
     using Tornado.Player.Services.Interfaces;
 
     public class StorageService : IStorageService
     {
+        private readonly IDataService _dataService;
+
         public StorageService(IDataService dataService)
         {
-            TrackFolders = dataService.Load(Constants.DataStoreNames.TrackFolders, () => new TrackFolder[0]);
+            _dataService = dataService;
+
+            TrackFolders = dataService.Load(Constants.DataStoreNames.TrackFolders, () => new List<TrackFolder>());
         }
 
-        public TrackFolder[] TrackFolders { get; }
+        public List<TrackFolder> TrackFolders { get; }
+
+        public void SaveData()
+        {
+            _dataService.Save(Constants.DataStoreNames.TrackFolders, TrackFolders);
+        }
     }
 }

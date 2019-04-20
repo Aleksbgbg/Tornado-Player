@@ -1,9 +1,13 @@
 ﻿namespace Tornado.Player.Services.Interfaces
 {
+    using System.Collections.Generic;
+
     using Tornado.Player.Models;
 
     public interface IStorageService
     {
-        TrackFolder[] TrackFolders { get; }
+        List<TrackFolder> TrackFolders { get; }
+
+        void SaveData();
     }
 }

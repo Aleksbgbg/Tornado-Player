@@ -1,5 +1,6 @@
 ﻿namespace Tornado.Player.Tests.ViewModels
 {
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
     using Moq;
@@ -25,6 +26,7 @@
         [Fact]
         public void TestFoldersTypeIsObservableCollection()
         {
+            SetupStorageServiceFolders(new List<TrackFolder>());
             CreateInstance();
             Assert.IsType<ObservableCollection<TrackFolder>>(_trackFoldersViewModel.Folders);
         }
@@ -32,7 +34,7 @@
         [Fact]
         public void TestPopulatesFoldersFromStorageService()
         {
-            TrackFolder[] folders = Data.TrackFolders;
+            List<TrackFolder> folders = Data.TrackFolders;
 
             SetupStorageServiceFolders(folders);
             CreateInstance();
@@ -45,7 +47,7 @@
             _trackFoldersViewModel = new TrackFoldersViewModel(_storageServiceMock.Object);
         }
 
-        private void SetupStorageServiceFolders(TrackFolder[] folders)
+        private void SetupStorageServiceFolders(List<TrackFolder> folders)
         {
             _storageServiceMock.SetupGet(storageService => storageService.TrackFolders)
                                .Returns(folders);

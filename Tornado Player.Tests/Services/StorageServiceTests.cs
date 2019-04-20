@@ -1,6 +1,8 @@
 ﻿namespace Tornado.Player.Tests.Services
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using Moq;
 
@@ -23,21 +25,38 @@
         }
 
         [Fact]
-        public void TestCallsDataServiceLoadOnStartup()
+        public void TestLoadsTrackFoldersOnStartup()
         {
             CreateInstance();
-            VerifyLoadDataCalled<TrackFolder[]>();
+            VerifyLoadDataCalled<List<TrackFolder>>(Constants.DataStoreNames.TrackFolders);
         }
 
         [Fact]
         public void TestGetTrackFolders()
         {
-            TrackFolder[] folders = Data.TrackFolders;
+            List<TrackFolder> folders = Data.TrackFolders;
 
-            SetupDataServiceLoad(folders);
+            SetupLoadData(Constants.DataStoreNames.TrackFolders, folders);
             CreateInstance();
 
             Assert.Equal(folders, _storageService.TrackFolders);
+        }
+
+        [Fact]
+        public void TestSaveCallsSaveTrackFolders()
+        {
+            TestSaveDataListWithNewItem(Constants.DataStoreNames.TrackFolders, Data.TrackFolders.ToList(), new TrackFolder("newFolder"));
+        }
+
+        private void TestSaveDataListWithNewItem<T>(string dataName, List<T> data, T newDataItem)
+        {
+            SetupLoadData(dataName, data);
+            CreateInstance();
+            data.Add(newDataItem);
+
+            _storageService.SaveData();
+
+            _dataServiceMock.Verify(dataService => dataService.Save(dataName, data));
         }
 
         private void CreateInstance()
@@ -45,15 +64,15 @@
             _storageService = new StorageService(_dataServiceMock.Object);
         }
 
-        private void SetupDataServiceLoad<T>(T data)
+        private void SetupLoadData<T>(string dataName, T data)
         {
-            _dataServiceMock.Setup(dataService => dataService.Load(Constants.DataStoreNames.TrackFolders, It.IsAny<Func<T>>()))
+            _dataServiceMock.Setup(dataService => dataService.Load(dataName, It.IsAny<Func<T>>()))
                             .Returns(data);
         }
 
-        private void VerifyLoadDataCalled<T>()
+        private void VerifyLoadDataCalled<T>(string dataName)
         {
-            _dataServiceMock.Verify(dataService => dataService.Load(Constants.DataStoreNames.TrackFolders, It.IsAny<Func<T>>()));
+            _dataServiceMock.Verify(dataService => dataService.Load(dataName, It.IsAny<Func<T>>()));
         }
     }
 }
