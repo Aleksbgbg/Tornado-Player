@@ -122,6 +122,7 @@
     <Compile Include="Models\Shortcut.cs" />
     <Compile Include="Models\Player\Snowflake.cs" />
     <Compile Include="Models\Dialogs\WindowSettings.cs" />
+    <Compile Include="Models\TrackFolder.cs" />
     <Compile Include="Services\AppDataService.cs" />
     <Compile Include="Services\ContentManagerService.cs" />
     <Compile Include="Services\DataService.cs" />
