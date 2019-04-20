@@ -149,6 +149,7 @@
     <Compile Include="Utilities\PropertyGrid\HotKeyBindPropertyDescriptor.cs" />
     <Compile Include="Utilities\VirtualKey.cs" />
     <Compile Include="ViewModels\Interfaces\ISettingsViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\ITrackFoldersViewModel.cs" />
     <Compile Include="ViewModels\Playlist\CustomPlaylistViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\ConfirmationDialogViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\CreatePlaylistDialogViewModel.cs" />
@@ -170,6 +171,7 @@
     <Compile Include="ViewModels\Editing\PlaylistEditorViewModel.cs" />
     <Compile Include="ViewModels\Editing\TrackSinkViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\TrackFoldersViewModel.cs" />
     <Compile Include="Views\Dialogs\ConfirmationDialogView.xaml.cs">
       <DependentUpon>ConfirmationDialogView.xaml</DependentUpon>
     </Compile>
@@ -196,6 +198,9 @@
     <Compile Include="Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\TrackFoldersView.xaml.cs">
+      <DependentUpon>TrackFoldersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TrackView.xaml.cs">
       <DependentUpon>TrackView.xaml</DependentUpon>
@@ -307,6 +312,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\Editing\TrackSinkView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TrackFoldersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

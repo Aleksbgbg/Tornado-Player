@@ -63,6 +63,8 @@
 
             viewModelFactory.Register<ICreatePlaylistDialogViewModel, CreatePlaylistDialogViewModel>();
             viewModelFactory.Register<IConfirmationDialogViewModel, ConfirmationDialogViewModel>();
+
+            viewModelFactory.Register<ITrackFoldersViewModel, TrackFoldersViewModel>();
         }
 
         protected override void OnStartupAfterDisplayRootView(object sender, StartupEventArgs e)
