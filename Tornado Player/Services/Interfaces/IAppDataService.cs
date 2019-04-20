@@ -2,7 +2,7 @@
 {
     using System;
 
-    internal interface IAppDataService
+    public interface IAppDataService
     {
         string GetFolder(string name);
 

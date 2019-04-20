@@ -2,7 +2,7 @@
 {
     using System;
 
-    internal interface IDataService
+    public interface IDataService
     {
         T Load<T>(string dataName, T emptyData = default);
 

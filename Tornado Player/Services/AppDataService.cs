@@ -5,7 +5,7 @@
 
     using Tornado.Player.Services.Interfaces;
 
-    internal class AppDataService : IAppDataService
+    public class AppDataService : IAppDataService
     {
         private static readonly string ApplicationPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Tornado Player");
 

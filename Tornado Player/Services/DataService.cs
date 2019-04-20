@@ -7,7 +7,7 @@
 
     using Tornado.Player.Services.Interfaces;
 
-    internal class DataService : IDataService
+    public class DataService : IDataService
     {
         private readonly IAppDataService _appDataService;
 
