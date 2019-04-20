@@ -136,10 +136,12 @@
     <Compile Include="Services\Interfaces\ILayoutService.cs" />
     <Compile Include="Services\Interfaces\ISettingsService.cs" />
     <Compile Include="Services\Interfaces\ISnowflakeService.cs" />
+    <Compile Include="Services\Interfaces\IStorageService.cs" />
     <Compile Include="Services\Interfaces\IWebService.cs" />
     <Compile Include="Services\LayoutService.cs" />
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Services\SnowflakeService.cs" />
+    <Compile Include="Services\StorageService.cs" />
     <Compile Include="Services\WebService.cs" />
     <Compile Include="Utilities\EventAggregator\PlaylistCreationMessage.cs" />
     <Compile Include="Utilities\EventAggregator\PlaylistDeletionMessage.cs" />

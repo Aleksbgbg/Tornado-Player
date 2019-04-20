@@ -38,6 +38,7 @@
             Container.Singleton<IMusicPlayerService, MusicPlayerService>();
             Container.Singleton<ISettingsService, SettingsService>();
             Container.Singleton<ISnowflakeService, SnowflakeService>();
+            Container.Singleton<IStorageService, StorageService>();
             Container.Singleton<IWebService, WebService>();
         }
 

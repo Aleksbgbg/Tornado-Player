@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\StorageServiceTests.cs" />
     <Compile Include="ViewModels\TrackFoldersViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
