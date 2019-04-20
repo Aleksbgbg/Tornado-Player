@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2047
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tornado Player", "Tornado Player\Tornado Player.csproj", "{EDF4F7FF-A223-4FD8-AB9D-A5144CD3D436}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tornado Player.Tests", "Tornado Player.Tests\Tornado Player.Tests.csproj", "{7493BA8C-E702-4728-A21C-0B66A4691850}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{EDF4F7FF-A223-4FD8-AB9D-A5144CD3D436}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDF4F7FF-A223-4FD8-AB9D-A5144CD3D436}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDF4F7FF-A223-4FD8-AB9D-A5144CD3D436}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7493BA8C-E702-4728-A21C-0B66A4691850}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7493BA8C-E702-4728-A21C-0B66A4691850}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7493BA8C-E702-4728-A21C-0B66A4691850}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7493BA8C-E702-4728-A21C-0B66A4691850}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
