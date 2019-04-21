@@ -34,5 +34,11 @@
                 Folders.Add(newTrackFolder);
             }
         }
+
+        public void RemoveFolder(TrackFolder trackFolder)
+        {
+            _storageService.TrackFolders.Remove(trackFolder);
+            Folders.Remove(trackFolder);
+        }
     }
 }

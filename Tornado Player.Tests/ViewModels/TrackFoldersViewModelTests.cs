@@ -96,6 +96,26 @@
             Assert.Empty(_storageServiceMock.Object.TrackFolders);
         }
 
+        [Fact]
+        public void TestRemoveFolderRemovesFromFolders()
+        {
+            TrackFolder folderToRemove = SetupFolderToRemove();
+
+            _trackFoldersViewModel.RemoveFolder(folderToRemove);
+
+            Assert.DoesNotContain(folderToRemove, _trackFoldersViewModel.Folders);
+        }
+
+        [Fact]
+        public void TestRemoveFolderRemovesFolderFromStorageService()
+        {
+            TrackFolder folderToRemove = SetupFolderToRemove();
+
+            _trackFoldersViewModel.RemoveFolder(folderToRemove);
+
+            Assert.DoesNotContain(folderToRemove, _storageServiceMock.Object.TrackFolders);
+        }
+
         private void SetupDirectoryNotSelected()
         {
             SetupStorageServiceFoldersEmpty();
@@ -108,6 +128,18 @@
             SetupStorageServiceFoldersEmpty();
             _fileSystemBrowserServiceMock = new FileSystemBrowserServiceMock(true, directory);
             CreateInstance();
+        }
+
+        private TrackFolder SetupFolderToRemove()
+        {
+            List<TrackFolder> folders = Data.TrackFolders;
+
+            SetupStorageServiceFolders(folders);
+            CreateInstance();
+
+            TrackFolder folderToRemove = folders[0];
+
+            return folderToRemove;
         }
 
         private void CreateInstance()
