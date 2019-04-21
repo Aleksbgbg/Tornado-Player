@@ -28,7 +28,7 @@
         [Fact]
         public void TestFoldersTypeIsObservableCollection()
         {
-            SetupStorageServiceFolders(new List<TrackFolder>());
+            SetupStorageServiceFoldersEmpty();
             CreateInstance();
             Assert.IsType<ObservableCollection<TrackFolder>>(_trackFoldersViewModel.Folders);
         }
@@ -98,14 +98,14 @@
 
         private void SetupDirectoryNotSelected()
         {
-            SetupStorageServiceFolders(new List<TrackFolder>());
+            SetupStorageServiceFoldersEmpty();
             _fileSystemBrowserServiceMock = new FileSystemBrowserServiceMock(false, null);
             CreateInstance();
         }
 
         private void SetupDirectorySelected(string directory)
         {
-            SetupStorageServiceFolders(new List<TrackFolder>());
+            SetupStorageServiceFoldersEmpty();
             _fileSystemBrowserServiceMock = new FileSystemBrowserServiceMock(true, directory);
             CreateInstance();
         }
@@ -113,6 +113,11 @@
         private void CreateInstance()
         {
             _trackFoldersViewModel = new TrackFoldersViewModel(_storageServiceMock.Object, _fileSystemBrowserServiceMock);
+        }
+
+        private void SetupStorageServiceFoldersEmpty()
+        {
+            SetupStorageServiceFolders(new List<TrackFolder>());
         }
 
         private void SetupStorageServiceFolders(List<TrackFolder> folders)
