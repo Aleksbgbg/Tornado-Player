@@ -1,4 +1,4 @@
-﻿namespace Tornado.Player.Utilities
+﻿namespace Tornado.Player.Utilities.HotKeys
 {
     internal enum VirtualKey : uint
     {

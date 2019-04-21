@@ -157,12 +157,12 @@
     <Compile Include="Utilities\EventAggregator\PlaylistDeletionMessage.cs" />
     <Compile Include="Utilities\BrowseDialogFactory.cs" />
     <Compile Include="Utilities\GlobalRandom.cs" />
-    <Compile Include="Utilities\HotKeyModifiers.cs" />
+    <Compile Include="Utilities\HotKeys\HotKeyModifiers.cs" />
     <Compile Include="Utilities\IBrowseDialogFactory.cs" />
     <Compile Include="Utilities\IBrowseDirectoryDialog.cs" />
-    <Compile Include="Utilities\IHotKey.cs" />
+    <Compile Include="Utilities\HotKeys\IHotKey.cs" />
     <Compile Include="Utilities\PropertyGrid\HotKeyBindPropertyDescriptor.cs" />
-    <Compile Include="Utilities\VirtualKey.cs" />
+    <Compile Include="Utilities\HotKeys\VirtualKey.cs" />
     <Compile Include="ViewModels\Interfaces\ISettingsViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\ITrackFoldersViewModel.cs" />
     <Compile Include="ViewModels\Playlist\CustomPlaylistViewModel.cs" />
@@ -272,8 +272,8 @@
     <Compile Include="Services\Interfaces\IMusicPlayerService.cs" />
     <Compile Include="Services\MusicPlayerService.cs" />
     <Compile Include="Utilities\TornadoPlayer.cs" />
-    <Compile Include="Utilities\Win32Handler.cs" />
-    <Compile Include="Utilities\Win32HotKey.cs" />
+    <Compile Include="Utilities\HotKeys\Win32Handler.cs" />
+    <Compile Include="Utilities\HotKeys\Win32HotKey.cs" />
     <Compile Include="ViewModels\Interfaces\Playlist\IPlaylistViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\ITrackViewModel.cs" />
     <Compile Include="ViewModels\Playlist\PlaylistViewModel.cs" />

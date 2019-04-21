@@ -2,7 +2,7 @@
 {
     using Newtonsoft.Json;
 
-    using Tornado.Player.Utilities;
+    using Tornado.Player.Utilities.HotKeys;
 
     internal class HotKeyBind
     {

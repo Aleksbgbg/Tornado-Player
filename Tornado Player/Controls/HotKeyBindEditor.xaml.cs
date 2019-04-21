@@ -5,7 +5,7 @@
     using System.Windows.Data;
 
     using Tornado.Player.Models.Settings;
-    using Tornado.Player.Utilities;
+    using Tornado.Player.Utilities.HotKeys;
 
     using Xceed.Wpf.Toolkit.PropertyGrid;
     using Xceed.Wpf.Toolkit.PropertyGrid.Editors;

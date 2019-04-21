@@ -7,7 +7,7 @@
     using Tornado.Player.Models;
     using Tornado.Player.Models.Settings;
     using Tornado.Player.Services.Interfaces;
-    using Tornado.Player.Utilities;
+    using Tornado.Player.Utilities.HotKeys;
 
     internal class HotKeyService : IHotKeyService
     {
