@@ -1,7 +1,7 @@
 ﻿namespace Tornado.Player.Services
 {
     using Tornado.Player.Services.Interfaces;
-    using Tornado.Player.Utilities;
+    using Tornado.Player.Utilities.FileSystemBrowsing;
 
     public class FileSystemBrowserService : IFileSystemBrowserService
     {

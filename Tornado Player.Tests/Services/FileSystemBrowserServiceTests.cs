@@ -3,7 +3,7 @@
     using Moq;
 
     using Tornado.Player.Services;
-    using Tornado.Player.Utilities;
+    using Tornado.Player.Utilities.FileSystemBrowsing;
 
     using Xunit;
 

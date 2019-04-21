@@ -1,4 +1,4 @@
-﻿namespace Tornado.Player.Utilities
+﻿namespace Tornado.Player.Utilities.FileSystemBrowsing
 {
     public interface IBrowseDialogFactory
     {

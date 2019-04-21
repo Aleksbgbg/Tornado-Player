@@ -6,7 +6,7 @@
 
     using Tornado.Player.Services;
     using Tornado.Player.Services.Interfaces;
-    using Tornado.Player.Utilities;
+    using Tornado.Player.Utilities.FileSystemBrowsing;
     using Tornado.Player.ViewModels;
     using Tornado.Player.ViewModels.Dialogs;
     using Tornado.Player.ViewModels.Editing;
