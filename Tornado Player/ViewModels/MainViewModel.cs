@@ -13,7 +13,14 @@
     {
         private readonly IViewModelFactory _viewModelFactory;
 
-        public MainViewModel(IViewModelFactory viewModelFactory, ILayoutService layoutService, IPlaybarViewModel playbarViewModel, IPlaylistCollectionViewModel playlistCollectionViewModel, ISettingsViewModel settingsViewModel)
+        public MainViewModel(
+                IViewModelFactory viewModelFactory,
+                ILayoutService layoutService,
+                IPlaybarViewModel playbarViewModel,
+                IPlaylistCollectionViewModel playlistCollectionViewModel,
+                ISettingsViewModel settingsViewModel,
+                ITrackFoldersViewModel trackFoldersViewModel
+        )
         {
             _viewModelFactory = viewModelFactory;
 
@@ -23,6 +30,7 @@
             Items.Add(playlistCollectionViewModel);
             Items.Add(null); // At index = 1, select IPlaylistEditorViewModel which is lazily instantiated
             Items.Add(settingsViewModel);
+            Items.Add(trackFoldersViewModel);
 
             SelectView(0);
 
@@ -69,11 +77,11 @@
             // unnecessary cascade of instantiations
             if (index == 1)
             {
+                // index = 1 is null
                 view = _viewModelFactory.MakeViewModel<IPlaylistEditorViewModel>();
             }
             else
             {
-                // index = 1 is null
                 view = Items[index];
             }
 

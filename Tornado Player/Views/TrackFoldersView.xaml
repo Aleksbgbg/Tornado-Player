@@ -1,10 +1,40 @@
 ﻿<UserControl x:Class="Tornado.Player.Views.TrackFoldersView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Caliburn="http://www.caliburnproject.org"
+             xmlns:Helpers="clr-namespace:Tornado.Player.Helpers"
              xmlns:ViewModels="clr-namespace:Tornado.Player.ViewModels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              d:DataContext="{d:DesignInstance ViewModels:TrackFoldersViewModel}"
              mc:Ignorable="d">
-    <Grid/>
+    <DockPanel>
+        <Button HorizontalAlignment="Center"
+                Caliburn:Message.Attach="AddNewFolder"
+                Helpers:ImageContentHelper.Content="Add New"
+                Helpers:ImageContentHelper.Image="{StaticResource NewFolder}"
+                DockPanel.Dock="Bottom"/>
+
+        <TextBlock Margin="0,5"
+                   HorizontalAlignment="Center"
+                   DockPanel.Dock="Bottom"
+                   Foreground="OrangeRed"
+                   Text="Once you have configured your folders, restart the application to load your tracks."/>
+
+        <ListBox x:Name="Items">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="ContextMenu">
+                        <Setter.Value>
+                            <ContextMenu>
+                                <MenuItem Caliburn:Message.Attach="Remove"
+                                          Helpers:ImageContentHelper.Image="{StaticResource Delete}"
+                                          Header="_Remove"/>
+                            </ContextMenu>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+    </DockPanel>
 </UserControl>

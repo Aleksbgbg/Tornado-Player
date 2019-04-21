@@ -3,12 +3,14 @@
 	<BitmapImage x:Key="Back" UriSource="/Images/Back.png"/>
 	<BitmapImage x:Key="Delete" UriSource="/Images/Delete.png"/>
 	<BitmapImage x:Key="Favorite" UriSource="/Images/Favorite.png"/>
+	<BitmapImage x:Key="Folder" UriSource="/Images/Folder.png"/>
 	<BitmapImage x:Key="HighVolume" UriSource="/Images/High Volume.png"/>
 	<BitmapImage x:Key="Loop" UriSource="/Images/Loop.png"/>
 	<BitmapImage x:Key="LowVolume" UriSource="/Images/Low Volume.png"/>
 	<BitmapImage x:Key="MaxVolume" UriSource="/Images/Max Volume.png"/>
 	<BitmapImage x:Key="Minus" UriSource="/Images/Minus.png"/>
 	<BitmapImage x:Key="Mute" UriSource="/Images/Mute.png"/>
+	<BitmapImage x:Key="NewFolder" UriSource="/Images/New Folder.png"/>
 	<BitmapImage x:Key="Pause" UriSource="/Images/Pause.png"/>
 	<BitmapImage x:Key="Play" UriSource="/Images/Play.png"/>
 	<BitmapImage x:Key="Plus" UriSource="/Images/Plus.png"/>

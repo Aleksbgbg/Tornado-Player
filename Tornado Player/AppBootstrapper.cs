@@ -58,6 +58,8 @@
 
             Container.Singleton<ISettingsViewModel, SettingsViewModel>();
 
+            Container.Singleton<ITrackFoldersViewModel, TrackFoldersViewModel>();
+
             viewModelFactory.Register<IManagedPlaylistViewModel, ManagedPlaylistViewModel>();
             viewModelFactory.Register<ICustomPlaylistViewModel, CustomPlaylistViewModel>();
             viewModelFactory.Register<ITrackViewModel, TrackViewModel>();
@@ -69,7 +71,7 @@
             viewModelFactory.Register<ICreatePlaylistDialogViewModel, CreatePlaylistDialogViewModel>();
             viewModelFactory.Register<IConfirmationDialogViewModel, ConfirmationDialogViewModel>();
 
-            viewModelFactory.Register<ITrackFoldersViewModel, TrackFoldersViewModel>();
+            viewModelFactory.Register<ITrackFolderViewModel, TrackFolderViewModel>();
         }
 
         protected override void OnStartupAfterDisplayRootView(object sender, StartupEventArgs e)
