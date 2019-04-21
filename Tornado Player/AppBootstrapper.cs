@@ -6,6 +6,7 @@
 
     using Tornado.Player.Services;
     using Tornado.Player.Services.Interfaces;
+    using Tornado.Player.Utilities;
     using Tornado.Player.ViewModels;
     using Tornado.Player.ViewModels.Dialogs;
     using Tornado.Player.ViewModels.Editing;
@@ -28,10 +29,13 @@
         {
             Container.Singleton<CM.IEventAggregator, CM.EventAggregator>();
 
+            Container.Singleton<IBrowseDialogFactory, BrowseDialogFactory>();
+
             Container.Singleton<IAppDataService, AppDataService>();
             Container.Singleton<IContentManagerService, ContentManagerService>();
             Container.Singleton<IDataService, DataService>();
             Container.Singleton<IDialogService, DialogService>();
+            Container.Singleton<IFileSystemBrowserService, FileSystemBrowserService>();
             Container.Singleton<IFileSystemService, FileSystemService>();
             Container.Singleton<IHotKeyService, HotKeyService>();
             Container.Singleton<ILayoutService, LayoutService>();
