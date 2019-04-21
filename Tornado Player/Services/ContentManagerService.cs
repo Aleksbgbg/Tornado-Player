@@ -23,13 +23,41 @@
 
         private readonly Dictionary<ManagedPlaylist, Playlist> _managedPlaylists;
 
-        public ContentManagerService(IDataService dataService, IFileSystemService fileSystemService, ISnowflakeService snowflakeService)
+        public ContentManagerService(IDataService dataService, IFileSystemService fileSystemService, ISnowflakeService snowflakeService, IStorageService storageService)
         {
             _dataService = dataService;
             _fileSystemService = fileSystemService;
             _snowflakeService = snowflakeService;
 
-            Track[] tracks = dataService.Load(Constants.DataStoreNames.Tracks, () => new Track[0]);
+            List<Track> tracks = dataService.Load(Constants.DataStoreNames.Tracks, () => new List<Track>());
+
+            HashSet<string> trackFiles = new HashSet<string>(tracks.Select(track => track.Filepath));
+            HashSet<string> existingFiles = new HashSet<string>();
+
+            foreach (TrackFolder folder in storageService.TrackFolders)
+            {
+                foreach (string file in fileSystemService.LoadFiles(folder.Path))
+                {
+                    existingFiles.Add(file);
+                }
+            }
+
+            foreach (string trackFile in trackFiles)
+            {
+                if (!existingFiles.Contains(trackFile))
+                {
+                    tracks.RemoveAt(tracks.FindIndex(track => track.Filepath == trackFile));
+                }
+            }
+
+            foreach (string file in existingFiles)
+            {
+                if (!trackFiles.Contains(file))
+                {
+                    tracks.Add(new Track(snowflakeService.GenerateSnowflake(), file));
+                }
+            }
+
             _trackRepository = tracks.ToDictionary(track => track.Id, track => track);
 
             _playlists = _dataService.Load(Constants.DataStoreNames.Playlists, () => new List<Playlist>());

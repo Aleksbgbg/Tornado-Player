@@ -76,8 +76,14 @@
 
         internal void Load(Dictionary<ulong, Track> trackRepository)
         {
-            foreach (PlaylistTrack track in _tracks)
+            foreach (PlaylistTrack track in _tracks.ToArray())
             {
+                if (!trackRepository.ContainsKey(track.TrackId))
+                {
+                    _tracks.Remove(track);
+                    continue;
+                }
+
                 track.Load(trackRepository);
             }
         }

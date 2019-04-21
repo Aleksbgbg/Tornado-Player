@@ -42,7 +42,7 @@
         public Track Track { get; private set; }
 
         [JsonProperty(nameof(TrackId))]
-        private ulong TrackId { get; }
+        public ulong TrackId { get; }
 
         public int CompareTo(PlaylistTrack other)
         {
