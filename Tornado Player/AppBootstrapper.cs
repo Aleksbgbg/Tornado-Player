@@ -1,11 +1,13 @@
 ﻿namespace Tornado.Player
 {
+    using System.Threading.Tasks;
     using System.Windows;
 
     using Caliburn.Micro.Wrapper;
 
     using Tornado.Player.Services;
     using Tornado.Player.Services.Interfaces;
+    using Tornado.Player.Utilities;
     using Tornado.Player.Utilities.FileSystemBrowsing;
     using Tornado.Player.ViewModels;
     using Tornado.Player.ViewModels.Dialogs;
@@ -77,6 +79,8 @@
         protected override void OnStartupAfterDisplayRootView(object sender, StartupEventArgs e)
         {
             ((HotKeyService)Container.GetInstance<IHotKeyService>()).Initialize(Application.Current.MainWindow);
+
+            Task.Run(Updater.Update);
         }
 
         protected override void OnExit(object sender, System.EventArgs e)
