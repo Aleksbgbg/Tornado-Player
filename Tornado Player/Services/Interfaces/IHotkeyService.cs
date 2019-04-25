@@ -4,7 +4,7 @@
 
     using Tornado.Player.EventArgs;
 
-    internal interface IHotKeyService
+    public interface IHotKeyService
     {
         event EventHandler<HotKeyActuatedEventArgs> HotKeyActuated;
     }

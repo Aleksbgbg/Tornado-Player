@@ -6,7 +6,7 @@
 
     using Tornado.Player.Models.Player;
 
-    internal interface IPlaylistViewModel : IViewModelBase, IConductor
+    public interface IPlaylistViewModel : IViewModelBase, IConductor
     {
         Playlist Playlist { get; }
 

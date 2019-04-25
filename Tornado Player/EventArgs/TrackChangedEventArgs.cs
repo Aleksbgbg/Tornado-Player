@@ -4,7 +4,7 @@
 
     using Tornado.Player.Models.Player;
 
-    internal class TrackChangedEventArgs : EventArgs
+    public class TrackChangedEventArgs : EventArgs
     {
         public TrackChangedEventArgs(Track track, TimeSpan duration)
         {

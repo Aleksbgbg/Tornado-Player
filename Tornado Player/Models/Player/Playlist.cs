@@ -8,7 +8,7 @@
 
     using Tornado.Player.Utilities;
 
-    internal class Playlist : Snowflake
+    public class Playlist : Snowflake
     {
         private readonly List<PlaylistTrack> _tracks;
 

@@ -5,7 +5,7 @@
     using Tornado.Player.EventArgs;
     using Tornado.Player.Models.Player;
 
-    internal interface IMusicPlayerService
+    public interface IMusicPlayerService
     {
         event EventHandler Played;
 

@@ -2,7 +2,7 @@
 {
     using System;
 
-    internal class ProgressUpdatedEventArgs : EventArgs
+    public class ProgressUpdatedEventArgs : EventArgs
     {
         public ProgressUpdatedEventArgs(TimeSpan newProgress)
         {

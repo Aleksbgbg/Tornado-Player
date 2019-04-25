@@ -4,7 +4,7 @@
 
     using Newtonsoft.Json;
 
-    internal class Snowflake : PropertyChangedBase
+    public class Snowflake : PropertyChangedBase
     {
         public Snowflake(ulong id)
         {

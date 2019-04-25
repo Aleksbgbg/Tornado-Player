@@ -7,7 +7,7 @@
 
     using Newtonsoft.Json;
 
-    internal class PlaylistTrack : PropertyChangedBase, IComparable, IComparable<PlaylistTrack> // Track with sort order
+    public class PlaylistTrack : PropertyChangedBase, IComparable, IComparable<PlaylistTrack> // Track with sort order
     {
         internal PlaylistTrack(int sortOrder, Track track)
         {

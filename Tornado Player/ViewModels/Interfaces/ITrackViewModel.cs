@@ -2,7 +2,7 @@
 {
     using Tornado.Player.Models.Player;
 
-    internal interface ITrackViewModel : IViewModelBase
+    public interface ITrackViewModel : IViewModelBase
     {
         bool IsPlaying { get; }
 

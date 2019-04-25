@@ -1,6 +1,6 @@
 ﻿namespace Tornado.Player.Models
 {
-    internal enum Shortcut
+    public enum Shortcut
     {
         Search,
         TogglePlayback,

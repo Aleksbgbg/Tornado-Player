@@ -2,7 +2,7 @@
 {
     using System;
 
-    internal interface IPlaybarViewModel : IViewModelBase
+    public interface IPlaybarViewModel : IViewModelBase
     {
         TimeSpan CurrentProgress { get; set; }
 

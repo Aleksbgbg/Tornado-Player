@@ -5,7 +5,7 @@
 
     using Newtonsoft.Json;
 
-    internal class Track : Snowflake, IComparable, IComparable<Track>, IEquatable<Track>
+    public class Track : Snowflake, IComparable, IComparable<Track>, IEquatable<Track>
     {
         [JsonConstructor]
         internal Track(ulong id, string filepath, bool isFavorite = default) : base(id)

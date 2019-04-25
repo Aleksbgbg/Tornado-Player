@@ -4,7 +4,7 @@
 
     using Tornado.Player.Models;
 
-    internal class HotKeyActuatedEventArgs : EventArgs
+    public class HotKeyActuatedEventArgs : EventArgs
     {
         public HotKeyActuatedEventArgs(Shortcut shortcut)
         {
