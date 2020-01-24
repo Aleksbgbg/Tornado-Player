@@ -13,7 +13,10 @@
     using Tornado.Player.Utilities.EventAggregator;
     using Tornado.Player.ViewModels.Interfaces.Playlist;
 
-    internal sealed class PlaylistCollectionViewModel : Conductor<IPlaylistViewModel>.Collection.OneActive, IPlaylistCollectionViewModel, IHandle<PlaylistCreationMessage>, IHandle<PlaylistDeletionMessage>
+    internal sealed class PlaylistCollectionViewModel : Conductor<IPlaylistViewModel>.Collection.OneActive,
+                                                        IPlaylistCollectionViewModel,
+                                                        IHandle<PlaylistCreationMessage>,
+                                                        IHandle<PlaylistDeletionMessage>
     {
         private readonly IEventAggregator _eventAggregator;
 
@@ -47,6 +50,8 @@
                 )
             );
         }
+
+        public string Name => "Music";
 
         public AppLayout AppLayout { get; }
 

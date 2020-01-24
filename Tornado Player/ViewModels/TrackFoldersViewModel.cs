@@ -38,5 +38,7 @@
                 Items.Add(_viewModelFactory.MakeViewModel<ITrackFolderViewModel>(newTrackFolder));
             }
         }
+
+        public string Name => "Track Folders";
     }
 }

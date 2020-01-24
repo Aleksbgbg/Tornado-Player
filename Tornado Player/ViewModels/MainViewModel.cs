@@ -1,7 +1,6 @@
 ﻿namespace Tornado.Player.ViewModels
 {
     using Caliburn.Micro;
-    using Caliburn.Micro.Wrapper;
 
     using Tornado.Player.Models;
     using Tornado.Player.Services.Interfaces;
@@ -9,92 +8,63 @@
     using Tornado.Player.ViewModels.Interfaces.Editing;
     using Tornado.Player.ViewModels.Interfaces.Playlist;
 
-    internal sealed class MainViewModel : Conductor<IViewModelBase>.Collection.AllActive, IMainViewModel
+    internal sealed class MainViewModel : Conductor<ITabViewModel>.Collection.OneActive, IMainViewModel
     {
-        private readonly IViewModelFactory _viewModelFactory;
-
         public MainViewModel(
-                IViewModelFactory viewModelFactory,
                 ILayoutService layoutService,
                 IPlaybarViewModel playbarViewModel,
                 IPlaylistCollectionViewModel playlistCollectionViewModel,
-                ISettingsViewModel settingsViewModel,
-                ITrackFoldersViewModel trackFoldersViewModel
+                ITrackFoldersViewModel trackFoldersViewModel,
+                IPlaylistEditorViewModel playlistEditorViewModel,
+                ISettingsViewModel settingsViewModel
         )
         {
-            _viewModelFactory = viewModelFactory;
-
             AppLayout = layoutService.AppLayout;
             PlaybarViewModel = playbarViewModel;
 
             Items.Add(playlistCollectionViewModel);
-            Items.Add(null); // At index = 1, select IPlaylistEditorViewModel which is lazily instantiated
-            Items.Add(settingsViewModel);
             Items.Add(trackFoldersViewModel);
+            Items.Add(playlistEditorViewModel);
+            Items.Add(settingsViewModel);
 
-            SelectView(0);
-
-            ActivateItem(PlaybarViewModel);
+            SelectMainView();
         }
 
         public AppLayout AppLayout { get; }
 
-        private int _mainContentIndex;
-        public int MainContentIndex
+        private ITabViewModel _selectedItem;
+        public ITabViewModel SelectedItem
         {
-            get => _mainContentIndex;
+            get => _selectedItem;
 
             set
             {
-                if (_mainContentIndex == value) return;
+                if (_selectedItem == value) return;
 
-                _mainContentIndex = value;
-                NotifyOfPropertyChange(nameof(MainContentIndex));
-            }
-        }
-
-        private IViewModelBase _mainContent;
-        public IViewModelBase MainContent
-        {
-            get => _mainContent;
-
-            set
-            {
-                if (_mainContent == value) return;
-
-                _mainContent = value;
-                NotifyOfPropertyChange(nameof(MainContent));
+                _selectedItem = value;
+                NotifyOfPropertyChange(nameof(SelectedItem));
             }
         }
 
         public IPlaybarViewModel PlaybarViewModel { get; }
 
-        public void SelectView(int index)
+        private void SelectMainView()
         {
-            IViewModelBase view;
-
-            // Delayed construction to prevent
-            // unnecessary cascade of instantiations
-            if (index == 1)
-            {
-                // index = 1 is null
-                view = _viewModelFactory.MakeViewModel<IPlaylistEditorViewModel>();
-            }
-            else
-            {
-                view = Items[index];
-            }
-
-            SwapMainContent(view);
-            MainContentIndex = index;
+            SelectView(0);
         }
 
-        private void SwapMainContent(IViewModelBase newContent, bool closeOld = default)
+        private void SelectView(int index)
         {
-            DeactivateItem(MainContent, closeOld);
+            ITabViewModel view = Items[index];
+            SwapMainContent(view);
+        }
+
+        private void SwapMainContent(ITabViewModel newContent, bool closeOld = default)
+        {
+            DeactivateItem(SelectedItem, closeOld);
             ActivateItem(newContent);
 
-            MainContent = newContent;
+            SelectedItem = newContent;
         }
     }
 }

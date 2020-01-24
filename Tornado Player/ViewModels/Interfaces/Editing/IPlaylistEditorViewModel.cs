@@ -2,7 +2,7 @@
 {
     using Caliburn.Micro;
 
-    internal interface IPlaylistEditorViewModel : IViewModelBase, IConductor
+    internal interface IPlaylistEditorViewModel : IViewModelBase, IConductor, ITabViewModel
     {
     }
 }

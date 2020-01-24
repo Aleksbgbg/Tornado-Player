@@ -12,5 +12,7 @@
         }
 
         public Settings Settings { get; }
+
+        public string Name => "Settings";
     }
 }

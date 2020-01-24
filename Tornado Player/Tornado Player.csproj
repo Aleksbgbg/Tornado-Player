@@ -196,6 +196,7 @@
     <Compile Include="Utilities\HotKeys\VirtualKey.cs" />
     <Compile Include="Utilities\Updater.cs" />
     <Compile Include="ViewModels\Interfaces\ISettingsViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\ITabViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\ITrackFoldersViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\ITrackFolderViewModel.cs" />
     <Compile Include="ViewModels\Playlist\CustomPlaylistViewModel.cs" />

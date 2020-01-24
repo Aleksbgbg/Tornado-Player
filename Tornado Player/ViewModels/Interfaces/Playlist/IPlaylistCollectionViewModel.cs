@@ -2,7 +2,7 @@
 {
     using Caliburn.Micro;
 
-    internal interface IPlaylistCollectionViewModel : IViewModelBase, IConductor
+    internal interface IPlaylistCollectionViewModel : IViewModelBase, IConductor, ITabViewModel
     {
         IObservableCollection<IPlaylistViewModel> Playlists { get; }
     }

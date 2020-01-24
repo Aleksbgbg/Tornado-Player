@@ -35,6 +35,8 @@
                                                       .Select(playlist => viewModelFactory.MakeViewModel<IEditPlaylistViewModel>(playlist)));
         }
 
+        public string Name => "Edit Playlists";
+
         private int _selectedIndex;
         public int SelectedIndex
         {
